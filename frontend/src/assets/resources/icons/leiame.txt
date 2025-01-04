@@ -1,0 +1,12 @@
+Projeto: Sistema Otica
+
+Autor: Fabricio Washington
+
+Nome do Pacote:
+
+    Resources.icons
+
+Descrição do Pacote:
+
+    Este pacote contém as imagens/icons do projeto.
+

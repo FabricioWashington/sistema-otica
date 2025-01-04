@@ -1,0 +1,54 @@
+<h1 class="title">Login</h1>
+<div class="container">
+  <div class="form-section">
+    <mat-label>
+      <img src="../assets/resources/icons/user_1077012_1.png" alt="Ícone de usuário" width="16">
+      Usuário
+    </mat-label>
+    <input
+      type="text"
+      id="username"
+      [(ngModel)]="loginUsuario"
+      placeholder="Digite seu usuário"
+      required
+    />
+
+    <mat-label>
+      <img src="../assets/resources/icons/password_12795740.png" alt="Ícone de senha" width="16">
+      Senha
+    </mat-label>
+    <input
+      type="password"
+      id="password"
+      [(ngModel)]="loginSenha"
+      placeholder="Digite sua senha"
+      required
+    />
+
+    <mat-label for="accessLevel">Opções de Acesso</mat-label>
+    <select id="accessLevel" [(ngModel)]="idTiposLogin" required>
+      <option value="">Selecione</option>
+      <option *ngFor="let tipo of tiposLogin" [value]="tipo.id">{{ tipo.nome }}</option>
+    </select>
+
+    <mat-label for="showPassword">
+      <input type="checkbox" id="showPassword" /> Visualizar Senha
+    </mat-label>
+
+    <button type="button" id="loginButton" (click)="autenticar()">ENTRAR</button>
+
+    <p *ngIf="loginError" class="error-message">{{ loginError }}</p>
+
+    <div class="extra-buttons">
+      <img src="../assets/resources/images/dberror.png" alt="Icone-bd">
+      <img src="..//src/assets/resources/images/semsinal.png" alt="Icone-sinal">
+      <img src="..//src/assets/resources/images/certificadogarantia.png" alt="icone-certificado">
+    </div>
+
+    <button style="margin-top: 10px;">PRIMEIRO ACESSO</button>
+  </div>
+
+  <div class="logo-section">
+    <img src="../assets/resources/images/fw.png" alt="img">
+  </div>
+</div>
