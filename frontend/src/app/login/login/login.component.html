@@ -1,54 +1,64 @@
-<h1 class="title">Login</h1>
+<h1 class="title"></h1>
 <div class="container">
   <div class="form-section">
-    <mat-label>
-      <img src="../assets/resources/icons/user_1077012_1.png" alt="Ícone de usuário" width="16">
-      Usuário
-    </mat-label>
-    <input
-      type="text"
-      id="username"
-      [(ngModel)]="loginUsuario"
-      placeholder="Digite seu usuário"
-      required
-    />
+    <mat-form-field appearance="outline">
+      <mat-label>
+        <img src="../assets/resources/icons/user_1077012_1.png" alt="Ícone de usuário" width="16">
+        Usuário
+      </mat-label>
+      <input matInput type="text" id="username" [(ngModel)]="loginUsuario" placeholder="Digite seu usuário" required />
+    </mat-form-field>
 
-    <mat-label>
-      <img src="../assets/resources/icons/password_12795740.png" alt="Ícone de senha" width="16">
-      Senha
-    </mat-label>
-    <input
-      type="password"
-      id="password"
-      [(ngModel)]="loginSenha"
-      placeholder="Digite sua senha"
-      required
-    />
+    <mat-form-field appearance="outline">
+      <mat-label>
+        <img src="../assets/resources/icons/password_12795740.png" alt="Ícone de senha" width="16">
+        Senha
+      </mat-label>
+      <input matInput [type]="showPassword ? 'text' : 'password'" id="passwordField" #passwordField
+        [(ngModel)]="loginSenha" placeholder="Digite sua senha" required />
+    </mat-form-field>
 
-    <mat-label for="accessLevel">Opções de Acesso</mat-label>
-    <select id="accessLevel" [(ngModel)]="idTiposLogin" required>
-      <option value="">Selecione</option>
-      <option *ngFor="let tipo of tiposLogin" [value]="tipo.id">{{ tipo.nome }}</option>
-    </select>
+    <mat-form-field appearance="outline">
+      <mat-label>Opções de Acesso</mat-label>
+      <mat-select [(value)]="idTiposLogin" required>
+        <mat-option value="">Selecione</mat-option>
+        <mat-option *ngFor="let tipo of tiposLogin" [value]="tipo.id">
+          {{ tipo.tiposLogin }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <mat-label for="showPassword">
-      <input type="checkbox" id="showPassword" /> Visualizar Senha
-    </mat-label>
+    <mat-checkbox id="showPasswordCheckbox" #showPasswordCheckbox (change)="toggleShowPassword()">
+      Visualizar Senha
+    </mat-checkbox>
 
-    <button type="button" id="loginButton" (click)="autenticar()">ENTRAR</button>
+    <button mat-raised-button color="primary" type="button" id="loginButton" (click)="autenticar()">
+      ENTRAR
+    </button>
 
     <p *ngIf="loginError" class="error-message">{{ loginError }}</p>
 
     <div class="extra-buttons">
-      <img src="../assets/resources/images/dberror.png" alt="Icone-bd">
-      <img src="..//src/assets/resources/images/semsinal.png" alt="Icone-sinal">
-      <img src="..//src/assets/resources/images/certificadogarantia.png" alt="icone-certificado">
+      <img [src]="statusBancoDados ? '../assets/resources/images/dbok.png' : '../assets/resources/images/dberror.png'"
+        alt="Status do banco de dados">
+
+      <img [src]="statusInternet ? '../assets/resources/images/sinal.png' : '../assets/resources/images/semsinal.png'"
+        alt="Status de conexão com a internet">
+
+      <img
+        [src]="statusCertificado ? '../assets/resources/images/certificadogarantia.png' : '../assets/resources/images/paginaerro.png'"
+        alt="Status do certificado">
+
     </div>
 
-    <button style="margin-top: 10px;">PRIMEIRO ACESSO</button>
+    <button mat-button style="margin-top: 10px;" id="primeiroAcessoButton">
+      PRIMEIRO ACESSO
+    </button>
+
   </div>
 
   <div class="logo-section">
-    <img src="../assets/resources/images/fw.png" alt="img">
+    <img src="../assets/resources/images/fw.png" alt="Logo da empresa">
   </div>
+
 </div>

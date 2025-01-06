@@ -12,6 +12,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SharedModule } from '../shared.module';
 
 
 
@@ -31,6 +33,7 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
+    MatCheckboxModule,
   ],
 })
 export class AppMaterialModule { }

@@ -1,4 +1,12 @@
-<ng-container *ngIf="showHeader">
-  <app-header></app-header>
-</ng-container>
-<router-outlet></router-outlet>
+<!-- Tela de Loading -->
+<div *ngIf="loading" class="loading-overlay">
+  <app-loading></app-loading>
+</div>
+
+<!-- Conteúdo da aplicação -->
+<div *ngIf="!loading">
+  <ng-container *ngIf="showHeader">
+    <app-header></app-header>
+  </ng-container>
+  <router-outlet></router-outlet>
+</div>

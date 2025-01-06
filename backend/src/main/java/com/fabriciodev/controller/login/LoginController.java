@@ -1,19 +1,18 @@
-package com.fabriciodev.controller;
+package com.fabriciodev.controller.login;
 
-import com.fabriciodev.model.Login;
-import com.fabriciodev.service.LoginService;
-import com.fabriciodev.service.TiposLoginService;
-import com.fabriciodev.dto.TiposLoginDTO;
+import com.fabriciodev.model.login.Login;
+import com.fabriciodev.service.login.LoginService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/login")
+@CrossOrigin(origins = "http://localhost:4200")
 public class LoginController {
 
     @Autowired
@@ -44,7 +43,5 @@ public class LoginController {
         return ResponseEntity.ok(novoLogin);
     }
 
-    @Autowired
-    private TiposLoginService tiposLoginService;
 
 }

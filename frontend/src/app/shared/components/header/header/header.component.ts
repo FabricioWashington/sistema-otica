@@ -15,20 +15,13 @@ export class HeaderComponent {
   constructor(private readonly authService: AuthService, private readonly router: Router) { }
 
 
-  toggleMenu() {
-    console.log('Electron toggleMenu chamado');
-    this.isMenuCollapsed = !this.isMenuCollapsed;
 
-    if ((window as any).electron) {
-      (window as any).electron.send('menu-toggled', this.isMenuCollapsed);
-    }
+  toggleMenu() {
+    //this.isMenuCollapsed = !this.isMenuCollapsed;
   }
 
   logout() {
-    console.log('Electron logout chamado');
-    if ((window as any).electron) {
-      (window as any).electron.send('logout');
-    }
+    this.router.navigate(['/login']);
   }
 
   openConfig(){

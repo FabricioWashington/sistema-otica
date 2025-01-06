@@ -12,7 +12,6 @@
   overflow: hidden;
   background-color: #f5f5f5;
   flex-wrap: wrap;
-  /* Permite que os elementos se ajustem em telas menores */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -21,7 +20,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  margin: 40px 0;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
@@ -43,10 +42,15 @@
   width: 100%;
   max-width: 400px;
   box-sizing: border-box;
-  /* Garante que padding não afete o tamanho total */
 }
 
-.form-section mat-label {
+/* Ajusta o estilo de mat-form-field */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+mat-label {
   display: flex;
   align-items: center;
   font-size: 14px;
@@ -54,40 +58,39 @@
   color: #333;
 }
 
-.form-section mat-label img {
+mat-label img {
   margin-right: 8px;
 }
 
-.form-section input[type="text"],
-.form-section input[type="password"],
-.form-section select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+input[matInput],
+textarea[matInput],
+mat-select {
   font-size: 14px;
-  box-sizing: border-box;
 }
 
-.form-section input[type="checkbox"] {
-  margin-right: 5px;
+mat-select {
+  padding: 8px;
 }
 
-.form-section button {
+mat-checkbox {
+  margin: 10px 0;
+}
+
+/* Estilo do botão */
+button {
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #ffffff;
   color: white;
-  border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s;
 }
 
-.form-section button:hover {
+button:hover {
   background-color: #0056b3;
+  color: white;
 }
 
 .form-section .extra-buttons {
@@ -97,7 +100,6 @@
   width: 100%;
   gap: 0.5rem;
   flex-wrap: wrap;
-  /* Garante ajuste em telas menores */
 }
 
 .form-section .extra-buttons img {
@@ -135,6 +137,14 @@
   text-align: center;
 }
 
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+/* Estilo responsivo */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -153,4 +163,6 @@
     margin-top: 20px;
     box-shadow: none;
   }
+
+
 }

@@ -3,9 +3,9 @@ export interface Login {
   idtipos_login: number;
   idContato: number;
   idUsuario: number;
-  Login_Usuario: string;
-  Login_Senha: string;
-  CPF: string;
-  Data_Cadastro: Date;
-  Data_Modificacao: Date;
+  loginUsuario: string;
+  loginSenha: string;
+  cpf: string;
+  dataCadastro: Date;
+  dataModificacao: Date;
 }

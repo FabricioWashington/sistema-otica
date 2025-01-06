@@ -1,4 +1,4 @@
-package com.fabriciodev.model;
+package com.fabriciodev.model.tiposlogin;
 
 import jakarta.persistence.*;
 
@@ -8,6 +8,7 @@ public class TiposLogin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idtipos_login") 
     private Long id;
 
     @Column(name = "tipos_login", nullable = false)

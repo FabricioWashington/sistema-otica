@@ -1,9 +1,9 @@
-package com.fabriciodev.repository;
+package com.fabriciodev.repository.login;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.fabriciodev.model.Login;
+import com.fabriciodev.model.login.Login;
 
 import java.util.Optional;
 

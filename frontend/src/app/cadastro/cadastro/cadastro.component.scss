@@ -16,8 +16,8 @@ main {
 .button-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
-  justify-content: space-between;
+  gap: 60px;
+  justify-content: flex-start;
   padding: 20px;
   margin-top: 70px;
   height: 100%;

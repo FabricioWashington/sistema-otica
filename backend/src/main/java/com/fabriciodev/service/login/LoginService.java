@@ -1,10 +1,10 @@
-package com.fabriciodev.service;
+package com.fabriciodev.service.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fabriciodev.model.Login;
-import com.fabriciodev.repository.LoginRepository;
+import com.fabriciodev.model.login.Login;
+import com.fabriciodev.repository.login.LoginRepository;
 
 import java.util.Optional;
 

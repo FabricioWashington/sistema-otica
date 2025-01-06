@@ -1,7 +1,9 @@
-package com.fabriciodev.model;
+package com.fabriciodev.model.login;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+
+import com.fabriciodev.model.tiposlogin.TiposLogin;
 
 @Entity
 @Table(name = "login")
@@ -9,6 +11,7 @@ public class Login {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idlogin") // Ajustando para refletir o nome correto da coluna
     private Long id;
 
     @Column(name = "login_usuario", nullable = false, unique = true)
@@ -20,6 +23,9 @@ public class Login {
     @ManyToOne
     @JoinColumn(name = "idtipos_login", nullable = false)
     private TiposLogin tiposLogin;
+
+    @Column(name = "idUsuario") 
+    private Integer idUsuario;
 
     @Column(name = "cpf", unique = true)
     private String cpf;
@@ -61,6 +67,14 @@ public class Login {
 
     public void setTiposLogin(TiposLogin tiposLogin) {
         this.tiposLogin = tiposLogin;
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getCpf() {

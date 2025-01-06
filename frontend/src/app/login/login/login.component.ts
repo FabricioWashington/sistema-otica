@@ -1,5 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from '../../services/login/login.service';
+import { TiposloginService } from '../../services/tipos-login/tiposlogin.service';
+import { TiposLogin } from '../../models/tipos-login/tipos-login';
+import { HttpClient } from '@angular/common/http';
+import { StatusService } from '../../services/status/status.service';
 
 @Component({
   selector: 'app-login',
@@ -11,38 +15,53 @@ import { LoginService } from '../../services/login/login.service';
 export class LoginComponent implements OnInit {
   loginUsuario: string = '';
   loginSenha: string = '';
-  idTiposLogin: string = '';
-  tiposLogin: { id: string; nome: string }[] = [];
-  loginError: string = '';
+  idTiposLogin: number | null = null;
+  tiposLogin: TiposLogin[] = [];
+  loginError: string | null = null;
+  showPassword: boolean = false;
+  statusInternet: boolean = false;
+  statusCertificado: boolean = false;
+  statusBancoDados: boolean = false;
 
   @ViewChild('showPasswordCheckbox') showPasswordCheckbox!: ElementRef;
   @ViewChild('passwordField') passwordField!: ElementRef;
 
-  constructor(private readonly loginService: LoginService) {}
+  constructor(
+    private readonly loginService: LoginService,
+    private readonly tiposLoginService: TiposloginService,
+    private readonly http: HttpClient,
+    private readonly statusService: StatusService
+  ) { }
 
   ngOnInit(): void {
+    this.atualizarIconesStatus();
     this.getTiposLogin();
   }
 
-  ngAfterViewInit(): void {
-    this.configurarMostrarSenha();
+  toggleShowPassword(): void {
+    this.showPassword = !this.showPassword;
   }
 
   configurarMostrarSenha(): void {
-    this.showPasswordCheckbox.nativeElement.addEventListener('change', () => {
-      const fieldType = this.showPasswordCheckbox.nativeElement.checked ? 'text' : 'password';
-      this.passwordField.nativeElement.type = fieldType;
-    });
+    if (this.showPasswordCheckbox && this.showPasswordCheckbox.nativeElement &&
+      this.passwordField && this.passwordField.nativeElement) {
+      this.showPasswordCheckbox.nativeElement.addEventListener('change', () => {
+        const fieldType = this.showPasswordCheckbox.nativeElement.checked ? 'text' : 'password';
+        this.passwordField.nativeElement.type = fieldType;
+      });
+    } else {
+      console.error('Elementos showPasswordCheckbox ou passwordField não encontrados.');
+    }
   }
 
   getTiposLogin(): void {
-    this.loginService.getTiposLogin().subscribe(
-      (response: any) => {
-        this.tiposLogin = response;
+    this.tiposLoginService.listarTiposLogin().subscribe(
+      (tiposLogin: TiposLogin[]) => {
+        this.tiposLogin = tiposLogin;
       },
       (error: any) => {
         console.error('Erro ao carregar os tipos de login:', error);
-        this.loginError = 'Erro ao carregar as opções de login.';
+        this.loginError = 'Erro ao carregar os tipos de login.';
       }
     );
   }
@@ -58,7 +77,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response: any) => {
           console.log('Login bem-sucedido:', response);
-          window.location.href = '/home';
+          window.location.href = '/#/home';
         },
         (error: any) => {
           console.error('Erro ao autenticar:', error);
@@ -66,4 +85,55 @@ export class LoginComponent implements OnInit {
         }
       );
   }
+
+
+  verificarConexaoInternet(): void {
+    this.http.head('https://www.google.com', { observe: 'response' }).subscribe(
+      () => {
+        this.statusInternet = true;
+        console.log('Conexão com a internet OK');
+      },
+      (error) => {
+        this.statusInternet = false;
+        console.error('Erro ao verificar conexão com a internet:', error);
+      }
+    );
+  }
+
+  verificarCertificado(): void {
+    // Simulação de verificação do certificado (você deve adaptar para sua lógica real)
+    try {
+      // Aqui deve estar a lógica de verificação do certificado
+      const certificadoConfigurado = true; // Trocar pela lógica real
+      this.statusCertificado = certificadoConfigurado;
+      console.log('Certificado configurado corretamente');
+    } catch (error) {
+      this.statusCertificado = false;
+      console.error('Erro ao verificar o certificado:', error);
+    }
+  }
+
+  verificarBancoDados(): void {
+    this.statusService.verificarBancoDados().subscribe(
+      (response: any) => {
+        console.log(response.status);
+        this.statusBancoDados = response.status === 'Banco de dados OK';
+      },
+      (error) => {
+        console.error('Erro ao verificar banco de dados:', error);
+        this.loginError = 'Erro ao conectar com o banco de dados.';
+        this.statusBancoDados = false;
+      }
+    );
+  }
+
+
+  atualizarIconesStatus(): void {
+    this.verificarConexaoInternet();
+    this.verificarCertificado();
+    this.verificarBancoDados();
+  }
+
+
+
 }

@@ -10,6 +10,7 @@ import { HeaderModule } from './shared/components/header/header.module';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderModule,
     RouterModule.forRoot([]),
     BrowserAnimationsModule,
+    SharedModule,
   ],
   providers: [
     provideClientHydration(withEventReplay()),

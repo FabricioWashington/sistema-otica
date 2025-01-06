@@ -23,9 +23,7 @@ header {
   box-shadow: 0px 4px 6px rgb(0, 0, 0, 0.41);
 }
 
-.logo img {
-  border-radius: 50%;
-}
+.logo img {}
 
 .menu {
   display: flex;
@@ -56,8 +54,7 @@ header {
   align-items: center;
   gap: 5px;
   font-size: 12px;
-  margin-left: 50px;
-  margin-top: 40px;
+  margin: 10px;
 }
 
 .logout-button img {
@@ -125,6 +122,31 @@ header .actions button:hover {
 
 .pesquisaIcon:hover {
   background-color: #0056b3;
+}
+
+.menuHamburguer {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 3px 3px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menuHamburguer:hover {
+  background-color: #0056b3;
+}
+
+.botoes,
+.button {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 5px;
 }
 
 nav.collapsed {
