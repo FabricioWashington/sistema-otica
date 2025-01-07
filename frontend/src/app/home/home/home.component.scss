@@ -21,8 +21,11 @@ main {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   color: white;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  text-align: center;
+  overflow: hidden;
   transition: transform 0.3s;
 }
 
@@ -31,19 +34,31 @@ main {
 }
 
 .card.blue {
-  background-color: #007bff;
+  background: linear-gradient(135deg, #007bff, #3a8eff);
 }
 
 .card.green {
-  background-color: #28a745;
+  background: linear-gradient(135deg, #28a745, #43d78f);
 }
 
 .card.red {
-  background-color: #dc3545;
+  background: linear-gradient(135deg, #dc3545, #ff6b72);
 }
 
 .card.orange {
-  background-color: #fd7e14;
+  background: linear-gradient(135deg, #fd7e14, #ffac4b);
+}
+
+.card p {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.card span {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: lighter;
 }
 
 table {
