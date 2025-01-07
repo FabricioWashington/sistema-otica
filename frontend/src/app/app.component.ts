@@ -15,9 +15,13 @@ export class AppComponent {
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const noHeaderRoutes = ['/login', '/cadastro/empresa', '/cadastro/funcionario'];
+        const noHeaderPaths = ['/login'];
+        const noHeaderPrefixes = ['/cadastro/', '/estoque/'];
 
-        this.showHeader = !noHeaderRoutes.includes(event.urlAfterRedirects);
+        this.showHeader = !(
+          noHeaderPaths.includes(event.urlAfterRedirects) ||
+          noHeaderPrefixes.some(prefix => event.urlAfterRedirects.startsWith(prefix))
+        );
       }
     });
 

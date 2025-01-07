@@ -7,6 +7,9 @@ import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { SharedModule } from '../shared/shared.module';
 import { CadastroFormEmpresaComponent } from './cadastro-form-empresa/cadastro-form-empresa.component';
 import { CadastroFormFuncionarioComponent } from './cadastro-form-funcionario/cadastro-form-funcionario.component';
+import { CadastroFormPessoafisicaComponent } from './cadastro-form-pessoafisica/cadastro-form-pessoafisica.component';
+import { CadastroFormPessoajuridicaComponent } from './cadastro-form-pessoajuridica/cadastro-form-pessoajuridica.component';
+import { CadastroFormProdutosComponent } from './cadastro-form-produtos/cadastro-form-produtos.component';
 
 
 
@@ -15,6 +18,9 @@ import { CadastroFormFuncionarioComponent } from './cadastro-form-funcionario/ca
     CadastroComponent,
     CadastroFormEmpresaComponent,
     CadastroFormFuncionarioComponent,
+    CadastroFormPessoafisicaComponent,
+    CadastroFormPessoajuridicaComponent,
+    CadastroFormProdutosComponent,
   ],
   imports: [
     CommonModule,
