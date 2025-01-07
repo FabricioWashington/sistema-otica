@@ -13,7 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { SharedModule } from '../shared.module';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -34,6 +34,8 @@ import { SharedModule } from '../shared.module';
     FormsModule,
     RouterModule,
     MatCheckboxModule,
+    MatGridListModule,
+
   ],
 })
 export class AppMaterialModule { }

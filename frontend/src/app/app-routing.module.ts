@@ -1,33 +1,71 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MovimentacaoComponent } from './movimentacao/movimentacao/movimentacao.component';
-import { FinanceiroComponent } from './financeiro/financeiro/financeiro.component';
-import { EstoqueComponent } from './estoque/estoque/estoque.component';
-import { CadastroComponent } from './cadastro/cadastro/cadastro.component';
-import { CaixaComponent } from './caixa/caixa/caixa.component';
 import { HomeComponent } from './home/home/home.component';
 import { LoginComponent } from './login/login/login.component';
-import { OrdemServicoComponent } from './ordem-servico/ordem-servico/ordem-servico.component';
-import { RelatoriosComponent } from './relatorios/relatorios/relatorios.component';
-import { VendasComponent } from './vendas/vendas/vendas.component';
-import { EcfComponent } from './ecf/ecf/ecf.component';
-import { NfceComponent } from './nfce/nfce/nfce.component';
+
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' }, // Redireciona para login
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'cadastro', component: CadastroComponent },
-  { path: 'caixa', component: CaixaComponent },
-  { path: 'estoque', component: EstoqueComponent },
-  { path: 'financeiro', component: FinanceiroComponent },
-  { path: 'movimentacao', component: MovimentacaoComponent },
-  { path: 'ordem-servico', component: OrdemServicoComponent },
-  { path: 'relatorios', component: RelatoriosComponent },
-  { path: 'vendas', component: VendasComponent },
-  { path: 'ecf', component: EcfComponent },
-  { path: 'nfce', component: NfceComponent },
+  {
+    path: 'cadastro',
+    loadChildren: () =>
+      import('./cadastro/cadastro.module').then((m) => m.CadastroModule),
+  },
+  {
+    path: 'caixa',
+    loadChildren: () =>
+      import('./caixa/caixa.module').then((m) => m.CaixaModule),
+  },
+  {
+    path: 'estoque',
+    loadChildren: () =>
+      import('./estoque/estoque.module').then((m) => m.EstoqueModule),
+  },
+  {
+    path: 'financeiro',
+    loadChildren: () =>
+      import('./financeiro/financeiro.module').then((m) => m.FinanceiroModule),
+  },
+  {
+    path: 'movimentacao',
+    loadChildren: () =>
+      import('./movimentacao/movimentacao.module').then(
+        (m) => m.MovimentacaoModule
+      ),
+  },
+  {
+    path: 'ordem-servico',
+    loadChildren: () =>
+      import('./ordem-servico/ordem-servico.module').then(
+        (m) => m.OrdemServicoModule
+      ),
+  },
+  {
+    path: 'relatorios',
+    loadChildren: () =>
+      import('./relatorios/relatorios.module').then(
+        (m) => m.RelatoriosModule
+      ),
+  },
+  {
+    path: 'vendas',
+    loadChildren: () =>
+      import('./vendas/vendas.module').then((m) => m.VendasModule),
+  },
+  {
+    path: 'ecf',
+    loadChildren: () => import('./ecf/ecf.module').then((m) => m.EcfModule),
+  },
+  {
+    path: 'nfce',
+    loadChildren: () =>
+      import('./nfce/nfce.module').then((m) => m.NfceModule),
+  },
+  { path: '**', redirectTo: 'login' },
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,0 +1,149 @@
+<div class="content-container">
+  <mat-card>
+    <form class="empresa-form">
+      <!-- DADOS -->
+      <fieldset>
+        <legend>DADOS</legend>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>CNPJ</mat-label>
+              <input matInput placeholder="__.___.___/____-__">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Razão Social</mat-label>
+              <input matInput placeholder="Digite a razão social">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Nome Fantasia</mat-label>
+              <input matInput placeholder="Digite o nome fantasia">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Indicador IE</mat-label>
+              <mat-select>
+                <mat-option value="selecione">Selecione</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Regime Tributário</mat-label>
+              <mat-select>
+                <mat-option value="selecione">Selecione</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Inscrição Estadual</mat-label>
+              <input matInput placeholder="Digite a inscrição estadual">
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ENDEREÇO -->
+      <fieldset>
+        <legend>ENDEREÇO</legend>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Logradouro</mat-label>
+              <input matInput placeholder="Digite o logradouro">
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Número</mat-label>
+              <input matInput placeholder="Digite o número">
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Complemento</mat-label>
+              <input matInput placeholder="Digite o complemento">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Bairro</mat-label>
+              <input matInput placeholder="Digite o bairro">
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>UF</mat-label>
+              <mat-select>
+                <mat-option value="selecione">Selecione</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Município</mat-label>
+              <input matInput placeholder="Digite o município">
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- CONTATO -->
+      <fieldset>
+        <legend>CONTATO</legend>
+        <div class="row">
+          <div class="col-md-2">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>DDD</mat-label>
+              <mat-select>
+                <mat-option value="11">11</mat-option>
+                <mat-option value="21">21</mat-option>
+                <mat-option value="31">31</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-5">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Contato</mat-label>
+              <input matInput placeholder="Digite o nome do contato">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Telefone</mat-label>
+              <input matInput placeholder="Digite o telefone">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Digite o email">
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- BOTÕES -->
+      <div class="row mt-3">
+        <div class="col-12 d-flex justify-content-between">
+          <button mat-stroked-button color="warn" type="button" (click)="onClear()">Limpar</button>
+          <div>
+            <button mat-stroked-button color="accent" type="button" (click)="onBack()">Voltar</button>
+            <button mat-raised-button color="primary" type="submit">Cadastrar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>
