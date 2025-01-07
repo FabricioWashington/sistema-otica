@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +11,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   isMenuCollapsed: boolean = false;
 
-  constructor(private readonly authService: AuthService, private readonly router: Router) { }
+  constructor(private readonly router: Router) { }
 
 
 
