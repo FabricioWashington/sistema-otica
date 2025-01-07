@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { CadastroFormEmpresaComponent } from './cadastro-form-empresa/cadastro-form-empresa.component';
+import { CadastroFormFuncionarioComponent } from './cadastro-form-funcionario/cadastro-form-funcionario.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'empresa',
     component: CadastroFormEmpresaComponent,
+  },
+  {
+    path: 'funcionario',
+    component: CadastroFormFuncionarioComponent,
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
