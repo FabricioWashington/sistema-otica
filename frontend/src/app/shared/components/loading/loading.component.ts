@@ -37,7 +37,7 @@ export class LoadingComponent implements OnInit {
       if (loadingOverlay) {
         loadingOverlay.classList.add('hidden');
       }
-      setTimeout(() => (this.loading = false), 1000);
-    }, 2000);
+      setTimeout(() => (this.loading = false), 500);
+    }, 1500);
   }
 }
