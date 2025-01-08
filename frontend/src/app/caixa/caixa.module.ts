@@ -5,12 +5,14 @@ import { CaixaRoutingModule } from './caixa-routing.module';
 import { CaixaComponent } from './caixa/caixa.component';
 import { CaixaFormAberturaComponent } from './caixa-form-abertura/caixa-form-abertura.component';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
+import { CaixaFormFechamentoComponent } from './caixa-form-fechamento/caixa-form-fechamento.component';
 
 
 @NgModule({
   declarations: [
     CaixaComponent,
-    CaixaFormAberturaComponent
+    CaixaFormAberturaComponent,
+    CaixaFormFechamentoComponent
   ],
   imports: [
     CommonModule,
