@@ -10,6 +10,7 @@ import { CadastroFormFuncionarioComponent } from './cadastro-form-funcionario/ca
 import { CadastroFormPessoafisicaComponent } from './cadastro-form-pessoafisica/cadastro-form-pessoafisica.component';
 import { CadastroFormPessoajuridicaComponent } from './cadastro-form-pessoajuridica/cadastro-form-pessoajuridica.component';
 import { CadastroFormProdutosComponent } from './cadastro-form-produtos/cadastro-form-produtos.component';
+import { CadastroFormUsuarioComponent } from './cadastro-form-usuario/cadastro-form-usuario.component';
 
 
 
@@ -21,6 +22,7 @@ import { CadastroFormProdutosComponent } from './cadastro-form-produtos/cadastro
     CadastroFormPessoafisicaComponent,
     CadastroFormPessoajuridicaComponent,
     CadastroFormProdutosComponent,
+    CadastroFormUsuarioComponent,
   ],
   imports: [
     CommonModule,

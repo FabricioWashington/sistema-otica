@@ -6,6 +6,7 @@ import { CadastroFormEmpresaComponent } from './cadastro-form-empresa/cadastro-f
 import { CadastroFormFuncionarioComponent } from './cadastro-form-funcionario/cadastro-form-funcionario.component';
 import { CadastroFormPessoafisicaComponent } from './cadastro-form-pessoafisica/cadastro-form-pessoafisica.component';
 import { CadastroFormProdutosComponent } from './cadastro-form-produtos/cadastro-form-produtos.component';
+import { CadastroFormUsuarioComponent } from './cadastro-form-usuario/cadastro-form-usuario.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'produtos',
     component: CadastroFormProdutosComponent
+  },
+  {
+    path: 'usuario',
+    component: CadastroFormUsuarioComponent
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
