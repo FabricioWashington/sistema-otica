@@ -11,6 +11,7 @@ import { CadastroFormPessoafisicaComponent } from './cadastro-form-pessoafisica/
 import { CadastroFormPessoajuridicaComponent } from './cadastro-form-pessoajuridica/cadastro-form-pessoajuridica.component';
 import { CadastroFormProdutosComponent } from './cadastro-form-produtos/cadastro-form-produtos.component';
 import { CadastroFormUsuarioComponent } from './cadastro-form-usuario/cadastro-form-usuario.component';
+import { CadastroFormArmacoesComponent } from './cadastro-form-armacoes/cadastro-form-armacoes.component';
 
 
 
@@ -23,6 +24,7 @@ import { CadastroFormUsuarioComponent } from './cadastro-form-usuario/cadastro-f
     CadastroFormPessoajuridicaComponent,
     CadastroFormProdutosComponent,
     CadastroFormUsuarioComponent,
+    CadastroFormArmacoesComponent,
   ],
   imports: [
     CommonModule,

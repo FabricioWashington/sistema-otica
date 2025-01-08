@@ -1,0 +1,80 @@
+<div class="content-container">
+  <mat-card>
+    <h2 class="form-title">CADASTRO DE ARMAÇÕES</h2>
+    <form class="armacao-form" (ngSubmit)="onSubmit()">
+      <!-- CADASTRO -->
+      <fieldset>
+        <legend>CADASTRO</legend>
+        <div class="row">
+          <!-- Referência -->
+          <div class="col-md-12">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Referência</mat-label>
+              <input matInput placeholder="Digite a referência" required />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Marca -->
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Marca</mat-label>
+              <mat-select required>
+                <mat-option value="item1">Item 1</mat-option>
+                <mat-option value="item2">Item 2</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Tipo de Óculos -->
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Tipo de Óculos</mat-label>
+              <mat-select required>
+                <mat-option value="item1">Item 1</mat-option>
+                <mat-option value="item2">Item 2</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Quantidade -->
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Quantidade</mat-label>
+              <input matInput placeholder="Digite a quantidade" type="number" required />
+            </mat-form-field>
+          </div>
+          <!-- Cor -->
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Cor</mat-label>
+              <input matInput placeholder="Digite a cor" required />
+            </mat-form-field>
+          </div>
+          <!-- Sexo -->
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Sexo</mat-label>
+              <mat-select required>
+                <mat-option value="M">Masculino</mat-option>
+                <mat-option value="F">Feminino</mat-option>
+                <mat-option value="U">Unissex</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- BOTÕES -->
+      <div class="row mt-3">
+        <div class="col-12 d-flex justify-content-between">
+          <button mat-stroked-button color="warn" type="button" (click)="onClear()">Limpar</button>
+          <div>
+            <button mat-stroked-button color="accent" type="button" (click)="onBack()">Voltar</button>
+            <button mat-raised-button color="primary" type="submit">Cadastrar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>
