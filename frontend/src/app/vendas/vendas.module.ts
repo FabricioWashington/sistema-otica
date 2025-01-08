@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { VendasRoutingModule } from './vendas-routing.module';
 import { VendasComponent } from './vendas/vendas.component';
+import { AppMaterialModule } from '../shared/app-material/app-material.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { VendasComponent } from './vendas/vendas.component';
   ],
   imports: [
     CommonModule,
-    VendasRoutingModule
+    VendasRoutingModule,
+    AppMaterialModule,
   ]
 })
 export class VendasModule { }
