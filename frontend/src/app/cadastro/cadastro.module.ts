@@ -14,6 +14,7 @@ import { CadastroFormUsuarioComponent } from './cadastro-form-usuario/cadastro-f
 import { CadastroFormArmacoesComponent } from './cadastro-form-armacoes/cadastro-form-armacoes.component';
 import { CadastroFormMarcaComponent } from './cadastro-form-marca/cadastro-form-marca.component';
 import { CadastroFormMedicoComponent } from './cadastro-form-medico/cadastro-form-medico.component';
+import { CadastroFormOrdemservicoComponent } from './cadastro-form-ordemservico/cadastro-form-ordemservico.component';
 
 
 
@@ -29,6 +30,7 @@ import { CadastroFormMedicoComponent } from './cadastro-form-medico/cadastro-for
     CadastroFormArmacoesComponent,
     CadastroFormMarcaComponent,
     CadastroFormMedicoComponent,
+    CadastroFormOrdemservicoComponent,
   ],
   imports: [
     CommonModule,

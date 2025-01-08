@@ -1,0 +1,155 @@
+<div class="content-container">
+  <mat-card>
+    <h2 class="form-title">CADASTRO DE ORDEM DE SERVIÇO</h2>
+    <form class="ordem-servico-form" (ngSubmit)="onSubmit()">
+      <!-- DADOS -->
+      <fieldset>
+        <legend>DADOS</legend>
+        <div class="row">
+          <!-- Número da O.S -->
+          <div class="col-md-12">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Número da O.S</mat-label>
+              <input matInput placeholder="Digite o número da ordem de serviço" required />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Cliente -->
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Cliente</mat-label>
+              <mat-select required>
+                <mat-option value="cliente1">Cliente 1</mat-option>
+                <mat-option value="cliente2">Cliente 2</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Funcionário -->
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Funcionário</mat-label>
+              <mat-select required>
+                <mat-option value="funcionario1">Funcionário 1</mat-option>
+                <mat-option value="funcionario2">Funcionário 2</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Médico -->
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Médico</mat-label>
+              <mat-select required>
+                <mat-option value="medico1">Médico 1</mat-option>
+                <mat-option value="medico2">Médico 2</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Receita -->
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Receita</mat-label>
+              <mat-select required>
+                <mat-option value="receita1">Receita 1</mat-option>
+                <mat-option value="receita2">Receita 2</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Produto -->
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Produto</mat-label>
+              <mat-select required>
+                <mat-option value="produto1">Produto 1</mat-option>
+                <mat-option value="produto2">Produto 2</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Tipo de Serviço -->
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Tipo de Serviço</mat-label>
+              <input matInput placeholder="Digite o tipo de serviço" required />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Data e Hora da Emissão -->
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Data e Hora da Emissão</mat-label>
+              <input matInput type="datetime-local" required />
+            </mat-form-field>
+          </div>
+          <!-- Data e Hora da Entrega -->
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Data e Hora da Entrega</mat-label>
+              <input matInput type="datetime-local" required />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Status -->
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Status</mat-label>
+              <mat-select required>
+                <mat-option value="aberto">Aberto</mat-option>
+                <mat-option value="concluido">Concluído</mat-option>
+                <mat-option value="cancelado">Cancelado</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Valor -->
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Valor</mat-label>
+              <input matInput type="number" placeholder="Digite o valor" required />
+            </mat-form-field>
+          </div>
+          <!-- Valor de Entrada -->
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Valor de Entrada</mat-label>
+              <input matInput type="number" placeholder="Digite o valor de entrada" required />
+            </mat-form-field>
+          </div>
+          <!-- Valor Restante -->
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Valor Restante</mat-label>
+              <input matInput type="number" placeholder="Digite o valor restante" required />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Observações -->
+          <div class="col-md-12">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Observações</mat-label>
+              <textarea matInput placeholder="Digite as observações"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- BOTÕES -->
+      <div class="row mt-3">
+        <div class="col-12 d-flex justify-content-between">
+          <button mat-stroked-button color="warn" type="button" (click)="onClear()">Limpar</button>
+          <div>
+            <button mat-stroked-button color="accent" type="button" (click)="onBack()">Voltar</button>
+            <button mat-raised-button color="primary" type="submit">Cadastrar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>
