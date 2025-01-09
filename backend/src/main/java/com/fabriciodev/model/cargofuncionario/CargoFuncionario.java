@@ -9,12 +9,13 @@ public class CargoFuncionario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idCargo_Funcionario")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "Cargo", nullable = false)
     private String cargo;
 
-    @Column(nullable = false)
+    @Column(name = "salario" , nullable = false)
     private BigDecimal salario;
 
     // Getters e Setters
