@@ -9,7 +9,7 @@ import com.fabriciodev.service.cargofuncionario.CargoFuncionarioService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cargos")
+@RequestMapping("/api/cargofuncionario")
 public class CargoFuncionarioController {
 
     @Autowired
