@@ -1,18 +1,12 @@
 package com.fabriciodev.controller.usuarios;
 
-import java.util.List;
-
+import com.fabriciodev.dto.usuarios.UsuariosDTO;
+import com.fabriciodev.service.usuarios.UsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.fabriciodev.model.tiposlogin.TiposLogin;
-import com.fabriciodev.service.tiposlogin.TiposLoginService;
-
-import org.springframework.web.bind.annotation.GetMapping;
-
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -20,10 +14,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UsuariosController {
 
     @Autowired
-    private TiposLoginService tiposLoginService;
+    private UsuariosService service;
 
-    @GetMapping("/tipos-login")
-    public ResponseEntity<List<TiposLogin>> listarTiposLogin() {
-        return ResponseEntity.ok(tiposLoginService.listarTodos());
+    @PostMapping
+    public ResponseEntity<UsuariosDTO> create(@RequestBody UsuariosDTO dto) {
+        return ResponseEntity.ok(service.create(dto));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UsuariosDTO>> getAll() {
+        return ResponseEntity.ok(service.getAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuariosDTO> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UsuariosDTO> update(@PathVariable Long id, @RequestBody UsuariosDTO dto) {
+        return ResponseEntity.ok(service.update(id, dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
