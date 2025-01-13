@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsuariosService } from '../../../../services/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-header',
@@ -8,11 +9,21 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  tipoLogin: string = '';
+  nomeUsuario: string = '';
   isMenuCollapsed: boolean = false;
 
-  constructor(private readonly router: Router) { }
+  constructor(
+    private readonly router: Router,
+    private readonly usuarioService: UsuariosService,
+  ) { }
 
+  ngOnInit(): void {
+    const userData = this.usuarioService.getUserData();
+    this.tipoLogin = userData.acesso;
+    this.nomeUsuario = userData.usuario;
+  }
 
 
   toggleMenu() {
@@ -20,14 +31,15 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.router.navigate(['/login']);
+    this.usuarioService.clearUserData();
+    this.router.navigate(['/#/login']);
   }
 
-  openConfig(){
+  openConfig() {
     console.log("abrindo config")
   }
 
-  openNotification(){
+  openNotification() {
     console.log("abrindo notificação")
   }
 

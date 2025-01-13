@@ -4,6 +4,8 @@ import { TiposloginService } from '../../services/tipos-login/tiposlogin.service
 import { TiposLogin } from '../../models/tipos-login/tipos-login';
 import { HttpClient } from '@angular/common/http';
 import { StatusService } from '../../services/status/status.service';
+import { Router } from '@angular/router';
+import { UsuariosService } from '../../services/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +32,9 @@ export class LoginComponent implements OnInit {
     private readonly loginService: LoginService,
     private readonly tiposLoginService: TiposloginService,
     private readonly http: HttpClient,
-    private readonly statusService: StatusService
+    private readonly statusService: StatusService,
+    private readonly router: Router,
+    private readonly usuarioService: UsuariosService,
   ) { }
 
   ngOnInit(): void {
@@ -77,7 +81,16 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response: any) => {
           console.log('Login bem-sucedido:', response);
-          window.location.href = '/#/home';
+
+          const tipoSelecionado = this.tiposLogin.find(
+            (tipo) => tipo.id === this.idTiposLogin
+          )?.tiposLogin;
+
+          if (tipoSelecionado) {
+            this.usuarioService.setUserData(tipoSelecionado, this.loginUsuario);
+          }
+
+          this.router.navigate(['/home']);
         },
         (error: any) => {
           console.error('Erro ao autenticar:', error);

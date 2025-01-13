@@ -13,7 +13,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 
@@ -35,6 +36,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     RouterModule,
     MatCheckboxModule,
     MatGridListModule,
+    MatProgressBarModule,
 
   ],
 })
