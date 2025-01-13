@@ -23,83 +23,83 @@
         <p>{{ nomeUsuario }}</p>
       </div>
       <div class="botoes">
-          <button class="logout-button" (click)="logout()">
-            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
-              width="24px" fill="#000000">
-              <g>
-                <path d="M0,0h24v24H0V0z" fill="none" />
-              </g>
-              <g>
-                <path
-                  d="M17,8l-1.41,1.41L17.17,11H9v2h8.17l-1.58,1.58L17,16l4-4L17,8z M5,5h7V3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h7v-2H5V5z" />
-              </g>
-            </svg></button>
+        <button class="logout-button" (click)="logout()">
+          <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24"
+            width="24px" fill="#000000">
+            <g>
+              <path d="M0,0h24v24H0V0z" fill="none" />
+            </g>
+            <g>
+              <path
+                d="M17,8l-1.41,1.41L17.17,11H9v2h8.17l-1.58,1.58L17,16l4-4L17,8z M5,5h7V3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h7v-2H5V5z" />
+            </g>
+          </svg></button>
       </div>
     </div>
 
     <ul>
       <li>
-        <a [routerLink]="['/home']" class="menu-link">
+        <a [routerLink]="['/home']" class="menu-link" routerLinkActive="active">
           <img src="assets/resources/icons/botao-de-inicio.png" alt="Home Icon" class="menu-icon">
           Home
         </a>
       </li>
       <li>
-        <a [routerLink]="['/caixa']" class="menu-link">
+        <a [routerLink]="['/caixa']" class="menu-link" routerLinkActive="active">
           <img src="assets/resources/icons/caixa-eletronico.png" alt="Caixa Icon" class="menu-icon">
           Caixa
         </a>
       </li>
       <li>
-        <a [routerLink]="['/cadastro']" class="menu-link">
+        <a [routerLink]="['/cadastro']" class="menu-link" routerLinkActive="active">
           <img src="assets/resources/icons/notes_768818.png" alt="Cadastro Icon" class="menu-icon">
           Cadastro
         </a>
       </li>
       <li>
-        <a [routerLink]="['/estoque']" class="menu-link">
+        <a [routerLink]="['/estoque']" class="menu-link" routerLinkActive="active">
           <img src="assets/resources/icons/ready-stock_4947506.png" alt="Estoque Icon" class="menu-icon">
           Estoque
         </a>
       </li>
       <li>
-        <a [routerLink]="['/nfce']" class="menu-link">
+        <a [routerLink]="['/nfce']" class="menu-link" routerLinkActive="active">
           <img src="assets/resources/icons/business-graphic_4008604.png" alt="Estoque Icon" class="menu-icon">
           NFCe/NFe
         </a>
       </li>
       <li>
-        <a [routerLink]="['/ordem-servico']" class="menu-link">
+        <a [routerLink]="['/ordem-servico']" class="menu-link" routerLinkActive="active">
           <img src="assets/resources/icons/servico-de-gestao.png" alt="Ordem Serviço Icon" class="menu-icon">
           Ordem Serviço
         </a>
       </li>
       <li>
-        <a [routerLink]="['/relatorios']" class="menu-link">
+        <a [routerLink]="['/relatorios']" class="menu-link" routerLinkActive="active">
           <img src="assets/resources/icons/grafico-preditivo.png" alt="Relatório Icon" class="menu-icon">
           Relatório Gerencial
         </a>
       </li>
       <li>
-        <a [routerLink]="['/vendas']" class="menu-link">
+        <a [routerLink]="['/vendas']" class="menu-link" routerLinkActive="active">
           <img src="assets/resources/icons/vendedor.png" alt="Vendas Icon" class="menu-icon">
           Vendas
         </a>
       </li>
       <li>
-        <a [routerLink]="['/financeiro']" class="menu-link">
+        <a [routerLink]="['/financeiro']" class="menu-link" routerLinkActive="active">
           <img src="assets/resources/icons/fluxo-de-caixa.png" alt="Financeiro Icon" class="menu-icon">
           Financeiro
         </a>
       </li>
       <li>
-        <a [routerLink]="['/ecf']" class="menu-link">
+        <a [routerLink]="['/ecf']" class="menu-link" routerLinkActive="active">
           <img src="assets/resources/icons/business-graphic_4008604.png" alt="Financeiro Icon" class="menu-icon">
           ECF
         </a>
       </li>
       <li>
-        <a [routerLink]="['/movimentacao']" class="menu-link">
+        <a [routerLink]="['/movimentacao']" class="menu-link" routerLinkActive="active">
           <img src="assets/resources/icons/produtos.png" alt="Movimentação Icon" class="menu-icon">
           Movimentação
         </a>
