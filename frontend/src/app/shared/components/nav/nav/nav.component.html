@@ -1,0 +1,73 @@
+<mat-toolbar class="mat-toolbar">
+  <div class="search-bar">
+    <div class="menuHamburguer">
+      <button mat-icon-button class="menu-button mr-3">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div class="navigation-buttons d-flex align-items-center">
+      <mat-icon [class.disabled]="navigationService.isBackDisabled" (click)="navigationService.goBack()"
+        aria-label="Voltar">arrow_back_ios</mat-icon>
+      <mat-icon [class.disabled]="navigationService.isForwardDisabled" (click)="navigationService.goForward()"
+        aria-label="Avançar">arrow_forward_ios</mat-icon>
+    </div>
+    <div class="search-input-container">
+      <mat-icon>search</mat-icon>
+      <input type="text" class="search-input" placeholder="Pesquise aqui...">
+    </div>
+    <div class="my-account-container">
+      <div class="my-account d-flex align-items-center justify-content-center align-content-center"
+        [matMenuTriggerFor]="myaccount" (menuOpened)="onMenuOpened()" (menuClosed)="onMenuClosed()">
+        <span>Olá, <strong>{{nomeUsuario}}</strong> <br> <strong>MINHA CONTA</strong></span>
+        <mat-icon class="arrow-icon" [ngClass]="{ 'rotated': isMenuOpen }">keyboard_arrow_down</mat-icon>
+      </div>
+      <mat-menu #myaccount="matMenu">
+        <div class="menu-header">
+          <p>Acesso: {{tipoLogin}}</p>
+        </div>
+        <button mat-menu-item>
+          <mat-icon>home</mat-icon>
+          <span>Minha Conta</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>person</mat-icon>
+          <span>Meus Dados</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Sair</span>
+        </button>
+      </mat-menu>
+    </div>
+    <div class="actions-container">
+      <div class="actions d-flex align-items-center justify-content-center align-content-center gap-2">
+        <mat-icon [matMenuTriggerFor]="configs" (click)="openConfig()" aria-label="Configurações">settings</mat-icon>
+        <mat-icon [matMenuTriggerFor]="notifications" matBadge="3" (click)="openNotification()"
+          aria-label="Notificações">notifications</mat-icon>
+      </div>
+      <div>
+        <mat-menu #configs="matMenu">
+          <button mat-menu-item>
+            <mat-icon>home</mat-icon>
+            <span>Ver Configurações</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>person</mat-icon>
+            <span>Minhas Configurações</span>
+          </button>
+        </mat-menu>
+        <mat-menu #notifications="matMenu">
+          <div class="text-notification d-flex justify-content-center mat-menu-content">
+            <mat-icon>notifications</mat-icon>
+            <p>Notificações</p>
+          </div>
+          <div class="notificacoes-provisorio d-flex flex-direction-column flex-wrap-wrap">
+            <p>Notificação 1</p>
+            <p>Notificação 2</p>
+            <p>Notificação 3</p>
+          </div>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
