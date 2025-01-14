@@ -6,6 +6,7 @@
 <!-- Conteúdo da aplicação -->
 <div *ngIf="!loading">
   <ng-container *ngIf="showHeader">
+    <app-nav></app-nav>
     <app-header></app-header>
   </ng-container>
   <router-outlet></router-outlet>
