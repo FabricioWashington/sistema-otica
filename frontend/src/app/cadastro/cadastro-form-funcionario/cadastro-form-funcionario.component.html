@@ -25,10 +25,11 @@
           <div class="col-md-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Função</mat-label>
-              <mat-select required>
-                <mat-option value="administrador">Administrador</mat-option>
-                <mat-option value="vendedor">Vendedor</mat-option>
-                <mat-option value="gerente">Gerente</mat-option>
+              <mat-select [(ngModel)]="formData.funcao" name="funcao" required>
+                <mat-option>Selecione</mat-option>
+                <mat-option *ngFor="let cargo of cargos" [value]="cargo.cargo">
+                  {{ cargo.cargo }}
+                </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
