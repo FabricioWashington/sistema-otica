@@ -102,7 +102,6 @@
 }
 
 
-/* Responsividade para telas médias e grandes */
 @media (min-width: 768px) {
   .side-menu {
     width: 75px;
@@ -119,14 +118,13 @@
   }
 }
 
-/* Responsividade para telas pequenas (largura máxima de 767px) */
 @media (max-width: 767px) {
   .side-menu {
-    width: 55px; /* Largura menor para telas pequenas */
+    width: 55px;
   }
 
   .side-menu.collapsed {
-    width: 200px; /* Expande menos em telas pequenas */
+    width: 200px;
   }
 
   .side-menu ul li .menu-link img {
@@ -135,11 +133,10 @@
   }
 
   .side-menu ul li .menu-link span {
-    display: none !important; /* Esconde o texto */
+    display: none !important;
   }
 }
 
-/* Responsividade para telas muito pequenas */
 @media (max-width: 480px) {
   .side-menu {
     width: 50px;
@@ -159,7 +156,6 @@
   }
 }
 
-/* Altura mínima para ajustar margem superior */
 @media (min-height: 690px) and (max-height: 700px) {
   .side-menu {
     margin-top: 50px;
