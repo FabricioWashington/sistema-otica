@@ -47,7 +47,6 @@
   margin: 0;
   flex-direction: column;
   display: flex;
-  flex-direction: column;
   align-items: center;
   width: 100%;
 }
@@ -103,21 +102,66 @@
 }
 
 
-/* Responsividade */
-@media (max-width: 768px) {
+/* Responsividade para telas médias e grandes */
+@media (min-width: 768px) {
   .side-menu {
-    width: 200px;
+    width: 75px;
+    margin-top: 30px;
+  }
+
+  .side-menu ul li .menu-link img {
+    width: 25px;
+    height: 25px;
   }
 
   .side-menu.collapsed {
-    width: 200px;
+    width: 250px;
+  }
+}
+
+/* Responsividade para telas pequenas (largura máxima de 767px) */
+@media (max-width: 767px) {
+  .side-menu {
+    width: 55px; /* Largura menor para telas pequenas */
   }
 
-  .side-menu ul li {
-    text-align: center;
+  .side-menu.collapsed {
+    width: 200px; /* Expande menos em telas pequenas */
+  }
+
+  .side-menu ul li .menu-link img {
+    width: 20px;
+    height: 20px;
   }
 
   .side-menu ul li .menu-link span {
-    display: none !important;
+    display: none !important; /* Esconde o texto */
+  }
+}
+
+/* Responsividade para telas muito pequenas */
+@media (max-width: 480px) {
+  .side-menu {
+    width: 50px;
+  }
+
+  .side-menu.collapsed {
+    width: 180px;
+  }
+
+  .side-menu ul li .menu-link img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .side-menu ul li {
+    padding: 10px;
+  }
+}
+
+/* Altura mínima para ajustar margem superior */
+@media (min-height: 690px) and (max-height: 700px) {
+  .side-menu {
+    margin-top: 50px;
   }
 }
