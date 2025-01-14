@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from '../../services/login/login.service';
-import { TiposloginService } from '../../services/tipos-login/tiposlogin.service';
 import { TiposLogin } from '../../models/tipos-login/tipos-login';
 import { HttpClient } from '@angular/common/http';
 import { StatusService } from '../../services/status/status.service';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
+import { TiposLoginService } from '../../services/tipos-login/tipos-login.service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private readonly loginService: LoginService,
-    private readonly tiposLoginService: TiposloginService,
+    private readonly tiposLoginService: TiposLoginService,
     private readonly http: HttpClient,
     private readonly statusService: StatusService,
     private readonly router: Router,

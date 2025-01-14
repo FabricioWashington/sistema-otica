@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
+import { TiposLoginService } from './tipos-login.service';
 
-import { TiposloginService } from './tiposlogin.service';
 
 describe('TiposloginService', () => {
-  let service: TiposloginService;
+  let service: TiposLoginService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TiposloginService);
+    service = TestBed.inject(TiposLoginService);
   });
 
   it('should be created', () => {

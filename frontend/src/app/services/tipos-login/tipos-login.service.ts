@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class TiposloginService {
+export class TiposLoginService {
   private apiUrl = 'http://localhost:8080/api/login/tipos-login'
 
   constructor(private http: HttpClient) {}
