@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CargoFuncionario } from '../../models/cargofuncionario/cargo-funcionario';
+import { CargoFuncionario } from '../../models/cargo-funcionario/cargo-funcionario';
 
 @Injectable({
   providedIn: 'root'

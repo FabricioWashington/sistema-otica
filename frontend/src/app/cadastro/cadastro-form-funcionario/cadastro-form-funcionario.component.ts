@@ -1,7 +1,7 @@
-import { CargoFuncionarioService } from './../../services/cargofuncionario/cargo-funcionario.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CargoFuncionario } from '../../models/cargofuncionario/cargo-funcionario';
+import { CargoFuncionario } from '../../models/cargo-funcionario/cargo-funcionario';
+import { CargoFuncionarioService } from '../../services/cargo-funcionario/cargo-funcionario.service';
 
 @Component({
   selector: 'app-cadastro-form-funcionario',
