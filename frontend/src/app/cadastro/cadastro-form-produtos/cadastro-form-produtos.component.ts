@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CategoriaService } from '../../services/categoria/categoria.service';
+import { Categoria } from '../../models/categoria/categoria';
 
 @Component({
   selector: 'app-cadastro-form-produtos',
@@ -8,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './cadastro-form-produtos.component.html',
   styleUrl: './cadastro-form-produtos.component.scss'
 })
-export class CadastroFormProdutosComponent {
+export class CadastroFormProdutosComponent implements OnInit{
   formData = {
     nome: '',
     unidade: '',
@@ -18,11 +20,25 @@ export class CadastroFormProdutosComponent {
     observacoes: '',
     imagem: null,
   };
+  categorias: Categoria[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private categoriaService: CategoriaService,
+  ) {}
+
+  ngOnInit(): void {
+    this.loadCategorias();
+  }
 
   onSubmit(): void {
     console.log('Dados enviados:', this.formData);
+  }
+
+  loadCategorias(): void {
+    this.categoriaService.listarCategorias().subscribe((data) => {
+      this.categorias = data;
+    });
   }
 
   onClear(): void {

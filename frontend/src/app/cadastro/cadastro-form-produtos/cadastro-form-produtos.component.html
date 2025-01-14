@@ -15,7 +15,7 @@
         </div>
         <div class="row">
           <!-- Unidade -->
-          <div class="col-md-6">
+          <div class="col-md-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Unidade</mat-label>
               <mat-select required>
@@ -25,26 +25,28 @@
             </mat-form-field>
           </div>
           <!-- Categoria -->
-          <div class="col-md-6">
+          <div class="col-md-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Categoria</mat-label>
-              <mat-select required>
-                <mat-option value="categoria1">Categoria 1</mat-option>
-                <mat-option value="categoria2">Categoria 2</mat-option>
+              <mat-select [(ngModel)]="formData.categoria" name="categoria" required>
+                <mat-option>Selecione</mat-option>
+                <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
+                  {{ categoria.nomeCategoria }}
+                </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
         </div>
         <div class="row">
           <!-- Preço -->
-          <div class="col-md-6">
+          <div class="col-md-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Preço</mat-label>
               <input matInput placeholder="Digite o preço" type="number" required />
             </mat-form-field>
           </div>
           <!-- Código de Barras -->
-          <div class="col-md-6">
+          <div class="col-md-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Código de Barras</mat-label>
               <input matInput placeholder="Digite o código de barras" required />
