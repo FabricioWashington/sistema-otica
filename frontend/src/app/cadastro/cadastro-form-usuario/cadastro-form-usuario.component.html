@@ -1,7 +1,7 @@
 <div class="content-container">
   <mat-card>
     <h2 class="form-title">CADASTRO DE USUÁRIOS</h2>
-    <form class="usuario-form" (ngSubmit)="onSubmit()">
+    <form class="usuario-form" (ngSubmit)="onSubmit()" #form="ngForm">
       <!-- DADOS DO USUÁRIO -->
       <fieldset>
         <legend>DADOS DO USUÁRIO</legend>
@@ -10,14 +10,14 @@
           <div class="col-md-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Nome Completo</mat-label>
-              <input matInput placeholder="Digite o nome completo" required />
+              <input matInput [(ngModel)]="formData.nomeCompleto" name="nomeCompleto" placeholder="Digite o nome completo" required />
             </mat-form-field>
           </div>
           <!-- CPF -->
           <div class="col-md-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>CPF</mat-label>
-              <input matInput placeholder="___.___.___-__" required />
+              <input matInput [(ngModel)]="formData.cpf" name="cpf" placeholder="___.___.___-__" required />
             </mat-form-field>
           </div>
         </div>
@@ -31,15 +31,15 @@
           <div class="col-md-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label><mat-icon>person</mat-icon> Usuário</mat-label>
-              <input matInput placeholder="Digite o nome de usuário" required />
+              <input matInput [(ngModel)]="formData.usuario" name="usuario" placeholder="Digite o nome de usuário" required />
             </mat-form-field>
           </div>
           <!-- Senha -->
           <div class="col-md-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label><mat-icon>lock</mat-icon> Senha</mat-label>
-              <input matInput placeholder="Digite a senha" [type]="hide ? 'password' : 'text'" required />
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Mostrar senha'">
+              <input matInput [(ngModel)]="formData.senha" name="senha" placeholder="Digite a senha" [type]="hide ? 'password' : 'text'" required />
+              <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Mostrar senha'">
                 <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
               </button>
             </mat-form-field>
@@ -50,7 +50,7 @@
           <div class="col-md-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Opções de Acesso</mat-label>
-              <mat-select [(value)]="idTiposLogin" name="idTiposLogin" required>
+              <mat-select [(ngModel)]="formData.acesso" name="acesso" required>
                 <mat-option value="">Selecione</mat-option>
                 <mat-option *ngFor="let tipo of tiposLogin" [value]="tipo.id">
                   {{ tipo.tiposLogin }}

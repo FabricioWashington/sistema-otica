@@ -4,19 +4,19 @@ import java.util.Date;
 
 public class UsuariosDTO {
 
-    private Long id;
+    private Long idUsuario;
     private String cpf;
     private String nomeCompleto;
     private Date dataCadastro;
     private Date dataModificacao;
 
     // Getters e Setters
-    public Long getId() {
-        return id;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getCpf() {

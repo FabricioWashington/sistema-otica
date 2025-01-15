@@ -48,6 +48,14 @@ button {
   margin-left: 10px;
 }
 
+button[mat-icon-button] {
+  min-width: 0px;
+  padding: 0px;
+  border-radius: 8px;
+  margin-left: 0;
+  margin-right: 5px;
+}
+
 button[mat-stroked-button] {
   border-color: #ddd;
   color: #555;

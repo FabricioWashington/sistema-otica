@@ -17,8 +17,8 @@ public class UsuariosController {
     private UsuariosService service;
 
     @PostMapping
-    public ResponseEntity<UsuariosDTO> create(@RequestBody UsuariosDTO dto) {
-        return ResponseEntity.ok(service.create(dto));
+    public ResponseEntity<UsuariosDTO> create(@RequestBody UsuariosDTO usuario) {
+        return ResponseEntity.ok(service.create(usuario));
     }
 
     @GetMapping

@@ -60,7 +60,7 @@ public class UsuariosService {
 
     private UsuariosDTO convertToDTO(Usuarios usuario) {
         UsuariosDTO dto = new UsuariosDTO();
-        dto.setId(usuario.getId());
+        dto.setIdUsuario(usuario.getIdUsuario());
         dto.setCpf(usuario.getCpf());
         dto.setNomeCompleto(usuario.getNomeCompleto());
         dto.setDataCadastro(usuario.getDataCadastro());

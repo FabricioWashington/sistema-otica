@@ -24,16 +24,13 @@ public class Login {
     @JoinColumn(name = "idtipos_login", nullable = false)
     private TiposLogin tiposLogin;
 
-    @Column(name = "idUsuario") 
+    @Column(name = "idUsuario", nullable = false) 
     private Integer idUsuario;
 
-    @Column(name = "cpf", unique = true)
-    private String cpf;
-
-    @Column(name = "data_cadastro", nullable = false)
+    @Column(name = "Data_cadastro", nullable = false)
     private LocalDateTime dataCadastro;
 
-    @Column(name = "data_modificacao")
+    @Column(name = "Data_modificacao")
     private LocalDateTime dataModificacao;
 
     // Getters e Setters
@@ -75,14 +72,6 @@ public class Login {
 
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public LocalDateTime getDataCadastro() {

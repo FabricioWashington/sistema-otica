@@ -10,7 +10,7 @@ public class Usuarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idUsuario")
-    private Long id;
+    private Long idUsuario;
 
     @Column(name = "CPF", nullable = false, unique = true)
     private String cpf;
@@ -27,12 +27,12 @@ public class Usuarios {
     private Date dataModificacao;
 
     // Getters e Setters
-    public Long getId() {
-        return id;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getCpf() {
