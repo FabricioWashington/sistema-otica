@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppMaterialModule } from './app-material/app-material.module';
 import { LoadingComponent } from './components/loading/loading.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
+import { SuccessDialogComponent } from './components/success-dialog/success-dialog/success-dialog.component';
 
 
 
@@ -10,13 +13,16 @@ import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
+    LoadingComponent,
+    ErrorDialogComponent,
+    SuccessDialogComponent
 
-    LoadingComponent
   ],
   imports: [
     CommonModule,
     AppMaterialModule,
+    MatDialogModule,
   ],
-  exports: [LoadingComponent]
+  exports: [LoadingComponent, ErrorDialogComponent]
 })
 export class SharedModule { }
