@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Usuario } from '../../models/usuario/usuario';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +9,29 @@ import { Injectable } from '@angular/core';
 export class UsuariosService {
   private tipoLoginKey = 'tipoLogin';
   private nomeUsuarioKey = 'nomeUsuario';
+  private apiUrl = 'http://localhost:8080/api/usuarios';
+
+  constructor(private http: HttpClient) { }
+
+  getUsuarios(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(this.apiUrl);
+  }
+
+  postUsuario(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(this.apiUrl, usuario);
+  }
+
+  getUsuarioPorId(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
+  }
+
+  putUsuario(id: number, usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.apiUrl}/${id}`, usuario);
+  }
+
+  deleteUsuario(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 
   setUserData(acesso: string, usuario: string): void {
     localStorage.setItem(this.tipoLoginKey, acesso);

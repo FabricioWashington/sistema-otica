@@ -21,7 +21,7 @@ export class LoginService {
     return this.http.post<boolean>(`${this.apiUrl}/verificar`, { loginUsuario, idTiposLogin });
   }
 
-  salvar(login: Login): Observable<Login> {
+  postLogin(login: Login): Observable<Login> {
     return this.http.post<Login>(this.apiUrl, login);
   }
 
