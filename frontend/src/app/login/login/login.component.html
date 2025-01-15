@@ -20,7 +20,7 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Opções de Acesso</mat-label>
-      <mat-select [(value)]="idTiposLogin" required>
+      <mat-select [(value)]="idTiposLogin" name="idTiposLogin" required>
         <mat-option value="">Selecione</mat-option>
         <mat-option *ngFor="let tipo of tiposLogin" [value]="tipo.id">
           {{ tipo.tiposLogin }}

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TiposLoginService {
-  private apiUrl = 'http://localhost:8080/api/login/tipos-login'
+  private apiUrl = 'http://localhost:8080/api/tipos-login'
 
   constructor(private http: HttpClient) {}
 

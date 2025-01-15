@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/login/tipos-login")
+@RequestMapping("/api/tipos-login")
 @CrossOrigin(origins = "http://localhost:4200")
 public class TiposLoginController {
 
