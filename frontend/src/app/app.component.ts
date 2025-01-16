@@ -15,7 +15,7 @@ export class AppComponent {
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const noHeaderPaths = ['/login'];
+        const noHeaderPaths = ['/login', '/404'];
         const noHeaderPrefixes = ['/cadastro/', '/estoque/', '/caixa/', '/vendas/'];
 
         this.showHeader = !(

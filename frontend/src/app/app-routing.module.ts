@@ -2,12 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home/home.component';
 import { LoginComponent } from './login/login/login.component';
+import { Error404Component } from './shared/error404/error404/error404.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  { path: '404', component: Error404Component },
+  { path: '**', redirectTo: '404' },
   {
     path: 'cadastro',
     loadChildren: () =>
@@ -63,7 +66,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./nfce/nfce.module').then((m) => m.NfceModule),
   },
-  { path: '**', redirectTo: 'login' },
 ];
 
 

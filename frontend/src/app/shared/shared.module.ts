@@ -6,6 +6,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import { SuccessDialogComponent } from './components/success-dialog/success-dialog/success-dialog.component';
+import { Error404Component } from './error404/error404/error404.component';
 
 
 
@@ -15,7 +16,8 @@ import { SuccessDialogComponent } from './components/success-dialog/success-dial
   declarations: [
     LoadingComponent,
     ErrorDialogComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    Error404Component
 
   ],
   imports: [
