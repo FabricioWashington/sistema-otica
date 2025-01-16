@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { SuccessDialogComponent } from '../../shared/components/success-dialog/success-dialog/success-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
+import { ValidationService } from '../../shared/utils/validation/validation.service';
+import { FormattingService } from '../../shared/utils/formatting/formatting.service';
 
 @Component({
   selector: 'app-cadastro-form-usuario',
@@ -38,10 +40,12 @@ export class CadastroFormUsuarioComponent implements OnInit {
     private loginService: LoginService,
     private tiposLoginService: TiposLoginService,
     private usuarioService: UsuariosService,
+    private validationService: ValidationService,
+    private formattingService: FormattingService,
     private dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private location: Location
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getTiposLogin();
@@ -59,6 +63,10 @@ export class CadastroFormUsuarioComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if (!this.validationService.validateCPF(this.formData.cpf)) {
+      this.onError('CPF inválido!', 'Fechar', { duration: 3000 });
+      return;
+    }
     const usuarioData: Usuario = {
       idUsuario: 0,
       nomeCompleto: this.formData.nomeCompleto,
@@ -99,6 +107,11 @@ export class CadastroFormUsuarioComponent implements OnInit {
     });
   }
 
+  aplicarMascaraCPF(event: any): void {
+    const input = event.target;
+    input.value = this.formattingService.maskCPF(input.value);
+  }
+
   onClear(): void {
     this.formData = {
       nomeCompleto: '',
@@ -131,12 +144,16 @@ export class CadastroFormUsuarioComponent implements OnInit {
     this.location.back();
   }
 
-  private onError() {
-    this._snackBar.open('Erro ao salvar curso!', 'Fechar', { duration: 3000 });
+  private onError(message: string, action: string, config: { duration: number }): void {
+    this._snackBar.open(message, action, config);
   }
 
-  private onSucess() {
-    this._snackBar.open('Curso salvo com sucesso!', 'Fechar', { duration: 3000 });
+  private onSucess(message: string, action: string, config: { duration: number }): void {
+    this._snackBar.open(message, action, config);
     this.onCancel();
+  }
+
+  private showMessage(message: string, action: string, config: { duration: number }): void {
+    this._snackBar.open(message, action, config);
   }
 }
