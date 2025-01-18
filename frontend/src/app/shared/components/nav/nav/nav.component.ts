@@ -41,7 +41,7 @@ export class NavComponent implements OnInit {
 
   logout() {
     this.usuarioService.clearUserData();
-    this.router.navigate(['/#/login']);
+    this.router.navigate(['/login']);
   }
 
   openConfig() {

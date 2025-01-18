@@ -47,13 +47,43 @@
 /* Ajusta o estilo de mat-form-field */
 mat-form-field {
   width: 100%;
-  margin-bottom: 15px;
+  // margin-bottom: 15px;
+}
+
+mat-form-field button.mat-icon-button {
+  position: absolute;
+  right: 8px;
+  top: calc(50% - 12px);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button[mat-icon-button] {
+  min-width: 0px;
+  padding: 0px;
+  border-radius: 8px;
+  margin-left: 0;
+  margin-right: 5px;
+  background-color: transparent;
+}
+
+button:hover[mat-icon-button] {
+  background-color: transparent;
+  color: transparent;
+}
+
+mat-form-field input {
+  padding-right: 40px;
+}
+
+mat-icon {
+  font-size: 20px;
+  color: #666;
 }
 
 mat-label {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 10px;
   color: #333;
 }
@@ -68,9 +98,6 @@ mat-select {
   font-size: 14px;
 }
 
-mat-select {
-  padding: 8px;
-}
 
 mat-checkbox {
   margin: 10px 0;

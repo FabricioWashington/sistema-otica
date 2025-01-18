@@ -6,6 +6,9 @@ import { StatusService } from '../../services/status/status.service';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { TiposLoginService } from '../../services/tipos-login/tipos-login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Location } from '@angular/common';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +18,7 @@ import { TiposLoginService } from '../../services/tipos-login/tipos-login.servic
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
+  hide = true;
   loginUsuario: string = '';
   loginSenha: string = '';
   idTiposLogin: number | null = null;
@@ -29,12 +33,14 @@ export class LoginComponent implements OnInit {
   @ViewChild('passwordField') passwordField!: ElementRef;
 
   constructor(
-    private readonly loginService: LoginService,
-    private readonly tiposLoginService: TiposLoginService,
-    private readonly http: HttpClient,
-    private readonly statusService: StatusService,
-    private readonly router: Router,
-    private readonly usuarioService: UsuariosService,
+    private loginService: LoginService,
+    private tiposLoginService: TiposLoginService,
+    private http: HttpClient,
+    private statusService: StatusService,
+    private router: Router,
+    private usuarioService: UsuariosService,
+    private _snackBar: MatSnackBar,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +49,7 @@ export class LoginComponent implements OnInit {
   }
 
   toggleShowPassword(): void {
-    this.showPassword = !this.showPassword;
+    this.hide = !this.hide;
   }
 
   configurarMostrarSenha(): void {
@@ -72,7 +78,7 @@ export class LoginComponent implements OnInit {
 
   autenticar(): void {
     if (!this.loginUsuario || !this.loginSenha || !this.idTiposLogin) {
-      this.loginError = 'Por favor, preencha todos os campos.';
+      this.onError('Por favor, preencha todos os campos.', 'Fechar', { duration: 3000 })
       return;
     }
 
@@ -80,8 +86,6 @@ export class LoginComponent implements OnInit {
       .autenticar(this.loginUsuario, this.loginSenha, Number(this.idTiposLogin))
       .subscribe(
         (response: any) => {
-          console.log('Login bem-sucedido:', response);
-
           const tipoSelecionado = this.tiposLogin.find(
             (tipo) => tipo.id === this.idTiposLogin
           )?.tiposLogin;
@@ -94,7 +98,7 @@ export class LoginComponent implements OnInit {
         },
         (error: any) => {
           console.error('Erro ao autenticar:', error);
-          this.loginError = 'Usuário ou senha inválidos.';
+          this.onError('Usuário ou senha inválidos.', 'Fechar', { duration: 3000 })
         }
       );
   }
@@ -108,7 +112,7 @@ export class LoginComponent implements OnInit {
       },
       (error) => {
         this.statusInternet = false;
-        console.error('Erro ao verificar conexão com a internet:', error);
+        this.onError('Erro ao verificar conexão com a internet.', 'Fechar', { duration: 3000 });
       }
     );
   }
@@ -122,7 +126,7 @@ export class LoginComponent implements OnInit {
       console.log('Certificado configurado corretamente');
     } catch (error) {
       this.statusCertificado = false;
-      console.error('Erro ao verificar o certificado:', error);
+      this.onError('Erro ao verificar o certificado.', 'Fechar', { duration: 3000 });
     }
   }
 
@@ -133,11 +137,27 @@ export class LoginComponent implements OnInit {
         this.statusBancoDados = response.status === 'Banco de dados OK';
       },
       (error) => {
-        console.error('Erro ao verificar banco de dados:', error);
-        this.loginError = 'Erro ao conectar com o banco de dados.';
+        this.onError('Erro ao conectar com o banco de dados.', 'Fechar', { duration: 3000 });
         this.statusBancoDados = false;
       }
     );
+  }
+
+  onCancel() {
+    this.location.back();
+  }
+
+  private onError(message: string, action: string, config: { duration: number }): void {
+    this._snackBar.open(message, action, config);
+  }
+
+  private onSucess(message: string, action: string, config: { duration: number }): void {
+    this._snackBar.open(message, action, config);
+    this.onCancel();
+  }
+
+  private showMessage(message: string, action: string, config: { duration: number }): void {
+    this._snackBar.open(message, action, config);
   }
 
 
