@@ -16,7 +16,7 @@
   overflow: hidden;
   overflow-y: auto;
   transition: width 0.4s ease, background 0.3s ease;
-  padding: 20px 0;
+  padding: 20px 0px;
 }
 
 .side-menu.collapsed {
@@ -67,7 +67,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 15px 20px;
+  padding: 20px 20px;
   text-decoration: none;
   color: white;
   font-size: 16px;
@@ -105,7 +105,7 @@
 @media (min-width: 768px) {
   .side-menu {
     width: 75px;
-    margin-top: 30px;
+    display: inline-block !important;
   }
 
   .side-menu ul li .menu-link img {
@@ -122,6 +122,7 @@
 @media (max-width: 767px) {
   .side-menu {
     width: 55px;
+    display: inline-block !important;
   }
 
   .side-menu.collapsed {
@@ -138,10 +139,12 @@
 @media (max-width: 480px) {
   .side-menu {
     width: 50px;
+    display: inline-block !important;
   }
 
   .side-menu.collapsed {
     width: 180px;
+    display: inline-block !important;
   }
 
   .side-menu ul li .menu-link img {
@@ -156,6 +159,6 @@
 
 @media (min-height: 690px) and (max-height: 700px) {
   .side-menu {
-    margin-top: 50px;
+    display: inline-block !important;
   }
 }
