@@ -10,7 +10,7 @@
       <mat-label><mat-icon>lock</mat-icon>Senha</mat-label>
       <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="loginSenha" placeholder="Digite sua senha"
         required />
-      <button mat-icon-button matSuffix type="button" (click)="toggleShowPassword()"
+      <button class="button-icon" mat-icon-button matSuffix type="button" (click)="toggleShowPassword()"
         [attr.aria-label]="'Mostrar senha'">
         <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
@@ -26,11 +26,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-checkbox id="showPasswordCheckbox" #showPasswordCheckbox (change)="toggleShowPassword()">
-      Visualizar Senha
-    </mat-checkbox>
-
-    <button mat-raised-button color="primary" type="button" id="loginButton" (click)="autenticar()">
+    <button class="button-entrar" mat-button color="primary" type="button" id="loginButton" (click)="autenticar()">
       ENTRAR
     </button>
 
@@ -49,7 +45,7 @@
 
     </div>
 
-    <button mat-button style="margin-top: 10px;" id="primeiroAcessoButton">
+    <button class="button-acess" mat-button id="primeiroAcessoButton">
       PRIMEIRO ACESSO
     </button>
 
