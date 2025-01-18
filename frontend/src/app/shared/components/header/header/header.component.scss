@@ -21,6 +21,7 @@
 
 .side-menu.collapsed {
   width: 250px;
+  display: block !important;
 }
 
 .side-menu:hover {
@@ -82,7 +83,6 @@
 }
 
 .side-menu ul li .menu-link span {
-  display: none;
   font-size: 16px;
   font-weight: bold;
 }
@@ -115,6 +115,7 @@
 
   .side-menu.collapsed {
     width: 250px;
+    display: inline-block !important;
   }
 }
 
@@ -125,15 +126,12 @@
 
   .side-menu.collapsed {
     width: 200px;
+    display: inline-block !important;
   }
 
   .side-menu ul li .menu-link img {
     width: 20px;
     height: 20px;
-  }
-
-  .side-menu ul li .menu-link span {
-    display: none !important;
   }
 }
 
