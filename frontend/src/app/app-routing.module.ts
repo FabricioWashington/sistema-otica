@@ -9,8 +9,6 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
-  { path: '404', component: Error404Component },
-  { path: '**', redirectTo: '404' },
   {
     path: 'cadastro',
     loadChildren: () =>
@@ -34,23 +32,16 @@ const routes: Routes = [
   {
     path: 'movimentacao',
     loadChildren: () =>
-      import('./movimentacao/movimentacao.module').then(
-        (m) => m.MovimentacaoModule
-      ),
+      import('./movimentacao/movimentacao.module').then((m) => m.MovimentacaoModule),
   },
   {
     path: 'ordem-servico',
-    loadChildren: () =>
-      import('./ordem-servico/ordem-servico.module').then(
-        (m) => m.OrdemServicoModule
-      ),
+    loadChildren: () => import('./ordem-servico/ordem-servico.module').then((m) => m.OrdemServicoModule),
   },
   {
     path: 'relatorios',
     loadChildren: () =>
-      import('./relatorios/relatorios.module').then(
-        (m) => m.RelatoriosModule
-      ),
+      import('./relatorios/relatorios.module').then((m) => m.RelatoriosModule),
   },
   {
     path: 'vendas',
@@ -66,6 +57,8 @@ const routes: Routes = [
     loadChildren: () =>
       import('./nfce/nfce.module').then((m) => m.NfceModule),
   },
+  { path: '404', component: Error404Component },
+  { path: '**', redirectTo: '404' },
 ];
 
 

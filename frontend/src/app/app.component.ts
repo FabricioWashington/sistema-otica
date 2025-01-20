@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
@@ -12,11 +12,11 @@ export class AppComponent {
   title = 'sistema-otica-angular';
   loading = true;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private renderer: Renderer2,  private elementRef: ElementRef) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const noHeaderPaths = ['/login', '/404'];
-        const noHeaderPrefixes = ['/cadastro/', '/estoque/', '/caixa/', '/vendas/'];
+        const noHeaderPaths = ['/login'];
+        const noHeaderPrefixes = ['/cadastro/', '/estoque/', '/caixa/', '/vendas/', '/404'];
 
         this.showHeader = !(
           noHeaderPaths.includes(event.urlAfterRedirects) ||
@@ -30,7 +30,10 @@ export class AppComponent {
 
   private simularCarregamentoInicial(): void {
     setTimeout(() => {
-      document.querySelector('.loading-overlay')?.classList.add('hidden');
+      const overlay = this.elementRef.nativeElement.querySelector('.loading-overlay');
+      if (overlay) {
+        this.renderer.addClass(overlay, 'hidden');
+      }
       setTimeout(() => (this.loading = false), 500);
     }, 4800);
   }

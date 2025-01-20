@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Renderer2, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-loading',
@@ -13,6 +13,8 @@ export class LoadingComponent implements OnInit {
   loading = true;
 
   @Output() onComplete = new EventEmitter<void>();
+
+  constructor(private renderer: Renderer2, private elementRef: ElementRef){}
 
   ngOnInit(): void {
     this.startLoading();
@@ -33,9 +35,9 @@ export class LoadingComponent implements OnInit {
 
   private simularCarregamentoInicial(): void {
     setTimeout(() => {
-      const loadingOverlay = document.querySelector('.loading-overlay');
+      const loadingOverlay = this.elementRef.nativeElement.querySelector('.loading-overlay');
       if (loadingOverlay) {
-        loadingOverlay.classList.add('hidden');
+        this.renderer.addClass(loadingOverlay, 'hidden');
       }
       setTimeout(() => (this.loading = false), 500);
     }, 1500);

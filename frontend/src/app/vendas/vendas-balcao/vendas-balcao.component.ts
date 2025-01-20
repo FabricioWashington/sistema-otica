@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { Produto } from '../../models/produto/produto';
 
 
@@ -24,10 +24,10 @@ export class VendasBalcaoComponent {
     valor: 'R$ 0,00',
   };
 
-  constructor() { }
+  constructor(private renderer: Renderer2) {}
 
   ngOnInit(): void {
-    document.addEventListener('keydown', (event) => {
+    this.renderer.listen('document', 'keydown', (event: KeyboardEvent) => {
       if (event.key === 'F1') {
         event.preventDefault();
         this.exibirModalAtalhos();
