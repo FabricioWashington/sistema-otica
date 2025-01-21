@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { NavModule } from './shared/components/nav/nav.module';
+import { LoginEmpresaModule } from './login-empresa/login-empresa.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { NavModule } from './shared/components/nav/nav.module';
     AppRoutingModule,
     AppMaterialModule,
     LoginModule,
+    LoginEmpresaModule,
     HeaderModule,
     NavModule,
     RouterModule.forRoot([]),

@@ -15,8 +15,8 @@ export class AppComponent {
   constructor(private router: Router, private renderer: Renderer2,  private elementRef: ElementRef) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const noHeaderPaths = ['/login'];
-        const noHeaderPrefixes = ['/cadastro/', '/estoque/', '/caixa/', '/vendas/', '/404'];
+        const noHeaderPaths = ['/login-empresa'];
+        const noHeaderPrefixes = ['/cadastro/', '/estoque/', '/caixa/', '/vendas/', '/404', '/login'];
 
         this.showHeader = !(
           noHeaderPaths.includes(event.urlAfterRedirects) ||

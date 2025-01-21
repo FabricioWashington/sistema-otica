@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home/home.component';
 import { LoginComponent } from './login/login/login.component';
 import { Error404Component } from './shared/error404/error404/error404.component';
+import { LoginEmpresaComponent } from './login-empresa/login-empresa/login-empresa/login-empresa.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login-empresa', pathMatch: 'full' },
+  {path: 'login-empresa', component: LoginEmpresaComponent},
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   {
