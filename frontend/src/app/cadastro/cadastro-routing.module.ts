@@ -1,10 +1,10 @@
-import { CadastroFormPessoajuridicaComponent } from './cadastro-form-pessoajuridica/cadastro-form-pessoajuridica.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { CadastroFormEmpresaComponent } from './cadastro-form-empresa/cadastro-form-empresa.component';
 import { CadastroFormFuncionarioComponent } from './cadastro-form-funcionario/cadastro-form-funcionario.component';
 import { CadastroFormPessoafisicaComponent } from './cadastro-form-pessoafisica/cadastro-form-pessoafisica.component';
+import { CadastroFormPessoajuridicaComponent } from './cadastro-form-pessoajuridica/cadastro-form-pessoajuridica.component';
 import { CadastroFormProdutosComponent } from './cadastro-form-produtos/cadastro-form-produtos.component';
 import { CadastroFormUsuarioComponent } from './cadastro-form-usuario/cadastro-form-usuario.component';
 import { CadastroFormArmacoesComponent } from './cadastro-form-armacoes/cadastro-form-armacoes.component';
