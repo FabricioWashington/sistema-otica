@@ -71,7 +71,6 @@ export class CadastroFormEmpresaComponent implements OnInit {
   }
 
   onBack(): void {
-    this.router.navigate(['/cadastro']);
-    console.log('Redirecionado para a tela de cadastro');
+    this.router.navigate(['/login-empresa']);
   }
 }
