@@ -82,4 +82,9 @@ export class ValidationService {
     return resultado === parseInt(digitos.charAt(1), 10);
   }
 
+  validateCEP(cep: string): boolean {
+    const regex = /^[0-9]{5}-[0-9]{3}$/;
+    return regex.test(cep);
+  }
+
 }

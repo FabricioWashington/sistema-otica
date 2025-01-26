@@ -1,50 +1,84 @@
 <div class="content-container">
   <mat-card>
-    <form class="empresa-form">
+    <form class="empresa-form" (ngSubmit)="onSubmit()">
       <!-- DADOS -->
       <fieldset>
         <legend>DADOS</legend>
         <div class="row">
+          <!-- CNPJ -->
           <div class="col-md-4">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>CNPJ</mat-label>
-              <input matInput placeholder="__.___.___/____-__">
+              <input matInput [(ngModel)]="formData.cnpj" name="cnpj" (input)="aplicarMascaraCNPJ($event)"
+                maxlength="18" placeholder="__.___.___/____-__" required>
             </mat-form-field>
           </div>
+          <!-- Razão Social -->
           <div class="col-md-4">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Razão Social</mat-label>
-              <input matInput placeholder="Digite a razão social">
+              <input matInput [(ngModel)]="formData.razaoSocial" name="razaoSocial" placeholder="Digite a razão social"
+                required>
             </mat-form-field>
           </div>
+          <!-- Nome Fantasia -->
           <div class="col-md-4">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Nome Fantasia</mat-label>
-              <input matInput placeholder="Digite o nome fantasia">
+              <input matInput [(ngModel)]="formData.nomeFantasia" name="nomeFantasia"
+                placeholder="Digite o nome fantasia" required>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Indicador IE -->
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Indicador IE</mat-label>
+              <mat-select [(ngModel)]="formData.indicadorIE" name="indicadorIE" required>
+                <mat-option value="selecione">Selecione</mat-option>
+                <mat-option value="Normal">Normal</mat-option>
+                <mat-option value="Produtor Rural">Produtor Rural</mat-option>
+                <mat-option value="Microempreendedor Individual (MEI)">Microempreendedor Individual (MEI)</mat-option>
+                <mat-option value="Substituto Tributário">Substituto Tributário</mat-option>
+                <mat-option value="Isento">Isento</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Regime Tributário -->
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Regime Tributário</mat-label>
+              <mat-select [(ngModel)]="formData.regimeTributario" name="regimeTributario" required>
+                <mat-option value="selecione">Selecione</mat-option>
+                <mat-option value="Simples Nacional">Simples Nacional</mat-option>
+                <mat-option value="Simples Nacional - Excesso de Sublimite de Receita">
+                  Simples Nacional - Excesso de Sublimite de Receita</mat-option>
+                <mat-option value="Regime Normal">Regime Normal</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Inscrição Estadual -->
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Inscrição Estadual</mat-label>
+              <input matInput [(ngModel)]="formData.inscricaoEstadual" name="inscricaoEstadual"
+                placeholder="Digite a inscrição estadual">
             </mat-form-field>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Indicador IE</mat-label>
-              <mat-select>
-                <mat-option value="selecione">Selecione</mat-option>
+          <!-- CNAE -->
+          <div class="col-md-10">
+            <mat-form-field *ngIf="cnaes.length > 0" appearance="outline" class="w-100">
+              <mat-label>CNAE</mat-label>
+              <mat-select [(ngModel)]="formData.idCnae" name="idCnae" required>
+                <mat-option value="" [disabled]>Selecione</mat-option>
+                <mat-option *ngFor="let cnae of cnaes" [value]="cnae.idCNAE">
+                  {{ cnae.cnae_Principal }}
+                </mat-option>
               </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-md-4">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Regime Tributário</mat-label>
-              <mat-select>
-                <mat-option value="selecione">Selecione</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-md-4">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Inscrição Estadual</mat-label>
-              <input matInput placeholder="Digite a inscrição estadual">
             </mat-form-field>
           </div>
         </div>
@@ -54,44 +88,65 @@
       <fieldset>
         <legend>ENDEREÇO</legend>
         <div class="row">
-          <div class="col-md-6">
+          <!-- CEP -->
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>CEP</mat-label>
+              <input matInput [(ngModel)]="formData.enderecoDTO.cep" name="cep" placeholder="_____-___"
+                maxlength="9" (input)="aplicarMascaraCEP($event)" required>
+            </mat-form-field>
+          </div>
+          <!-- Logradouro -->
+          <div class="col-md-4">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Logradouro</mat-label>
-              <input matInput placeholder="Digite o logradouro">
+              <input matInput [(ngModel)]="formData.enderecoDTO.logradouro" name="logradouro"
+                placeholder="Digite o logradouro" required>
             </mat-form-field>
           </div>
-          <div class="col-md-3">
+          <!-- Número -->
+          <div class="col-md-4">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Número</mat-label>
-              <input matInput placeholder="Digite o número">
-            </mat-form-field>
-          </div>
-          <div class="col-md-3">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Complemento</mat-label>
-              <input matInput placeholder="Digite o complemento">
+              <input matInput [(ngModel)]="formData.enderecoDTO.numero" name="numero" placeholder="Digite o número"
+                required>
             </mat-form-field>
           </div>
         </div>
+
         <div class="row">
-          <div class="col-md-6">
+          <!-- Complemento -->
+          <div class="col-md-4">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Bairro</mat-label>
-              <input matInput placeholder="Digite o bairro">
+              <mat-label>Complemento</mat-label>
+              <input matInput [(ngModel)]="formData.enderecoDTO.complemento" name="complemento"
+                placeholder="Digite o complemento">
             </mat-form-field>
           </div>
-          <div class="col-md-3">
+          <!-- Bairro -->
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Bairro</mat-label>
+              <input matInput [(ngModel)]="formData.enderecoDTO.bairro" name="bairro" placeholder="Digite o bairro"
+                required>
+            </mat-form-field>
+          </div>
+          <!-- UF -->
+          <div class="col-md-2">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>UF</mat-label>
-              <mat-select>
+              <mat-select [(ngModel)]="formData.enderecoDTO.uf" name="uf" required>
                 <mat-option value="selecione">Selecione</mat-option>
+                <mat-option value="DF">DF</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
-          <div class="col-md-3">
+          <!-- Município -->
+          <div class="col-md-2">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Município</mat-label>
-              <input matInput placeholder="Digite o município">
+              <input matInput [(ngModel)]="formData.enderecoDTO.municipio" name="municipio"
+                placeholder="Digite o município" required>
             </mat-form-field>
           </div>
         </div>
@@ -101,34 +156,43 @@
       <fieldset>
         <legend>CONTATO</legend>
         <div class="row">
-          <div class="col-md-2">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>DDD</mat-label>
-              <mat-select>
-                <mat-option value="11">11</mat-option>
-                <mat-option value="21">21</mat-option>
-                <mat-option value="31">31</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+          <!-- Telefone -->
           <div class="col-md-5">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Contato</mat-label>
-              <input matInput placeholder="Digite o nome do contato">
+              <mat-label>Telefone</mat-label>
+              <input matInput [(ngModel)]="formData.contatoDTO.telefone" name="telefone"
+                placeholder="Digite o telefone principal">
             </mat-form-field>
           </div>
-          <div class="col-md-6">
+          <!-- Telefone Secundário -->
+          <div class="col-md-5">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Telefone</mat-label>
-              <input matInput placeholder="Digite o telefone">
+              <mat-label>Telefone Secundário</mat-label>
+              <input matInput [(ngModel)]="formData.contatoDTO.telefone2" name="telefone2"
+                placeholder="Digite o telefone secundário">
             </mat-form-field>
           </div>
         </div>
+
         <div class="row">
-          <div class="col-md-12">
+          <!-- Email -->
+          <div class="col-md-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Email</mat-label>
-              <input matInput placeholder="Digite o email">
+              <input matInput [(ngModel)]="formData.contatoDTO.email" name="email" placeholder="Digite o email"
+                required>
+            </mat-form-field>
+          </div>
+          <!-- Senha -->
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label><mat-icon>lock</mat-icon>Senha</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="formData.senha" name="senha"
+                placeholder="Digite sua senha" required>
+              <button class="button-icon" mat-icon-button matSuffix type="button" (click)="toggleShowPassword()"
+                [attr.aria-label]="'Mostrar senha'">
+                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
             </mat-form-field>
           </div>
         </div>
