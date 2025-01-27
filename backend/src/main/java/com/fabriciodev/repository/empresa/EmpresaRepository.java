@@ -11,4 +11,6 @@ import com.fabriciodev.model.empresa.Empresa;
 public interface EmpresaRepository extends JpaRepository<Empresa, Integer> {
     boolean existsByCnpj(String cnpj);
     Optional<Empresa> findByCnpj(String cnpj);
+    Empresa findByCnpjAndSenha(String cnpj, String senha);
+
 }

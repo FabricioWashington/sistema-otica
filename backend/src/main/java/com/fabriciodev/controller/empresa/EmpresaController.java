@@ -20,7 +20,7 @@ public class EmpresaController {
 
     @PostMapping
     public ResponseEntity<Empresa> cadastrarEmpresa(@RequestBody EmpresaDTO empresaDTO) {
-        Empresa empresa = empresaService.salvarEmpresaComContatoEEndereco(empresaDTO);
+        Empresa empresa = empresaService.createEmpresa(empresaDTO);
         return ResponseEntity.ok(empresa);
     }
 
@@ -38,13 +38,13 @@ public class EmpresaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Empresa> atualizarEmpresa(@PathVariable Integer id, @RequestBody EmpresaDTO empresaDTO) {
-        Empresa empresa = empresaService.atualizarEmpresaComContatoEEndereco(id, empresaDTO);
+        Empresa empresa = empresaService.updateEmpresa(id, empresaDTO);
         return ResponseEntity.ok(empresa);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirEmpresa(@PathVariable Integer id) {
-        empresaService.excluirEmpresa(id);
+        empresaService.deleteEmpresa(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -14,15 +14,14 @@ public class LoginEmpresaController {
     private LoginEmpresaService loginEmpresaService;
 
     @PostMapping("/auth")
-    public ResponseEntity<String> autenticar(
+    public ResponseEntity<?> autenticar(
             @RequestParam String cnpj,
-            @RequestParam String email,
             @RequestParam String senha) {
 
-        boolean autenticado = loginEmpresaService.autenticar(cnpj, email, senha);
+        Integer idEmpresa = loginEmpresaService.autenticarCnpj(cnpj, senha);
 
-        if (autenticado) {
-            return ResponseEntity.ok("Autenticação realizada com sucesso.");
+        if (idEmpresa != null) {
+            return ResponseEntity.ok(idEmpresa);
         } else {
             return ResponseEntity.status(401).body("Credenciais inválidas.");
         }

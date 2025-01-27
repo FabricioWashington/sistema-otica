@@ -86,8 +86,8 @@ export class CadastroFormEmpresaComponent implements OnInit {
     );
   }
 
-  consultarEmpresa(idOuCnpj: string): void {
-    this.empresaService.buscarEmpresa(idOuCnpj).subscribe(
+  consultarEmpresa(id: number): void {
+    this.empresaService.buscarEmpresa(id).subscribe(
       (empresa) => {
         this.empresaSelecionada = empresa;
         this._snackBar.open('Empresa encontrada!', 'Fechar', { duration: 3000 });

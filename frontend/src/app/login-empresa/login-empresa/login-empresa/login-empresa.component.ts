@@ -3,6 +3,10 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { LoginEmpresaService } from '../../../services/login/login-empresa.service';
+import { UsuariosService } from '../../../services/usuarios/usuarios.service';
+import { ValidationService } from '../../../shared/utils/validation/validation.service';
+import { FormattingService } from '../../../shared/utils/formatting/formatting.service';
 
 @Component({
   selector: 'app-login-empresa',
@@ -27,14 +31,38 @@ export class LoginEmpresaComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private _snackBar: MatSnackBar,
-    private location: Location
+    private location: Location,
+    private login: LoginEmpresaService,
+    private usuario: UsuariosService,
+    private formattingService: FormattingService,
   ) { }
 
   ngOnInit(): void {
 
   }
 
-  autenticar(){}
+
+  autenticar() {
+    if (!this.loginEmpresa || !this.loginSenha) {
+      this.showMessage('Preencha todos os campos!', 'Fechar', { duration: 3000 });
+      return;
+    }
+
+    this.login.autenticar(this.loginEmpresa, this.loginSenha).subscribe(
+      (idEmpresa) => {
+        console.log(idEmpresa);
+        console.log('Autenticação bem-sucedida. ID da Empresa:', idEmpresa);
+        this.usuario.setUserEmpresaData(idEmpresa);
+        this.showMessage('Autenticação realizada com sucesso!', 'Fechar', { duration: 3000 });
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        console.error('Erro durante a autenticação:', error);
+        this.showMessage('Credenciais inválidas!', 'Fechar', { duration: 3000 });
+      }
+    );
+  }
+
 
 
   toggleShowPassword(): void {
@@ -53,11 +81,16 @@ export class LoginEmpresaComponent implements OnInit {
     }
   }
 
+  aplicarMascaraCNPJ(event: any): void {
+    const input = event.target;
+    input.value = this.formattingService.maskCNPJ(input.value);
+  }
+
   onCreateAccount(): void {
     this.router.navigate(['/cadastro/empresa']);
   }
 
-  onForgotPassword(): void{
+  onForgotPassword(): void {
     this.router.navigate(['']);
   }
 

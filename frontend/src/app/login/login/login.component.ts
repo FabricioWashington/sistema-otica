@@ -8,7 +8,6 @@ import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { TiposLoginService } from '../../services/tipos-login/tipos-login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
-import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',

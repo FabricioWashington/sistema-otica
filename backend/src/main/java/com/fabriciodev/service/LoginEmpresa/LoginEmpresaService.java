@@ -6,18 +6,22 @@ import org.springframework.stereotype.Service;
 import com.fabriciodev.model.empresa.Empresa;
 import com.fabriciodev.repository.empresa.EmpresaRepository;
 
+
 @Service
 public class LoginEmpresaService {
 
     @Autowired
     private EmpresaRepository empresaRepository;
 
-    public boolean autenticar(String cnpj, String email, String senha) {
-        Empresa empresa = empresaRepository.findByCnpj(cnpj).orElse(null);
-        if (empresa == null) {
-            return false; 
+
+    public Integer autenticarCnpj(String cnpj, String senha) {
+        if (!cnpj.matches("\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}")) {
+            return null;
         }
 
-        return empresa.getSenha().equals(senha);
+        Empresa empresa = empresaRepository.findByCnpjAndSenha(cnpj, senha);
+
+        return (empresa != null) ? empresa.getIdEmpresa() : null;
     }
+    
 }

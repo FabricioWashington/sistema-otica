@@ -28,15 +28,12 @@ public class EmpresaService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-    /**
-     * Salva uma nova empresa com os dados de contato e endereço.
-     */
-    public Empresa salvarEmpresaComContatoEEndereco(EmpresaDTO empresaDTO) {
+    
+    public Empresa createEmpresa(EmpresaDTO empresaDTO) {
         if (empresaRepository.existsByCnpj(empresaDTO.getCnpj())) {
             throw new IllegalArgumentException("CNPJ já cadastrado.");
         }
 
-        // Salvar o contato
         ContatoDTO contatoDTO = empresaDTO.getContatoDTO();
         Contato contato = new Contato();
         contato.setEmail(contatoDTO.getEmail());
@@ -45,7 +42,6 @@ public class EmpresaService {
         Contato contatoSalvo = contatoRepository.save(contato);
         System.out.println("ID Contato: " + contatoSalvo.getIdContato());
 
-        // Salvar o endereço
         EnderecoDTO enderecoDTO = empresaDTO.getEnderecoDTO();
         Endereco endereco = new Endereco();
         endereco.setLogradouro(enderecoDTO.getLogradouro());
@@ -58,7 +54,6 @@ public class EmpresaService {
         Endereco enderecoSalvo = enderecoRepository.save(endereco);
         System.out.println("ID Endereco: " + enderecoSalvo.getIdEndereco());
 
-        // Salvar a empresa com os IDs de contato e endereço
         Empresa empresa = new Empresa();
         empresa.setCnpj(empresaDTO.getCnpj());
         empresa.setRazaoSocial(empresaDTO.getRazaoSocial());
@@ -75,10 +70,7 @@ public class EmpresaService {
         return empresaSalva;
     }
 
-    /**
-     * Atualiza uma empresa com os dados de contato e endereço existentes.
-     */
-    public Empresa atualizarEmpresaComContatoEEndereco(Integer id, EmpresaDTO empresaDTO) {
+    public Empresa updateEmpresa(Integer id, EmpresaDTO empresaDTO) {
         Empresa empresa = empresaRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Empresa não encontrada."));
 
@@ -113,35 +105,23 @@ public class EmpresaService {
 
         return empresaRepository.save(empresa);
     }
-
-    /**
-     * Lista todas as empresas cadastradas.
-     */
+    
     public List<Empresa> listarEmpresas() {
         return empresaRepository.findAll();
     }
-
-    /**
-     * Consulta os detalhes de uma empresa específica.
-     */
+   
     public Optional<Empresa> consultarEmpresa(Integer id) {
         return empresaRepository.findById(id);
     }
 
-    /**
-     * Exclui uma empresa junto com seus dados de contato e endereço.
-     */
-    public void excluirEmpresa(Integer id) {
+    public void deleteEmpresa(Integer id) {
         Empresa empresa = empresaRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Empresa não encontrada."));
 
-        // Excluir o contato
         contatoRepository.deleteById(empresa.getIdContato());
 
-        // Excluir o endereço
         enderecoRepository.deleteById(empresa.getIdEndereco());
 
-        // Excluir a empresa
         empresaRepository.deleteById(id);
     }
 }

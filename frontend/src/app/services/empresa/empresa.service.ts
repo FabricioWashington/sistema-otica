@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../../environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmpresaService {
-  private apiUrl = 'http://localhost:8080/api/empresa';
+  private apiUrl = `${environment.apiUrl}/empresa`;
 
   constructor(private http: HttpClient) { }
 
@@ -18,8 +19,8 @@ export class EmpresaService {
     return this.http.get<any[]>(`${this.apiUrl}`);
   }
 
-  buscarEmpresa(idOuCnpj: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${idOuCnpj}`);
+  buscarEmpresa(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
   atualizarEmpresa(id: number, empresa: any): Observable<any> {

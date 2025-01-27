@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class UsuariosService {
   private tipoLoginKey = 'tipoLogin';
   private nomeUsuarioKey = 'nomeUsuario';
+  private idEmpresaKey = 'idEmpresa';
   private apiUrl = 'http://localhost:8080/api/usuarios';
 
   constructor(private http: HttpClient) { }
@@ -48,4 +49,20 @@ export class UsuariosService {
     localStorage.removeItem(this.tipoLoginKey);
     localStorage.removeItem(this.nomeUsuarioKey);
   }
+
+  setUserEmpresaData(idEmpresa: number): void {
+    localStorage.setItem(this.idEmpresaKey, idEmpresa.toString());
+  }
+
+
+  getUserEmpresaData(): { idEmpresa: number } {
+    const idEmpresa = Number(localStorage.getItem(this.idEmpresaKey)) || 0;
+    return { idEmpresa };
+  }
+
+
+  clearUserEmpresaData(): void {
+    localStorage.removeItem(this.idEmpresaKey);
+  }
+
 }
