@@ -18,13 +18,19 @@
     <div class="my-account-container">
       <div class="my-account d-flex align-items-center justify-content-center align-content-center"
         [matMenuTriggerFor]="myaccount" (menuOpened)="onMenuOpened()" (menuClosed)="onMenuClosed()">
-        <span>Olá, <strong>{{nomeUsuario}}</strong> <br> <strong>MINHA CONTA</strong></span>
+        <span>Olá, <strong>{{nomeUsuario}}</strong> | <strong>{{nomeFantasia}}</strong> <br>
+          <strong>MINHA CONTA</strong></span>
         <mat-icon class="arrow-icon" [ngClass]="{ 'rotated': isMenuOpen }">keyboard_arrow_down</mat-icon>
       </div>
       <mat-menu #myaccount="matMenu">
-        <div class="menu-header">
+        <div class="menu-header flex-wrap flex-column align-items-center">
+          <p> {{razaoSocial}} </p>
           <p>Acesso: {{tipoLogin}}</p>
         </div>
+        <button mat-menu-item>
+          <mat-icon><i class="bi bi-building-fill"></i></mat-icon>
+          <span>Minha Empresa</span>
+        </button>
         <button mat-menu-item>
           <mat-icon>home</mat-icon>
           <span>Minha Conta</span>
@@ -42,8 +48,9 @@
     <div class="actions-container">
       <div class="actions d-flex align-items-center justify-content-center align-content-center gap-2">
         <mat-icon [matMenuTriggerFor]="configs" (click)="openConfig()" aria-label="Configurações">settings</mat-icon>
-        <mat-icon [matMenuTriggerFor]="notifications" matBadge="3" (click)="openNotification()"
-          aria-label="Notificações">notifications</mat-icon>
+        <mat-icon [matMenuTriggerFor]="notifications" matBadge="3"
+          class="mat-icon notranslate mat-mdc-menu-trigger mat-badge" aria-hidden="false" role="button" tabindex="0"
+          (click)="openNotification()" aria-label="Notificações">notifications</mat-icon>
       </div>
       <div>
         <mat-menu #configs="matMenu">

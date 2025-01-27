@@ -1,7 +1,10 @@
+import { EmpresaService } from './../../../../services/empresa/empresa.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../../../../services/usuarios/usuarios.service';
 import { NavigationService } from '../../../../services/navigation/navigation.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-nav',
@@ -14,15 +17,38 @@ export class NavComponent implements OnInit {
   tipoLogin: string = '';
   nomeUsuario: string = '';
   isMenuOpen: boolean = false;
+  nomeFantasia: string = '';
+  razaoSocial: string = '';
+  idEmpresa: number = 0;
 
   constructor(
-    private readonly router: Router,
-    private readonly usuarioService: UsuariosService,
-    public readonly navigationService: NavigationService,
+    private router: Router,
+    private usuarioService: UsuariosService,
+    public navigationService: NavigationService,
+    private empresaService: EmpresaService,
+    private _snackBar: MatSnackBar,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
     this.userLoading();
+    this.obterNomeEmpresa(this.idEmpresa);
+  }
+
+  obterNomeEmpresa(idEmpresa: number): void {
+    const userData = this.usuarioService.getUserEmpresaData();
+    this.idEmpresa = userData.idEmpresa;
+    this.empresaService.buscarEmpresa(userData.idEmpresa).subscribe(
+      (empresa) => {
+        this.razaoSocial = empresa.razaoSocial;
+        this.nomeFantasia = empresa.nomeFantasia;
+      },
+      (error) => {
+        this.onError('Erro ao carregar nome da empresa.', 'Fechar', { duration: 3000 });
+        console.error('Erro ao buscar a empresa', error);
+      }
+    )
+
   }
 
   onMenuOpened(): void {
@@ -50,6 +76,23 @@ export class NavComponent implements OnInit {
 
   openNotification() {
     console.log("abrindo notificação")
+  }
+
+  onCancel() {
+    this.location.back();
+  }
+
+  private onError(message: string, action: string, config: { duration: number }): void {
+    this._snackBar.open(message, action, config);
+  }
+
+  private onSucess(message: string, action: string, config: { duration: number }): void {
+    this._snackBar.open(message, action, config);
+    this.onCancel();
+  }
+
+  private showMessage(message: string, action: string, config: { duration: number }): void {
+    this._snackBar.open(message, action, config);
   }
 
 }
