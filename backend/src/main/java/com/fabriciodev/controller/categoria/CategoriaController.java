@@ -21,8 +21,8 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoriaDTO>> listarCategorias() {
-        return ResponseEntity.ok(service.listarCategorias());
+    public ResponseEntity<List<CategoriaDTO>> listarCategorias(@RequestParam Integer idEmpresa) {
+        return ResponseEntity.ok(service.listarCategorias(idEmpresa));
     }
 
     @PutMapping("/{id}")

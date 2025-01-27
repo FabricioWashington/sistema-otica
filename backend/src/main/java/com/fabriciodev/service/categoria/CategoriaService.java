@@ -18,13 +18,14 @@ public class CategoriaService {
     public CategoriaDTO cadastrarCategoria(CategoriaDTO dto) {
         Categoria categoria = new Categoria();
         categoria.setNomeCategoria(dto.getNomeCategoria());
+        categoria.setIdEmpresa(dto.getIdEmpresa());
 
         Categoria savedCategoria = repository.save(categoria);
         return convertToDTO(savedCategoria);
     }
 
-    public List<CategoriaDTO> listarCategorias() {
-        return repository.findAll().stream()
+    public List<CategoriaDTO> listarCategorias(Integer idEmpresa) {
+        return repository.findByIdEmpresa(idEmpresa).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
@@ -34,6 +35,7 @@ public class CategoriaService {
                 .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada"));
 
         categoria.setNomeCategoria(dto.getNomeCategoria());
+        categoria.setIdEmpresa(dto.getIdEmpresa());
         Categoria updatedCategoria = repository.save(categoria);
         return convertToDTO(updatedCategoria);
     }
@@ -49,6 +51,7 @@ public class CategoriaService {
         CategoriaDTO dto = new CategoriaDTO();
         dto.setId(categoria.getId());
         dto.setNomeCategoria(categoria.getNomeCategoria());
+        dto.setIdEmpresa(categoria.getIdEmpresa());
         return dto;
     }
 }
