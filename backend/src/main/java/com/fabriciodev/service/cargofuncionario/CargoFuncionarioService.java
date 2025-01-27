@@ -20,22 +20,28 @@ public class CargoFuncionarioService {
         CargoFuncionario cargo = new CargoFuncionario();
         cargo.setCargo(dto.getCargo());
         cargo.setSalario(dto.getSalario());
+        cargo.setIdEmpresa(dto.getIdEmpresa()); // Adicionado idEmpresa
         CargoFuncionario savedCargo = repository.save(cargo);
         return mapToDTO(savedCargo);
     }
 
-    public List<CargoFuncionarioDTO> getAll() {
-        return repository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
+    public List<CargoFuncionarioDTO> getAllByEmpresa(Integer idEmpresa) {
+        return repository.findByIdEmpresa(idEmpresa).stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     public CargoFuncionarioDTO getById(Long id) {
-        return repository.findById(id).map(this::mapToDTO).orElseThrow(() -> new RuntimeException("Cargo não encontrado!"));
+        return repository.findById(id).map(this::mapToDTO)
+                .orElseThrow(() -> new RuntimeException("Cargo não encontrado!"));
     }
 
     public CargoFuncionarioDTO update(Long id, CargoFuncionarioDTO dto) {
-        CargoFuncionario cargo = repository.findById(id).orElseThrow(() -> new RuntimeException("Cargo não encontrado!"));
+        CargoFuncionario cargo = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cargo não encontrado!"));
         cargo.setCargo(dto.getCargo());
         cargo.setSalario(dto.getSalario());
+        cargo.setIdEmpresa(dto.getIdEmpresa()); 
         CargoFuncionario updatedCargo = repository.save(cargo);
         return mapToDTO(updatedCargo);
     }
@@ -49,6 +55,7 @@ public class CargoFuncionarioService {
         dto.setId(cargo.getId());
         dto.setCargo(cargo.getCargo());
         dto.setSalario(cargo.getSalario());
+        dto.setIdEmpresa(cargo.getIdEmpresa()); 
         return dto;
     }
 }

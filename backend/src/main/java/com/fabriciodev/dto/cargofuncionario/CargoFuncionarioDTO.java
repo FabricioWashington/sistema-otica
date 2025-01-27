@@ -7,6 +7,7 @@ public class CargoFuncionarioDTO {
     private Long id;
     private String cargo;
     private BigDecimal salario;
+    private Integer idEmpresa;
 
     // Getters e Setters
     public Long getId() {
@@ -31,5 +32,13 @@ public class CargoFuncionarioDTO {
 
     public void setSalario(BigDecimal salario) {
         this.salario = salario;
+    }
+
+    public Integer getIdEmpresa(){
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Integer idEmpresa){
+        this.idEmpresa = idEmpresa;
     }
 }

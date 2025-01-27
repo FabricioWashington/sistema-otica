@@ -1,4 +1,5 @@
 package com.fabriciodev.controller.cargofuncionario;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,8 @@ public class CargoFuncionarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CargoFuncionarioDTO>> getAll() {
-        return ResponseEntity.ok(service.getAll());
+    public ResponseEntity<List<CargoFuncionarioDTO>> getAll(@RequestParam Integer idEmpresa) {
+        return ResponseEntity.ok(service.getAllByEmpresa(idEmpresa));
     }
 
     @GetMapping("/{id}")

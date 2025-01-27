@@ -18,6 +18,9 @@ public class CargoFuncionario {
     @Column(name = "salario" , nullable = false)
     private BigDecimal salario;
 
+    @Column(name = "idEmpresa", nullable = false)
+    private Integer idEmpresa;
+
     // Getters e Setters
     public Long getId() {
         return id;
@@ -41,5 +44,13 @@ public class CargoFuncionario {
 
     public void setSalario(BigDecimal salario) {
         this.salario = salario;
+    }
+
+    public Integer getIdEmpresa(){
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Integer idEmpresa){
+        this.idEmpresa = idEmpresa;
     }
 }
