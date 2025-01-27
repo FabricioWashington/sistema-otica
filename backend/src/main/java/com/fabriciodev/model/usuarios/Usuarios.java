@@ -10,7 +10,7 @@ public class Usuarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idUsuario")
-    private Long idUsuario;
+    private Integer idUsuario;
 
     @Column(name = "CPF", nullable = false, unique = true)
     private String cpf;
@@ -26,13 +26,24 @@ public class Usuarios {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataModificacao;
 
+    @Column(name = "idEmpresa", nullable = false)
+    private Integer idEmpresa;
+
     // Getters e Setters
-    public Long getIdUsuario() {
+    public Integer getIdUsuario() {
         return idUsuario;
     }
 
-    public void setId(Long idUsuario) {
+    public void setId(Integer idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public Integer getIdEmpresa(){
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Integer idEmpresa){
+        this.idEmpresa = idEmpresa;
     }
 
     public String getCpf() {

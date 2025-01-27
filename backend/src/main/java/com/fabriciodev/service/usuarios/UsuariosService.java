@@ -3,6 +3,7 @@ package com.fabriciodev.service.usuarios;
 import com.fabriciodev.dto.usuarios.UsuariosDTO;
 import com.fabriciodev.model.usuarios.Usuarios;
 import com.fabriciodev.repository.usuarios.UsuariosRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class UsuariosService {
         usuario.setNomeCompleto(dto.getNomeCompleto());
         usuario.setDataCadastro(new Date());
         usuario.setDataModificacao(new Date());
+        usuario.setIdEmpresa(dto.getIdEmpresa());
 
         Usuarios savedUsuario = repository.save(usuario);
 
@@ -33,6 +35,10 @@ public class UsuariosService {
 
     public List<UsuariosDTO> getAll() {
         return repository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    public List<UsuariosDTO> getAllByEmpresa(Integer idEmpresa) {
+        return repository.findByIdEmpresa(idEmpresa).stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     public UsuariosDTO getById(Long id) {
@@ -45,6 +51,7 @@ public class UsuariosService {
         usuario.setCpf(dto.getCpf());
         usuario.setNomeCompleto(dto.getNomeCompleto());
         usuario.setDataModificacao(new Date());
+        usuario.setIdEmpresa(dto.getIdEmpresa());
 
         Usuarios updatedUsuario = repository.save(usuario);
 
@@ -65,6 +72,7 @@ public class UsuariosService {
         dto.setNomeCompleto(usuario.getNomeCompleto());
         dto.setDataCadastro(usuario.getDataCadastro());
         dto.setDataModificacao(usuario.getDataModificacao());
+        dto.setIdEmpresa(usuario.getIdEmpresa());
         return dto;
     }
 }

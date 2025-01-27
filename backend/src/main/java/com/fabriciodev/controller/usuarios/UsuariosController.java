@@ -2,6 +2,7 @@ package com.fabriciodev.controller.usuarios;
 
 import com.fabriciodev.dto.usuarios.UsuariosDTO;
 import com.fabriciodev.service.usuarios.UsuariosService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,10 @@ public class UsuariosController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UsuariosDTO>> getAll() {
+    public ResponseEntity<List<UsuariosDTO>> getAll(@RequestParam(required = false) Integer idEmpresa) {
+        if (idEmpresa != null) {
+            return ResponseEntity.ok(service.getAllByEmpresa(idEmpresa));
+        }
         return ResponseEntity.ok(service.getAll());
     }
 

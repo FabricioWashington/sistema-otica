@@ -4,6 +4,7 @@ public class TiposLoginDTO {
     
     private Long id;
     private String tipoLogin;
+    private Integer idEmpresa;
 
 
     public Long getId() {
@@ -20,5 +21,13 @@ public class TiposLoginDTO {
 
     public void setTipoLogin(String tipoLogin) {
         this.tipoLogin = tipoLogin;
+    }
+
+    public Integer getIdEmpresa(){
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Integer idEmpresa){
+        this.idEmpresa = idEmpresa;
     }
 }

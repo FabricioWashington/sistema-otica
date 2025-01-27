@@ -2,36 +2,44 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuario/usuario';
 import { Observable } from 'rxjs';
+import { environment } from '../../../../environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsuariosService {
   private tipoLoginKey = 'tipoLogin';
   private nomeUsuarioKey = 'nomeUsuario';
   private idEmpresaKey = 'idEmpresa';
-  private apiUrl = 'http://localhost:8080/api/usuarios';
+  private apiUrl = `${environment.apiUrl}/usuarios`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getUsuarios(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(this.apiUrl);
+    const { idEmpresa } = this.getUserEmpresaData();
+    return this.http.get<Usuario[]>(`${this.apiUrl}?idEmpresa=${idEmpresa}`);
   }
 
   postUsuario(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(this.apiUrl, usuario);
+    const { idEmpresa } = this.getUserEmpresaData();
+    const body = { ...usuario, idEmpresa};
+    return this.http.post<Usuario>(this.apiUrl, body);
   }
 
   getUsuarioPorId(id: number): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
+    const { idEmpresa } = this.getUserEmpresaData();
+    return this.http.get<Usuario>(`${this.apiUrl}/${id}?idEmpresa=${idEmpresa}`);
   }
 
   putUsuario(id: number, usuario: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.apiUrl}/${id}`, usuario);
+    const { idEmpresa } = this.getUserEmpresaData();
+    const body = { ...usuario, idEmpresa };
+    return this.http.put<Usuario>(`${this.apiUrl}/${id}`, body);
   }
 
   deleteUsuario(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    const { idEmpresa } = this.getUserEmpresaData();
+    return this.http.delete<void>(`${this.apiUrl}/${id}?idEmpresa=${idEmpresa}`);
   }
 
   setUserData(acesso: string, usuario: string): void {
@@ -54,15 +62,12 @@ export class UsuariosService {
     localStorage.setItem(this.idEmpresaKey, idEmpresa.toString());
   }
 
-
   getUserEmpresaData(): { idEmpresa: number } {
     const idEmpresa = Number(localStorage.getItem(this.idEmpresaKey)) || 0;
     return { idEmpresa };
   }
 
-
   clearUserEmpresaData(): void {
     localStorage.removeItem(this.idEmpresaKey);
   }
-
 }

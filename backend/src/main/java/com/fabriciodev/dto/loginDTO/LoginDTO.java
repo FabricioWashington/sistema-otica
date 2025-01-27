@@ -6,8 +6,8 @@ public class LoginDTO {
 
     private Long id;
     private Long idTiposLogin;
-    private Long idContato;
     private Long idUsuario;
+    private Long idEmpresa;
     private String loginUsuario;
     private String loginSenha;
     private String cpf;
@@ -30,14 +30,14 @@ public class LoginDTO {
         this.idTiposLogin = idTiposLogin;
     }
 
-    public Long getIdContato() {
-        return idContato;
+    public Long getIdEmpresa(){
+        return idEmpresa;
     }
 
-    public void setIdContato(Long idContato) {
-        this.idContato = idContato;
+    public void setIdEmpresa(Long idEmpresa){
+        this.idEmpresa = idEmpresa;
     }
-
+    
     public Long getIdUsuario() {
         return idUsuario;
     }

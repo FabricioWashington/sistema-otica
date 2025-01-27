@@ -18,7 +18,10 @@ public class TiposLoginController {
     private TiposLoginService tiposLoginService;
 
     @GetMapping
-    public ResponseEntity<List<TiposLogin>> listarTiposLogin() {
+    public ResponseEntity<List<TiposLogin>> listarTiposLogin(@RequestParam(required = false) Integer idEmpresa) {
+        if (idEmpresa != null) {
+            return ResponseEntity.ok(tiposLoginService.listarPorEmpresa(idEmpresa));
+        }
         return ResponseEntity.ok(tiposLoginService.listarTodos());
     }
 

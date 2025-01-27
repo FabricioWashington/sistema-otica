@@ -4,4 +4,5 @@ export interface Usuario {
   nomeCompleto: string;
   dataCadastro: Date;
   dataModificacao: Date;
+  idEmpresa: number;
 }

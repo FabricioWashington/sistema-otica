@@ -11,7 +11,7 @@ public class Login {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idlogin") // Ajustando para refletir o nome correto da coluna
+    @Column(name = "idlogin") 
     private Long id;
 
     @Column(name = "login_usuario", nullable = false, unique = true)
@@ -26,12 +26,16 @@ public class Login {
 
     @Column(name = "idUsuario", nullable = false) 
     private Integer idUsuario;
-
+   
     @Column(name = "Data_cadastro", nullable = false)
     private LocalDateTime dataCadastro;
 
     @Column(name = "Data_modificacao")
     private LocalDateTime dataModificacao;
+
+    @Column(name = "idEmpresa", nullable = false)
+    private Integer idEmpresa;
+
 
     // Getters e Setters
     public Long getId() {
@@ -72,6 +76,14 @@ public class Login {
 
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public Integer getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Integer idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
 
     public LocalDateTime getDataCadastro() {

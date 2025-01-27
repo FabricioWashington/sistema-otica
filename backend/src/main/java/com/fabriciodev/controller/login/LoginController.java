@@ -19,18 +19,20 @@ public class LoginController {
 
     @PostMapping("/autenticar")
     public ResponseEntity<Login> autenticar(@RequestParam String loginUsuario,
-                                        @RequestParam String loginSenha,
-                                        @RequestParam Long idTiposLogin) {
-    Optional<Login> login = loginService.autenticar(loginUsuario, loginSenha, idTiposLogin);
+                                            @RequestParam String loginSenha,
+                                            @RequestParam Long idTiposLogin,
+                                            @RequestParam Integer idEmpresa) {
+        Optional<Login> login = loginService.autenticar(loginUsuario, loginSenha, idTiposLogin, idEmpresa);
 
-    return login.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.status(401).build());
+        return login.map(ResponseEntity::ok)
+                    .orElseGet(() -> ResponseEntity.status(401).build());
     }
 
     @PostMapping("/verificar")
     public ResponseEntity<Boolean> verificarUsuarioCadastrado(@RequestParam String loginUsuario,
-                                                              @RequestParam Long idTiposLogin) {
-        boolean existe = loginService.verificarUsuarioCadastrado(loginUsuario, idTiposLogin);
+                                                              @RequestParam Long idTiposLogin,
+                                                              @RequestParam Integer idEmpresa) {
+        boolean existe = loginService.verificarUsuarioCadastrado(loginUsuario, idTiposLogin, idEmpresa);
 
         return ResponseEntity.ok(existe);
     }
@@ -41,6 +43,4 @@ public class LoginController {
 
         return ResponseEntity.ok(novoLogin);
     }
-
-
 }

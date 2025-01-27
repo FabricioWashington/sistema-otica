@@ -6,4 +6,5 @@ export interface Login {
   idUsuario: number;
   dataCadastro: Date;
   dataModificacao: Date;
+  idEmpresa: number;
 }

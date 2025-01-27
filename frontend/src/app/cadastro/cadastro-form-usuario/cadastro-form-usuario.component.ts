@@ -72,11 +72,13 @@ export class CadastroFormUsuarioComponent implements OnInit {
       nomeCompleto: this.formData.nomeCompleto,
       cpf: this.formData.cpf,
       dataCadastro: new Date(),
-      dataModificacao: new Date()
+      dataModificacao: new Date(),
+      idEmpresa: 0,
     };
 
     this.usuarioService.postUsuario(usuarioData).subscribe({
       next: (usuarioResponse) => {
+        console.log(usuarioResponse);
         if (!usuarioResponse.idUsuario) {
           return;
         }
@@ -88,7 +90,8 @@ export class CadastroFormUsuarioComponent implements OnInit {
           tiposLogin: { id: parseInt(this.formData.acesso, 10), tiposLogin: '' },
           idUsuario: usuarioResponse.idUsuario,
           dataCadastro: new Date(),
-          dataModificacao: new Date()
+          dataModificacao: new Date(),
+          idEmpresa: 0,
         };
 
         this.loginService.postLogin(loginData).subscribe({

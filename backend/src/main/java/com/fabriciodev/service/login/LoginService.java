@@ -14,12 +14,12 @@ public class LoginService {
     @Autowired
     private LoginRepository loginRepository;
 
-    public Optional<Login> autenticar(String loginUsuario, String loginSenha, Long idTiposLogin) {
-        return loginRepository.findByLoginUsuarioAndLoginSenhaAndTiposLoginId(loginUsuario, loginSenha, idTiposLogin);
+    public Optional<Login> autenticar(String loginUsuario, String loginSenha, Long idTiposLogin, Integer idEmpresa) {
+        return loginRepository.findByLoginUsuarioAndLoginSenhaAndTiposLoginIdAndIdEmpresa(loginUsuario, loginSenha, idTiposLogin, idEmpresa);
     }
 
-    public boolean verificarUsuarioCadastrado(String loginUsuario, Long idTiposLogin) {
-        return loginRepository.existsByLoginUsuarioAndTiposLoginId(loginUsuario, idTiposLogin);
+    public boolean verificarUsuarioCadastrado(String loginUsuario, Long idTiposLogin, Integer idEmpresa) {
+        return loginRepository.existsByLoginUsuarioAndTiposLoginIdAndIdEmpresa(loginUsuario, idTiposLogin, idEmpresa);
     }
 
     public Login salvar(Login login) {

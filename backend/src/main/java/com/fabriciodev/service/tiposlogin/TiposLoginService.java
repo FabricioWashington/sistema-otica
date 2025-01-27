@@ -19,6 +19,10 @@ public class TiposLoginService {
         return tiposLoginRepository.findAll();
     }
 
+    public List<TiposLogin> listarPorEmpresa(Integer idEmpresa) {
+        return tiposLoginRepository.findByIdEmpresa(idEmpresa);
+    }
+
     public Optional<TiposLogin> buscarPorId(Long id) {
         return tiposLoginRepository.findById(id);
     }
@@ -30,6 +34,7 @@ public class TiposLoginService {
     public Optional<TiposLogin> atualizar(Long id, TiposLogin tiposLoginAtualizado) {
         return tiposLoginRepository.findById(id).map(tiposLogin -> {
             tiposLogin.setTiposLogin(tiposLoginAtualizado.getTiposLogin());
+            tiposLogin.setIdEmpresa(tiposLoginAtualizado.getIdEmpresa());
             return tiposLoginRepository.save(tiposLogin);
         });
     }

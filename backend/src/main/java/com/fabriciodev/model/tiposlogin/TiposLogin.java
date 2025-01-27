@@ -14,6 +14,9 @@ public class TiposLogin {
     @Column(name = "tipos_login", nullable = false)
     private String tiposLogin;
 
+    @Column(name = "idEmpresa", nullable = false)
+    private Integer idEmpresa;
+
     // Getters e Setters
     public Long getId() {
         return id;
@@ -30,4 +33,13 @@ public class TiposLogin {
     public void setTiposLogin(String tiposLogin) {
         this.tiposLogin = tiposLogin;
     }
+
+    public Integer getIdEmpresa(){
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Integer idEmpresa){
+        this.idEmpresa = idEmpresa;
+    }
+
 }
