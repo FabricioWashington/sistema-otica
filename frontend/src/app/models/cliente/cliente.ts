@@ -5,5 +5,4 @@ export interface Cliente {
   idContato: number;
   dataCadastro: Date;
   dataModificacao: Date;
-  idEmpresa: number;
 }
