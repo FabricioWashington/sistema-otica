@@ -21,8 +21,8 @@ public class MedicoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MedicoDTO>> getAll() {
-        return ResponseEntity.ok(service.getAll());
+    public ResponseEntity<List<MedicoDTO>> getAll(@RequestParam Integer idEmpresa) {
+        return ResponseEntity.ok(service.getAllByEmpresa(idEmpresa));
     }
 
     @GetMapping("/{id}")

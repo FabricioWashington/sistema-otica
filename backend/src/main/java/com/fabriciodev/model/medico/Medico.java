@@ -28,6 +28,9 @@ public class Medico {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCadastro;
 
+    @Column(name = "idEmpresa", nullable = false)
+    private Integer idEmpresa;
+
     // Getters e Setters
     public Long getId() {
         return id;
@@ -75,5 +78,13 @@ public class Medico {
 
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+    
+    public Integer getIdEmpresa(){
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Integer idEmpresa){
+        this.idEmpresa = idEmpresa;
     }
 }

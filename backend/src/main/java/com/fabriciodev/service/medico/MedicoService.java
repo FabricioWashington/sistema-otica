@@ -26,6 +26,7 @@ public class MedicoService {
         medico.setRegistroProfissional(dto.getRegistroProfissional());
         medico.setIdEndereco(dto.getIdEndereco());
         medico.setIdContato(dto.getIdContato());
+        medico.setIdEmpresa(dto.getIdEmpresa());
         medico.setDataCadastro(new Date());
 
         Medico savedMedico = repository.save(medico);
@@ -33,8 +34,8 @@ public class MedicoService {
         return convertToDTO(savedMedico);
     }
 
-    public List<MedicoDTO> getAll() {
-        return repository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
+    public List<MedicoDTO> getAllByEmpresa(Integer idEmpresa) {
+        return repository.findByIdEmpresa(idEmpresa).stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     public MedicoDTO getById(Long id) {
@@ -51,6 +52,7 @@ public class MedicoService {
         medico.setRegistroProfissional(dto.getRegistroProfissional());
         medico.setIdEndereco(dto.getIdEndereco());
         medico.setIdContato(dto.getIdContato());
+        medico.setIdEmpresa(dto.getIdEmpresa());
 
         Medico updatedMedico = repository.save(medico);
 
@@ -71,6 +73,7 @@ public class MedicoService {
         dto.setRegistroProfissional(medico.getRegistroProfissional());
         dto.setIdEndereco(medico.getIdEndereco());
         dto.setIdContato(medico.getIdContato());
+        dto.setIdEmpresa(medico.getIdEmpresa());
         dto.setDataCadastro(medico.getDataCadastro());
         return dto;
     }

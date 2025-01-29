@@ -10,6 +10,7 @@ public class MedicoDTO {
     private Long idEndereco;
     private Long idContato;
     private Date dataCadastro;
+    private Integer idEmpresa;
 
     // Getters e Setters
     public Long getId() {
@@ -58,5 +59,13 @@ public class MedicoDTO {
 
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public Integer getIdEmpresa(){
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Integer idEmpresa){
+        this.idEmpresa = idEmpresa;
     }
 }

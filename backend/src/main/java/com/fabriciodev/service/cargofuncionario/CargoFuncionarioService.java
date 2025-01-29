@@ -20,7 +20,7 @@ public class CargoFuncionarioService {
         CargoFuncionario cargo = new CargoFuncionario();
         cargo.setCargo(dto.getCargo());
         cargo.setSalario(dto.getSalario());
-        cargo.setIdEmpresa(dto.getIdEmpresa()); // Adicionado idEmpresa
+        cargo.setIdEmpresa(dto.getIdEmpresa());
         CargoFuncionario savedCargo = repository.save(cargo);
         return mapToDTO(savedCargo);
     }

@@ -1,7 +1,7 @@
 <div class="content-container">
   <mat-card>
     <h2 class="form-title">CADASTRO DE MÉDICO</h2>
-    <form class="medico-form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="medicoForm" class="medico-form" (ngSubmit)="onSubmit()">
       <!-- DADOS -->
       <fieldset>
         <legend>DADOS</legend>
@@ -10,14 +10,24 @@
           <div class="col-md-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Nome Completo</mat-label>
-              <input matInput placeholder="Digite o nome completo" required />
+              <input
+                matInput
+                placeholder="Digite o nome completo"
+                formControlName="nomeCompleto"
+              />
+              <mat-error *ngIf="isFieldInvalid('nomeCompleto')">Nome completo é obrigatório</mat-error>
             </mat-form-field>
           </div>
           <!-- Inscrição Profissional -->
           <div class="col-md-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Inscrição Profissional</mat-label>
-              <input matInput placeholder="Digite a inscrição profissional" required />
+              <input
+                matInput
+                placeholder="Digite a inscrição profissional"
+                formControlName="inscricaoProfissional"
+              />
+              <mat-error *ngIf="isFieldInvalid('inscricaoProfissional')">Inscrição é obrigatória</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -27,29 +37,27 @@
       <fieldset>
         <legend>CONTATO</legend>
         <div class="row">
-          <!-- DDD -->
-          <div class="col-md-2">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>DDD</mat-label>
-              <mat-select required>
-                <mat-option value="11">11</mat-option>
-                <mat-option value="21">21</mat-option>
-                <mat-option value="31">31</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <!-- Contato -->
-          <div class="col-md-5">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Contato</mat-label>
-              <input matInput placeholder="Digite o contato" required />
-            </mat-form-field>
-          </div>
           <!-- Telefone -->
-          <div class="col-md-5">
+          <div class="col-md-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Telefone</mat-label>
-              <input matInput placeholder="Digite o telefone" required />
+              <input
+                matInput
+                placeholder="Digite o telefone"
+                formControlName="telefone"
+              />
+              <mat-error *ngIf="isFieldInvalid('telefone')">Telefone é obrigatório</mat-error>
+            </mat-form-field>
+          </div>
+          <!-- Telefone 2 -->
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Telefone Secundário</mat-label>
+              <input
+                matInput
+                placeholder="Digite o telefone secundário"
+                formControlName="telefone2"
+              />
             </mat-form-field>
           </div>
         </div>
@@ -58,7 +66,12 @@
           <div class="col-md-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Email</mat-label>
-              <input matInput placeholder="Digite o email" required />
+              <input
+                matInput
+                placeholder="Digite o email"
+                formControlName="email"
+              />
+              <mat-error *ngIf="isFieldInvalid('email')">Email válido é obrigatório</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -72,14 +85,24 @@
           <div class="col-md-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Logradouro</mat-label>
-              <input matInput placeholder="Digite o logradouro" required />
+              <input
+                matInput
+                placeholder="Digite o logradouro"
+                formControlName="logradouro"
+              />
+              <mat-error *ngIf="isFieldInvalid('logradouro')">Logradouro é obrigatório</mat-error>
             </mat-form-field>
           </div>
           <!-- Bairro -->
           <div class="col-md-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Bairro</mat-label>
-              <input matInput placeholder="Digite o bairro" required />
+              <input
+                matInput
+                placeholder="Digite o bairro"
+                formControlName="bairro"
+              />
+              <mat-error *ngIf="isFieldInvalid('bairro')">Bairro é obrigatório</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -88,32 +111,47 @@
           <div class="col-md-3">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Número</mat-label>
-              <input matInput placeholder="Digite o número" required />
+              <input
+                matInput
+                placeholder="Digite o número"
+                formControlName="numero"
+              />
+              <mat-error *ngIf="isFieldInvalid('numero')">Número é obrigatório</mat-error>
             </mat-form-field>
           </div>
           <!-- Complemento -->
           <div class="col-md-3">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Complemento</mat-label>
-              <input matInput placeholder="Digite o complemento" />
+              <input
+                matInput
+                placeholder="Digite o complemento"
+                formControlName="complemento"
+              />
             </mat-form-field>
           </div>
           <!-- CEP -->
           <div class="col-md-3">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>CEP</mat-label>
-              <input matInput placeholder="_____-___" required />
+              <input
+                matInput
+                placeholder="_____-___"
+                formControlName="cep"
+              />
+              <mat-error *ngIf="isFieldInvalid('cep')">CEP é obrigatório</mat-error>
             </mat-form-field>
           </div>
           <!-- UF -->
           <div class="col-md-3">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>UF</mat-label>
-              <mat-select required>
-                <mat-option value="SP">São Paulo</mat-option>
-                <mat-option value="RJ">Rio de Janeiro</mat-option>
-                <mat-option value="MG">Minas Gerais</mat-option>
+              <mat-select formControlName="uf">
+                <mat-option value="SP">SP</mat-option>
+                <mat-option value="RJ">RJ</mat-option>
+                <mat-option value="MG">MG</mat-option>
               </mat-select>
+              <mat-error *ngIf="isFieldInvalid('uf')">UF é obrigatório</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -122,7 +160,24 @@
           <div class="col-md-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Localidade</mat-label>
-              <input matInput placeholder="Digite a localidade" required />
+              <input
+                matInput
+                placeholder="Digite a localidade"
+                formControlName="localidade"
+              />
+              <mat-error *ngIf="isFieldInvalid('localidade')">Localidade é obrigatória</mat-error>
+            </mat-form-field>
+          </div>
+          <!-- Município -->
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Município</mat-label>
+              <input
+                matInput
+                placeholder="Digite o município"
+                formControlName="municipio"
+              />
+              <mat-error *ngIf="isFieldInvalid('municipio')">Município é obrigatório</mat-error>
             </mat-form-field>
           </div>
         </div>
