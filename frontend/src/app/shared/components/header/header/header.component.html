@@ -1,6 +1,6 @@
 <body>
   <header class="side-menu" [ngClass]="{ 'collapsed': isMenuCollapsed }" (mouseenter)="collapseMenu()" (mouseleave)="expandMenu()">
-    <ul>
+    <ul class="side-bar">
       <li *ngFor="let item of menuItems">
         <a [routerLink]="item.route" routerLinkActive="active" class="menu-link">
           <img [src]="item.icon" [alt]="item.label" class="menu-icon" />

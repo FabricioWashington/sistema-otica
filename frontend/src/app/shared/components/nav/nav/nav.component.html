@@ -12,9 +12,11 @@
         aria-label="Avançar">arrow_forward_ios</mat-icon>
     </div>
     <div class="search-input-container">
-      <mat-icon>search</mat-icon>
-      <input type="text" class="search-input" placeholder="Pesquise aqui...">
+      <input type="text" class="search-input" placeholder="Pesquise aqui..." />
     </div>
+    <button class="btn btn-outline-primary" (click)="toggleTheme()">
+      <i class="bi" [ngClass]="isDarkMode ? 'bi-brightness-high-fill' : 'bi-moon-stars-fill'"></i>
+    </button>
     <div class="my-account-container">
       <div class="my-account d-flex align-items-center justify-content-center align-content-center"
         [matMenuTriggerFor]="myaccount" (menuOpened)="onMenuOpened()" (menuClosed)="onMenuClosed()">

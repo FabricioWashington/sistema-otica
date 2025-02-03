@@ -1,3 +1,117 @@
 /* You can add global styles to this file, and also import other style files */
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+:root {
+  --dark-bg: #000000e0;
+  /* Fundo principal */
+  --dark-navbar: #121212;
+  /* Barra de navegação */
+  --dark-sidebar: #1C1C1C;
+  /* Sidebar/Menu */
+  --dark-card: #262626;
+  /* Cartões e caixas */
+  --dark-text: #FFFFFF;
+  /* Texto principal */
+  --dark-text-muted: #A8A8A8;
+  /* Texto secundário */
+  --dark-border: #2A2A2A;
+  /* Bordas e separadores */
+  --dark-hover: #333333;
+  /* Cor ao passar o mouse */
+}
+
+/* Modo escuro global */
+.dark-mode {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+/* Barra superior */
+.dark-mode .mat-toolbar {
+  background-color: var(--dark-navbar) !important;
+  color: var(--dark-text) !important;
+}
+
+/* Sidebar/Lateral */
+.dark-mode .side-menu {
+  background: var(--dark-sidebar) !important;
+}
+
+/* Button Card */
+.dark-mode .button-card {
+  background-color: var(--dark-border) !important;
+  border: 1px solid var(--dark-text) !important;
+}
+
+/* Tabela */
+.dark-mode .table {
+  background-color: var(--dark-border) !important;
+  color: var(--dark-text) !important;
+}
+
+/* Grafico */
+.dark-mode .chart {
+  background-color: var(--dark-border) !important;
+  color: var(--dark-text) !important;
+}
+
+/* Cartões e caixas */
+.dark-mode .card {
+  background-color: var(--dark-card) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text);
+}
+
+/* Inputs e busca */
+.dark-mode .search-input {
+  background-color: var(--dark-card) !important;
+  color: var(--dark-text);
+  border: 1px solid var(--dark-border) !important;
+}
+
+/* Ícones e botões */
+.dark-mode .btn {
+  background-color: var(--dark-border) !important;
+  color: var(--dark-text) !important;
+}
+
+.dark-mode .btn:hover {
+  background-color: var(--dark-hover) !important;
+}
+
+/* Ícones */
+.dark-mode mat-icon {
+  color: var(--dark-text) !important;
+}
+
+/* Links */
+.dark-mode a {
+  color: var(--dark-text) !important;
+}
+
+.dark-mode a:hover {
+  color: var(--dark-hover) !important;
+}
+
+.dark-mode .mat-mdc-menu-content,
+.dark-mode .menu-header {
+  background-color: var(--dark-card) !important;
+  border-bottom: 1px solid var(--dark-border) !important;
+}
+
+.dark-mode span, .dark-mode p {
+  color: var(--dark-text) !important;
+}
+
+.dark-mode button.mat-menu-item:hover {
+  background-color: var(--dark-hover) !important;
+}

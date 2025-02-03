@@ -5,6 +5,7 @@ import { UsuariosService } from '../../../../services/usuarios/usuarios.service'
 import { NavigationService } from '../../../../services/navigation/navigation.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
+import { ThemeService } from '../../../../services/theme/theme.service';
 
 @Component({
   selector: 'app-nav',
@@ -20,6 +21,7 @@ export class NavComponent implements OnInit {
   nomeFantasia: string = '';
   razaoSocial: string = '';
   idEmpresa: number = 0;
+  isDarkMode: boolean = false;
 
   constructor(
     private router: Router,
@@ -28,11 +30,19 @@ export class NavComponent implements OnInit {
     private empresaService: EmpresaService,
     private _snackBar: MatSnackBar,
     private location: Location,
+    private themeService: ThemeService,
   ) { }
 
   ngOnInit(): void {
     this.userLoading();
     this.obterNomeEmpresa(this.idEmpresa);
+    this.isDarkMode = localStorage.getItem("darkMode") === "enabled";
+  }
+
+
+  toggleTheme(): void {
+    this.isDarkMode = !this.isDarkMode;
+    this.themeService.toggleTheme();
   }
 
   obterNomeEmpresa(idEmpresa: number): void {
