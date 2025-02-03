@@ -1,4 +1,4 @@
-package com.fabriciodev.dto.tiposloginDTO;
+package com.fabriciodev.dto.tiposlogin;
 
 public class TiposLoginDTO {
     

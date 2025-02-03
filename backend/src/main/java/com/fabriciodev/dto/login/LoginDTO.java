@@ -1,4 +1,4 @@
-package com.fabriciodev.dto.loginDTO;
+package com.fabriciodev.dto.login;
 
 import java.time.LocalDateTime;
 
