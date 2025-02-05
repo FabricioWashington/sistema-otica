@@ -22,7 +22,7 @@ public class Produto {
     private String nomeProduto;
 
     @Column(nullable = false)
-    private Integer idUnidade;
+    private String unidade;
 
     @Column(nullable = false)
     private Integer idCategoria;

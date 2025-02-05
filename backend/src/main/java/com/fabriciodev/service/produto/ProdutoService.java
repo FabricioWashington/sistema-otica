@@ -40,7 +40,7 @@ public class ProdutoService {
         Produto produto = buscarPorId(id);
 
         produto.setNomeProduto(dto.getNomeProduto());
-        produto.setIdUnidade(dto.getIdUnidade());
+        produto.setUnidade(dto.getUnidade());
         produto.setIdCategoria(dto.getIdCategoria());
         produto.setPreco(dto.getPreco());
         produto.setData(dto.getData());

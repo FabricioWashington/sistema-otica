@@ -13,7 +13,7 @@ public class ProdutoDTO {
 
     private Long idProduto;
     private String nomeProduto;
-    private Integer idUnidade;
+    private String unidade;
     private Integer idCategoria;
     private BigDecimal preco;
     private LocalDate data;
