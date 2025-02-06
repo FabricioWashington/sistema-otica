@@ -88,9 +88,19 @@ body {
   background-color: var(--dark-hover) !important;
 }
 
+.dark-mode .menu-icon {
+filter: invert(1) !important;
+}
+
 /* Ícones */
 .dark-mode mat-icon {
   color: var(--dark-text) !important;
+}
+
+/* Loading */
+.dark-mode .loading-overlay {
+  background-color: var(--dark-hover) !important;
+  filter: invert(1);
 }
 
 /* Links */
