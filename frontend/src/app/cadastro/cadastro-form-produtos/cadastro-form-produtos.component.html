@@ -1,6 +1,6 @@
 <div class="content-container">
   <mat-card>
-    <form class="produto-form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="produtoForm" class="produto-form" (ngSubmit)="onSubmit()">
       <!-- CADASTRO -->
       <fieldset>
         <legend>CADASTRO</legend>
@@ -9,59 +9,71 @@
           <div class="col-md-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Nome</mat-label>
-              <input matInput placeholder="Digite o nome do produto" required />
+              <input matInput formControlName="nomeProduto" placeholder="Digite o nome do produto" required autocomplete="off" />
+              <mat-error *ngIf="isFieldInvalid('nomeProduto')">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
         </div>
+
         <div class="row">
           <!-- Unidade -->
-          <div class="col-md-12">
+          <div class="col-md-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Unidade</mat-label>
-              <mat-select required>
-                <mat-option value="unidade1">Unidade 1</mat-option>
-                <mat-option value="unidade2">Unidade 2</mat-option>
+              <mat-select formControlName="unidade" required>
+                <mat-option value="">Selecione</mat-option>
+                <mat-option *ngFor="let unidade of unidades" [value]="unidade.id">
+                  {{ unidade.descricao }}
+                </mat-option>
               </mat-select>
+              <mat-error *ngIf="isFieldInvalid('unidade')">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
+
           <!-- Categoria -->
-          <div class="col-md-12">
+          <div class="col-md-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Categoria</mat-label>
-              <mat-select [(ngModel)]="formData.categoria" name="categoria" required>
-                <mat-option>Selecione</mat-option>
+              <mat-select formControlName="categoria" required>
+                <mat-option value="">Selecione</mat-option>
                 <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
                   {{ categoria.nomeCategoria }}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="isFieldInvalid('categoria')">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
         </div>
+
         <div class="row">
           <!-- Preço -->
-          <div class="col-md-12">
+          <div class="col-md-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Preço</mat-label>
-              <input matInput placeholder="Digite o preço" type="number" required />
+              <input matInput type="number" formControlName="preco" placeholder="Digite o preço" required autocomplete="off" />
+              <mat-error *ngIf="isFieldInvalid('preco')">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
+
           <!-- Código de Barras -->
-          <div class="col-md-12">
+          <div class="col-md-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Código de Barras</mat-label>
-              <input matInput placeholder="Digite o código de barras" required />
+              <input matInput formControlName="codigoDeBarras" placeholder="Digite o código de barras" autocomplete="off" />
             </mat-form-field>
           </div>
         </div>
+
         <div class="row">
           <!-- Observações -->
           <div class="col-md-12">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Observações</mat-label>
-              <textarea matInput placeholder="Digite observações adicionais"></textarea>
+              <textarea matInput formControlName="observacoes" placeholder="Digite observações adicionais"></textarea>
             </mat-form-field>
           </div>
         </div>
+
         <div class="row">
           <!-- Selecionar Imagem -->
           <div class="col-md-12">
@@ -76,7 +88,7 @@
           <button mat-stroked-button color="warn" type="button" (click)="onClear()">Limpar</button>
           <div>
             <button mat-stroked-button color="accent" type="button" (click)="onBack()">Voltar</button>
-            <button mat-raised-button color="primary" type="submit">Cadastrar</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="produtoForm.invalid">Cadastrar</button>
           </div>
         </div>
       </div>

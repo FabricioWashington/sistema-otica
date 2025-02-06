@@ -12,15 +12,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/produtos")
-@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class ProdutoController {
 
     private final ProdutoService produtoService;
 
     @GetMapping
-    public ResponseEntity<List<Produto>> listarTodos() {
-        return ResponseEntity.ok(produtoService.listarTodos());
+    public ResponseEntity<List<Produto>> listarTodos(@RequestParam Integer idEmpresa) {
+        return ResponseEntity.ok(produtoService.listarTodos(idEmpresa));
     }
 
     @GetMapping("/{id}")
@@ -28,9 +27,9 @@ public class ProdutoController {
         return ResponseEntity.ok(produtoService.buscarPorId(id));
     }
 
-    @GetMapping("/codigo/{codigoDeBarras}")
-    public ResponseEntity<Produto> buscarPorCodigo(@PathVariable String codigoDeBarras) {
-        return ResponseEntity.ok(produtoService.buscarPorCodigoDeBarras(codigoDeBarras));
+    @GetMapping("/nome/{nomeProduto}")
+    public ResponseEntity<Produto> buscarPorNome(@PathVariable String nomeProduto) {
+        return ResponseEntity.ok(produtoService.buscarPorNome(nomeProduto));
     }
 
     @PostMapping

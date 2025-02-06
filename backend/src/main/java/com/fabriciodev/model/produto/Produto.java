@@ -16,32 +16,33 @@ public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idProduto")
     private Long idProduto;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "Nome_Produto", nullable = false, length = 100)
     private String nomeProduto;
 
-    @Column(nullable = false)
+    @Column(name = "unidade", nullable = false)
     private String unidade;
 
-    @Column(nullable = false)
+    @Column(name = "idCategoria", nullable = false)
     private Integer idCategoria;
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    @Column(name = "Preco", nullable = false, precision = 10, scale = 2)
     private BigDecimal preco;
 
-    @Column(nullable = false)
+    @Column(name = "data", nullable = false)
     private LocalDate data;
 
-    @Column(length = 255)
+    @Column(name = "Imagem", length = 255)
     private String imagem;
 
-    @Column(unique = true, nullable = false, length = 50)
+    @Column(name = "Codigo_de_Barras", unique = true, nullable = false, length = 50)
     private String codigoDeBarras;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "Observacoes", columnDefinition = "TEXT")
     private String observacoes;
 
-    @Column(nullable = false)
+    @Column(name = "idEmpresa", nullable = false)
     private Integer idEmpresa;
 }
