@@ -9,10 +9,6 @@ export interface Produto {
   imagem: string;
   codigoDeBarras: string;
   observacoes: string;
-  item: number;
-  codigo: string;
-  produto: string;
   quantidade: number;
-  valorUnitario: number;
   valorTotal: number;
 }
