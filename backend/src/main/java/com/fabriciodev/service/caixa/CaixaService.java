@@ -3,7 +3,7 @@ package com.fabriciodev.service.caixa;
 import com.fabriciodev.dto.caixa.CaixaDTO;
 import com.fabriciodev.model.caixa.Caixa;
 import com.fabriciodev.repository.caixa.CaixaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -12,24 +12,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class CaixaService {
 
-    @Autowired
-    private CaixaRepository repository;
+    private final CaixaRepository repository;
 
     public CaixaDTO abrirCaixa(CaixaDTO dto) {
         if (repository.findFirstByStatus("aberto") != null) {
             throw new IllegalStateException("Já existe um caixa aberto.");
         }
 
-        Caixa caixa = new Caixa();
-        caixa.setDataAbertura(LocalDateTime.now());
-        caixa.setSaldoInicial(dto.getSaldoInicial());
-        caixa.setOperador(dto.getOperador());
-        caixa.setStatus("aberto");
+        Caixa caixa = Caixa.builder()
+                .dataAbertura(LocalDateTime.now())
+                .saldoInicial(dto.getSaldoInicial())
+                .operador(dto.getOperador())
+                .status("aberto")
+                .build();
 
-        Caixa savedCaixa = repository.save(caixa);
-        return convertToDTO(savedCaixa);
+        return convertToDTO(repository.save(caixa));
     }
 
     public CaixaDTO fecharCaixa(Long id, BigDecimal saldoFinal) {
@@ -44,8 +44,7 @@ public class CaixaService {
         caixa.setDataFechamento(LocalDateTime.now());
         caixa.setStatus("fechado");
 
-        Caixa savedCaixa = repository.save(caixa);
-        return convertToDTO(savedCaixa);
+        return convertToDTO(repository.save(caixa));
     }
 
     public List<CaixaDTO> listarCaixas() {
@@ -59,14 +58,14 @@ public class CaixaService {
     }
 
     private CaixaDTO convertToDTO(Caixa caixa) {
-        CaixaDTO dto = new CaixaDTO();
-        dto.setId(caixa.getId());
-        dto.setDataAbertura(caixa.getDataAbertura());
-        dto.setDataFechamento(caixa.getDataFechamento());
-        dto.setSaldoInicial(caixa.getSaldoInicial());
-        dto.setSaldoFinal(caixa.getSaldoFinal());
-        dto.setStatus(caixa.getStatus());
-        dto.setOperador(caixa.getOperador());
-        return dto;
+        return CaixaDTO.builder()
+                .id(caixa.getId())
+                .dataAbertura(caixa.getDataAbertura())
+                .dataFechamento(caixa.getDataFechamento())
+                .saldoInicial(caixa.getSaldoInicial())
+                .saldoFinal(caixa.getSaldoFinal())
+                .status(caixa.getStatus())
+                .operador(caixa.getOperador())
+                .build();
     }
 }
