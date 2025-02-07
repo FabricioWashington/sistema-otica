@@ -9,6 +9,21 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.success-snackbar {
+  background-color: #4caf50;
+  color: white;
+}
+
+.error-snackbar {
+  background-color: #f44336;
+  color: white;
+}
+
+.info-snackbar {
+  background-color: #2196f3;
+  color: white;
+}
+
 
 :root {
   --dark-bg: #000000e0;
