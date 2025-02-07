@@ -27,6 +27,7 @@ public class CaixaService {
                 .saldoInicial(dto.getSaldoInicial())
                 .operador(dto.getOperador())
                 .status("aberto")
+                .idEmpresa(dto.getIdEmpresa())
                 .build();
 
         return convertToDTO(repository.save(caixa));
@@ -47,14 +48,20 @@ public class CaixaService {
         return convertToDTO(repository.save(caixa));
     }
 
-    public List<CaixaDTO> listarCaixas() {
-        return repository.findAll().stream()
+    public List<CaixaDTO> listarCaixas(Integer idEmpresa) {
+        return repository.findByIdEmpresa(idEmpresa).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
     public void deletarCaixa(Long id) {
         repository.deleteById(id);
+    }
+
+    public Long getIdCaixaAberto(Integer idEmpresa) {
+        return repository.findFirstByStatusAndIdEmpresa("aberto", idEmpresa)
+                .map(Caixa::getId)
+                .orElseThrow(() -> new IllegalStateException("Nenhum caixa aberto encontrado."));
     }
 
     private CaixaDTO convertToDTO(Caixa caixa) {
@@ -66,6 +73,7 @@ public class CaixaService {
                 .saldoFinal(caixa.getSaldoFinal())
                 .status(caixa.getStatus())
                 .operador(caixa.getOperador())
+                .idEmpresa(caixa.getIdEmpresa())
                 .build();
     }
 }

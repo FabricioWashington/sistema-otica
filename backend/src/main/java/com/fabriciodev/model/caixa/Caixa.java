@@ -36,4 +36,7 @@ public class Caixa {
 
     @Column(name = "operador", nullable = false)
     private String operador;
+
+    @Column(name = "idEmpresa", nullable = false)
+    private Integer idEmpresa;
 }

@@ -18,4 +18,5 @@ public class CaixaDTO {
     private BigDecimal saldoFinal;
     private String status;
     private String operador;
+    private Integer idEmpresa;
 }

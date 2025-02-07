@@ -21,14 +21,15 @@ public class CaixaController {
         return ResponseEntity.ok(service.abrirCaixa(dto));
     }
 
-    @PostMapping("/fechar/{id}")
-    public ResponseEntity<CaixaDTO> fecharCaixa(@PathVariable Long id, @RequestParam BigDecimal saldoFinal) {
-        return ResponseEntity.ok(service.fecharCaixa(id, saldoFinal));
+    @PostMapping("/fechar")
+    public ResponseEntity<CaixaDTO> fecharCaixa(@RequestParam BigDecimal saldoFinal, @RequestParam Integer idEmpresa) {
+        Long idCaixaAberto = service.getIdCaixaAberto(idEmpresa);
+        return ResponseEntity.ok(service.fecharCaixa(idCaixaAberto, saldoFinal));
     }
 
     @GetMapping
-    public ResponseEntity<List<CaixaDTO>> listarCaixas() {
-        return ResponseEntity.ok(service.listarCaixas());
+    public ResponseEntity<List<CaixaDTO>> listarCaixas(@RequestParam Integer idEmpresa) {
+        return ResponseEntity.ok(service.listarCaixas(idEmpresa));
     }
 
     @DeleteMapping("/{id}")
