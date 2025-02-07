@@ -3,17 +3,17 @@ package com.fabriciodev.service.venda;
 import com.fabriciodev.dto.venda.VendaDTO;
 import com.fabriciodev.model.venda.Venda;
 import com.fabriciodev.repository.venda.VendaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class VendaService {
 
-    @Autowired
-    private VendaRepository repository;
+    private final VendaRepository repository;
 
     public VendaDTO cadastrarVenda(VendaDTO dto) {
         Venda venda = convertToEntity(dto);
@@ -57,39 +57,39 @@ public class VendaService {
     }
 
     private VendaDTO convertToDTO(Venda venda) {
-        VendaDTO dto = new VendaDTO();
-        dto.setId(venda.getId());
-        dto.setIdFuncionario(venda.getIdFuncionario());
-        dto.setIdCliente(venda.getIdCliente());
-        dto.setIdPagamento(venda.getIdPagamento());
-        dto.setData(venda.getData());
-        dto.setVencimento(venda.getVencimento());
-        dto.setVlrSugerido(venda.getVlrSugerido());
-        dto.setDesconto(venda.getDesconto());
-        dto.setTotalVenda(venda.getTotalVenda());
-        dto.setParcela(venda.getParcela());
-        dto.setStatus(venda.getStatus());
-        dto.setVlrRecebido(venda.getVlrRecebido());
-        dto.setVlrRestante(venda.getVlrRestante());
-        dto.setVlrFinal(venda.getVlrFinal());
-        return dto;
+        return VendaDTO.builder()
+                .id(venda.getId())
+                .idFuncionario(venda.getIdFuncionario())
+                .idCliente(venda.getIdCliente())
+                .idPagamento(venda.getIdPagamento())
+                .data(venda.getData())
+                .vencimento(venda.getVencimento())
+                .vlrSugerido(venda.getVlrSugerido())
+                .desconto(venda.getDesconto())
+                .totalVenda(venda.getTotalVenda())
+                .parcela(venda.getParcela())
+                .status(venda.getStatus())
+                .vlrRecebido(venda.getVlrRecebido())
+                .vlrRestante(venda.getVlrRestante())
+                .vlrFinal(venda.getVlrFinal())
+                .build();
     }
 
     private Venda convertToEntity(VendaDTO dto) {
-        Venda venda = new Venda();
-        venda.setIdFuncionario(dto.getIdFuncionario());
-        venda.setIdCliente(dto.getIdCliente());
-        venda.setIdPagamento(dto.getIdPagamento());
-        venda.setData(dto.getData());
-        venda.setVencimento(dto.getVencimento());
-        venda.setVlrSugerido(dto.getVlrSugerido());
-        venda.setDesconto(dto.getDesconto());
-        venda.setTotalVenda(dto.getTotalVenda());
-        venda.setParcela(dto.getParcela());
-        venda.setStatus(dto.getStatus());
-        venda.setVlrRecebido(dto.getVlrRecebido());
-        venda.setVlrRestante(dto.getVlrRestante());
-        venda.setVlrFinal(dto.getVlrFinal());
-        return venda;
+        return Venda.builder()
+                .idFuncionario(dto.getIdFuncionario())
+                .idCliente(dto.getIdCliente())
+                .idPagamento(dto.getIdPagamento())
+                .data(dto.getData())
+                .vencimento(dto.getVencimento())
+                .vlrSugerido(dto.getVlrSugerido())
+                .desconto(dto.getDesconto())
+                .totalVenda(dto.getTotalVenda())
+                .parcela(dto.getParcela())
+                .status(dto.getStatus())
+                .vlrRecebido(dto.getVlrRecebido())
+                .vlrRestante(dto.getVlrRestante())
+                .vlrFinal(dto.getVlrFinal())
+                .build();
     }
 }
