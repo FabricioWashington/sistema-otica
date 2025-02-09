@@ -1,3 +1,4 @@
+import { Usuario } from './../../models/usuario/usuario';
 import { MessageService } from './../../shared/utils/message/message.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -5,6 +6,7 @@ import { CaixaService } from '../../services/caixa/caixa.service';
 import { Caixa } from '../../models/caixa/caixa';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
+import { UsuariosService } from '../../services/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-caixa-form-abertura',
@@ -13,7 +15,7 @@ import { Location } from '@angular/common';
   templateUrl: './caixa-form-abertura.component.html',
   styleUrl: './caixa-form-abertura.component.scss'
 })
-export class CaixaFormAberturaComponent implements OnInit{
+export class CaixaFormAberturaComponent implements OnInit {
   caixas: Caixa[] = [];
   saldoInicial: number = 0;
   operador: string = '';
@@ -22,10 +24,11 @@ export class CaixaFormAberturaComponent implements OnInit{
     private router: Router,
     private caixaService: CaixaService,
     private messageService: MessageService,
-  ) {}
+    private usuariosService: UsuariosService,
+  ) { }
 
   ngOnInit(): void {
-
+    this.obterOperador();
   }
 
   abrirCaixa(): void {
@@ -47,6 +50,11 @@ export class CaixaFormAberturaComponent implements OnInit{
       },
       error: () => this.messageService.showError('Erro ao abrir caixa', 'Fechar')
     });
+  }
+
+  obterOperador() {
+    const userData = this.usuariosService.getUserData();
+    this.operador = userData.usuario;
   }
 
   onClear(): void {
