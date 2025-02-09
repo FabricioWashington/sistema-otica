@@ -65,23 +65,19 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  background-color: #fff;
+  background-color: #ffff;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #555;
+  font-weight: bold;
+  border-bottom: 1px solid #f1f1f1;
 }
 
 table th,
 table td {
   padding: 15px;
   text-align: left;
-  border-bottom: 1px solid #f1f1f1;
-}
-
-table th {
-  background-color: #f9fafb;
-  font-weight: bold;
-  color: #555;
 }
 
 table tbody tr:hover {

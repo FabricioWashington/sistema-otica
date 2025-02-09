@@ -44,6 +44,10 @@ body {
   /* Cor ao passar o mouse */
 }
 
+.dark-mode body {
+  background-color: var(--dark-bg);
+}
+
 /* Modo escuro global */
 .dark-mode {
   background-color: var(--dark-bg);
@@ -68,7 +72,7 @@ body {
 }
 
 /* Tabela */
-.dark-mode .table {
+.dark-mode table {
   background-color: var(--dark-border) !important;
   color: var(--dark-text) !important;
 }
@@ -104,7 +108,7 @@ body {
 }
 
 .dark-mode .menu-icon {
-filter: invert(1) !important;
+  filter: invert(1) !important;
 }
 
 /* Ícones */
@@ -118,10 +122,6 @@ filter: invert(1) !important;
   filter: invert(1);
 }
 
-/* Links */
-.dark-mode a {
-  color: var(--dark-text) !important;
-}
 
 .dark-mode a:hover {
   color: var(--dark-hover) !important;
@@ -133,7 +133,10 @@ filter: invert(1) !important;
   border-bottom: 1px solid var(--dark-border) !important;
 }
 
-.dark-mode span, .dark-mode p {
+.dark-mode span,
+.dark-mode p,
+.dark-mode h3,
+.dark-mode a {
   color: var(--dark-text) !important;
 }
 
