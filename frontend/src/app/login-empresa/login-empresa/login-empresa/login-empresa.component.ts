@@ -5,8 +5,9 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { LoginEmpresaService } from '../../../services/login/login-empresa.service';
 import { UsuariosService } from '../../../services/usuarios/usuarios.service';
-import { ValidationService } from '../../../shared/utils/validation/validation.service';
+import { jwtDecode } from "jwt-decode";
 import { FormattingService } from '../../../shared/utils/formatting/formatting.service';
+import { CookieService } from '../../../shared/utils/cookies/cookie.service';
 
 @Component({
   selector: 'app-login-empresa',
@@ -35,12 +36,12 @@ export class LoginEmpresaComponent implements OnInit {
     private login: LoginEmpresaService,
     private usuario: UsuariosService,
     private formattingService: FormattingService,
+    private cookieService: CookieService,
   ) { }
 
   ngOnInit(): void {
 
   }
-
 
   autenticar() {
     if (!this.loginEmpresa || !this.loginSenha) {
@@ -49,12 +50,42 @@ export class LoginEmpresaComponent implements OnInit {
     }
 
     this.login.autenticar(this.loginEmpresa, this.loginSenha).subscribe(
-      (idEmpresa) => {
-        console.log(idEmpresa);
-        console.log('Autenticação bem-sucedida. ID da Empresa:', idEmpresa);
-        this.usuario.setUserEmpresaData(idEmpresa);
-        this.showMessage('Autenticação realizada com sucesso!', 'Fechar', { duration: 3000 });
-        this.router.navigate(['/login']);
+      (response) => {
+        console.log('Resposta do backend:', response);
+
+        // Obtém o token do cookie
+        const token = this.cookieService.getCookie('_auth_Optivisus');
+
+        if (!token) {
+          console.error('Erro: Token JWT não encontrado nos cookies.');
+          this.showMessage('Erro ao autenticar. Tente novamente.', 'Fechar', { duration: 3000 });
+          return;
+        }
+
+        try {
+          // Decodifica o token para obter idEmpresa
+          const decodedToken: any = jwtDecode(token);
+          const idEmpresa = decodedToken.idEmpresa;
+
+          if (!idEmpresa) {
+            console.error('Erro: idEmpresa não encontrado no token JWT.');
+            this.showMessage('Erro na autenticação. Contate o suporte.', 'Fechar', { duration: 3000 });
+            return;
+          }
+
+          // ✅ Salva o idEmpresa globalmente no UsuariosService
+          this.usuario.setUserEmpresaData(idEmpresa);
+
+          console.log('Autenticação bem-sucedida. ID da Empresa:', idEmpresa);
+          this.showMessage('Autenticação realizada com sucesso!', 'Fechar', { duration: 3000 });
+
+          // Redireciona para a página principal
+          this.router.navigate(['/dashboard']);
+
+        } catch (error) {
+          console.error('Erro ao decodificar token JWT:', error);
+          this.showMessage('Erro ao processar autenticação. Tente novamente.', 'Fechar', { duration: 3000 });
+        }
       },
       (error) => {
         console.error('Erro durante a autenticação:', error);
@@ -62,7 +93,6 @@ export class LoginEmpresaComponent implements OnInit {
       }
     );
   }
-
 
 
   toggleShowPassword(): void {

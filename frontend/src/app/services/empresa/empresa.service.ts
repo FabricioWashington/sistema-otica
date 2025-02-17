@@ -12,7 +12,7 @@ export class EmpresaService {
   constructor(private http: HttpClient) { }
 
   cadastrarEmpresa(empresa: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}`, empresa);
+    return this.http.post(`${this.apiUrl}/create`, empresa);
   }
 
   listarEmpresas(): Observable<any[]> {

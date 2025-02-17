@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Login } from '../../models/login/login';
 import { environment } from '../../../../environment.prod';
 import { UsuariosService } from '../usuarios/usuarios.service';
+import { CookieService } from '../../shared/utils/cookies/cookie.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class LoginService {
 
   constructor(
     private http: HttpClient,
-    private usuariosService: UsuariosService
+    private usuariosService: UsuariosService,
+    private cookieService: CookieService,
   ) { }
 
   autenticar(
@@ -23,7 +25,10 @@ export class LoginService {
   ): Observable<any> {
     const { idEmpresa } = this.usuariosService.getUserEmpresaData();
     const params = { loginUsuario, loginSenha, idTiposLogin, idEmpresa };
-    return this.http.post(`${this.apiUrl}/autenticar`, null, { params });
+    return this.http.post(`${this.apiUrl}/autenticar`, null, {
+      params,
+      withCredentials: true
+    });
   }
 
   verificarUsuario(

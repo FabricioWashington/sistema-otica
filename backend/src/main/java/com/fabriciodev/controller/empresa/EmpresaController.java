@@ -18,7 +18,7 @@ public class EmpresaController {
     @Autowired
     private EmpresaService empresaService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Empresa> cadastrarEmpresa(@RequestBody EmpresaDTO empresaDTO) {
         Empresa empresa = empresaService.createEmpresa(empresaDTO);
         return ResponseEntity.ok(empresa);

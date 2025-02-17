@@ -8,6 +8,7 @@ import { UsuariosService } from '../../services/usuarios/usuarios.service';
 import { TiposLoginService } from '../../services/tipos-login/tipos-login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
+import { CookieService } from '../../shared/utils/cookies/cookie.service';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private usuarioService: UsuariosService,
     private _snackBar: MatSnackBar,
-    private location: Location
+    private location: Location,
+    private cookieService: CookieService,
   ) { }
 
   ngOnInit(): void {

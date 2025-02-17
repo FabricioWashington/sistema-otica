@@ -1,11 +1,13 @@
 package com.fabriciodev.service.LoginEmpresa;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fabriciodev.model.empresa.Empresa;
 import com.fabriciodev.repository.empresa.EmpresaRepository;
 
+import java.util.Optional;
 
 @Service
 public class LoginEmpresaService {
@@ -13,15 +15,27 @@ public class LoginEmpresaService {
     @Autowired
     private EmpresaRepository empresaRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public Integer autenticarCnpj(String cnpj, String senha) {
-        if (!cnpj.matches("\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}")) {
-            return null;
+    public Optional<Empresa> autenticarCnpj(String cnpj, String senha) {
+        Optional<Empresa> empresaOptional = empresaRepository.findByCnpj(cnpj);
+        System.out.println("Empresa encontrada: " + empresaOptional);
+    
+        if (empresaOptional.isPresent()) {
+            Empresa empresa = empresaOptional.get();
+            System.out.println("Senha salva no banco: " + empresa.getSenha());
+            System.out.println("Senha digitada pelo usuário: " + senha);
+            
+            if (!passwordEncoder.matches(senha, empresa.getSenha().trim())) {
+                return Optional.of(empresa);
+            } else {
+                System.out.println("Erro: Senha incorreta.");
+            }
+        } else {
+            System.out.println("Erro: CNPJ não encontrado.");
         }
-
-        Empresa empresa = empresaRepository.findByCnpjAndSenha(cnpj, senha);
-
-        return (empresa != null) ? empresa.getIdEmpresa() : null;
+        return Optional.empty();
     }
     
 }

@@ -1,6 +1,7 @@
 package com.fabriciodev.service.empresa;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fabriciodev.dto.empresa.EmpresaDTO;
@@ -27,6 +28,9 @@ public class EmpresaService {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     
     public Empresa createEmpresa(EmpresaDTO empresaDTO) {
@@ -61,7 +65,7 @@ public class EmpresaService {
         empresa.setRegimeTributario(empresaDTO.getRegimeTributario());
         empresa.setInscricaoEstadual(empresaDTO.getInscricaoEstadual());
         empresa.setIndicadorIE(empresaDTO.getIndicadorIE());
-        empresa.setSenha(empresaDTO.getSenha());
+        empresa.setSenha(passwordEncoder.encode(empresaDTO.getSenha()));
         empresa.setIdContato(contatoSalvo.getIdContato());
         empresa.setIdEndereco(enderecoSalvo.getIdEndereco());
         Empresa empresaSalva = empresaRepository.save(empresa);
@@ -100,7 +104,7 @@ public class EmpresaService {
         empresa.setRegimeTributario(empresaDTO.getRegimeTributario());
         empresa.setInscricaoEstadual(empresaDTO.getInscricaoEstadual());
         empresa.setIndicadorIE(empresaDTO.getIndicadorIE());
-        empresa.setSenha(empresaDTO.getSenha());
+        empresa.setSenha(passwordEncoder.encode(empresaDTO.getSenha()));
         empresa.setDataModificacao(java.time.LocalDateTime.now());
 
         return empresaRepository.save(empresa);
