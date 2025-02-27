@@ -21,21 +21,21 @@ public class LoginEmpresaService {
     public Optional<Empresa> autenticarCnpj(String cnpj, String senha) {
         Optional<Empresa> empresaOptional = empresaRepository.findByCnpj(cnpj);
         System.out.println("Empresa encontrada: " + empresaOptional);
-    
+
         if (empresaOptional.isPresent()) {
             Empresa empresa = empresaOptional.get();
-            System.out.println("Senha salva no banco: " + empresa.getSenha());
-            System.out.println("Senha digitada pelo usuário: " + senha);
-            
+            // System.out.println("Senha salva no banco: " + empresa.getSenha());
+            // System.out.println("Senha digitada pelo usuário: " + senha);
+
             if (!passwordEncoder.matches(senha, empresa.getSenha().trim())) {
                 return Optional.of(empresa);
             } else {
-                System.out.println("Erro: Senha incorreta.");
+                // System.out.println("Erro: Senha incorreta.");
             }
         } else {
-            System.out.println("Erro: CNPJ não encontrado.");
+            // System.out.println("Erro: CNPJ não encontrado.");
         }
         return Optional.empty();
     }
-    
+
 }

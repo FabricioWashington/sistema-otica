@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TiposLogin } from '../../models/tipos-login/tipos-login';
 import { Observable } from 'rxjs';
@@ -13,29 +13,45 @@ export class TiposLoginService {
 
   constructor(
     private http: HttpClient,
-    private usuariosService: UsuariosService
-  ) { }
+    private usuariosService: UsuariosService,
+  ) {}
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = this.usuariosService.getToken();
+    // console.log("token enviado: ", token);
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  }
 
   listarTiposLogin(): Observable<any[]> {
     const { idEmpresa } = this.usuariosService.getUserEmpresaData();
-    return this.http.get<any[]>(`${this.apiUrl}?idEmpresa=${idEmpresa}`);
+    const url = idEmpresa ? `${this.apiUrl}?idEmpresa=${idEmpresa}` : this.apiUrl;
+
+    return this.http.get<any[]>(url, {
+      headers: this.getAuthHeaders(),
+    });
   }
 
   criarTipoLogin(tiposLogin: any): Observable<any> {
-    const { idEmpresa } = this.usuariosService.getUserEmpresaData();
-    tiposLogin.idEmpresa = idEmpresa;
-    return this.http.post<any>(this.apiUrl, tiposLogin);
+    return this.http.post<any>(this.apiUrl, tiposLogin, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+
+  buscarPorId(id: number): Observable<TiposLogin> {
+    return this.http.get<TiposLogin>(`${this.apiUrl}/${id}`, {
+      headers: this.getAuthHeaders(),
+    });
   }
 
   atualizarTiposLogin(id: number, tiposLogin: TiposLogin): Observable<TiposLogin> {
-    const { idEmpresa } = this.usuariosService.getUserEmpresaData();
-    const body = { ...tiposLogin, idEmpresa };
-    return this.http.put<TiposLogin>(`${this.apiUrl}/${id}`, body);
+    return this.http.put<TiposLogin>(`${this.apiUrl}/${id}`, tiposLogin, {
+      headers: this.getAuthHeaders(),
+    });
   }
 
   deletarTiposLogin(id: number): Observable<void> {
-    const { idEmpresa } = this.usuariosService.getUserEmpresaData();
-    const empresa = { idEmpresa }
-    return this.http.delete<void>(`${this.apiUrl}/${id}?idEmpresa=${empresa}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, {
+      headers: this.getAuthHeaders(),
+    });
   }
 }

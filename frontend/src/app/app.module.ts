@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { NavModule } from './shared/components/nav/nav.module';
 import { LoginEmpresaModule } from './login-empresa/login-empresa.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,14 @@ import { LoginEmpresaModule } from './login-empresa/login-empresa.module';
     RouterModule.forRoot([]),
     BrowserAnimationsModule,
     SharedModule,
+    HttpClientModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
     provideClientHydration(withEventReplay()),
     provideAnimationsAsync(),
     { provide: LocationStrategy, useClass: HashLocationStrategy }

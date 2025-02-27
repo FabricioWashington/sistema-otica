@@ -11,6 +11,8 @@ export class UsuariosService {
   private tipoLoginKey = 'tipoLogin';
   private nomeUsuarioKey = 'nomeUsuario';
   private idEmpresaKey = 'idEmpresa';
+  private tokenKey = 'token';
+  private empresaKey = 'empresa';
   private apiUrl = `${environment.apiUrl}/usuarios`;
 
   constructor(private http: HttpClient) {}
@@ -69,5 +71,28 @@ export class UsuariosService {
 
   clearUserEmpresaData(): void {
     localStorage.removeItem(this.idEmpresaKey);
+  }
+
+  //// token
+  saveToken(token: string, empresa: string): void {
+    localStorage.setItem(this.tokenKey, token);
+    localStorage.setItem(this.empresaKey, empresa);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
+  }
+
+  getEmpresa(): string | null {
+    return localStorage.getItem(this.empresaKey);
+  }
+
+  removeToken(): void {
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.empresaKey);
+  }
+
+  isAuthenticated(): boolean {
+    return this.getToken() !== null;
   }
 }

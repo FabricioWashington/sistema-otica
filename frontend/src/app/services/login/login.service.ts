@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Login } from '../../models/login/login';
 import { environment } from '../../../../environment.prod';
 import { UsuariosService } from '../usuarios/usuarios.service';
-import { CookieService } from '../../shared/utils/cookies/cookie.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,6 @@ export class LoginService {
   constructor(
     private http: HttpClient,
     private usuariosService: UsuariosService,
-    private cookieService: CookieService,
   ) { }
 
   autenticar(

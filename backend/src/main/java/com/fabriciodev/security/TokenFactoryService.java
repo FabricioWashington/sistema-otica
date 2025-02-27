@@ -24,12 +24,27 @@ public class TokenFactoryService {
     }
 
     public Map<String, Object> validateToken(String token) {
-        Map<String, Object> claims = tokenUsuarioService.validateToken(token);
-        
-        if (claims == null) {
-            claims = tokenEmpresaService.validateToken(token);
-        }
+        try {
+            // System.out.println("Token recebido para validação: " + token);
 
-        return claims;
+            Map<String, Object> claims = tokenUsuarioService.validateToken(token);
+            if (claims != null && "USUARIO".equals(claims.get("role"))) {
+                System.out.println("Token validado como USUARIO: " + claims);
+                return claims;
+            }
+
+            claims = tokenEmpresaService.validateToken(token);
+            if (claims != null && "EMPRESA".equals(claims.get("role"))) {
+                // System.out.println("Token validado como EMPRESA: " + claims);
+                return claims;
+            }
+
+            // System.out.println("Erro: Token não corresponde a nenhum tipo válido.");
+            throw new RuntimeException("Token inválido ou tipo desconhecido.");
+        } catch (Exception e) {
+            // System.out.println("Erro ao validar token: " + e.getMessage());
+            throw new RuntimeException("Erro ao validar token: " + e.getMessage());
+        }
     }
+
 }

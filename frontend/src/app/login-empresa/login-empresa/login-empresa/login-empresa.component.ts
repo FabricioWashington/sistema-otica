@@ -7,7 +7,6 @@ import { LoginEmpresaService } from '../../../services/login/login-empresa.servi
 import { UsuariosService } from '../../../services/usuarios/usuarios.service';
 import { jwtDecode } from "jwt-decode";
 import { FormattingService } from '../../../shared/utils/formatting/formatting.service';
-import { CookieService } from '../../../shared/utils/cookies/cookie.service';
 
 @Component({
   selector: 'app-login-empresa',
@@ -36,7 +35,6 @@ export class LoginEmpresaComponent implements OnInit {
     private login: LoginEmpresaService,
     private usuario: UsuariosService,
     private formattingService: FormattingService,
-    private cookieService: CookieService,
   ) { }
 
   ngOnInit(): void {
@@ -53,18 +51,14 @@ export class LoginEmpresaComponent implements OnInit {
       (response) => {
         console.log('Resposta do backend:', response);
 
-        // Obtém o token do cookie
-        const token = this.cookieService.getCookie('_auth_Optivisus');
-
-        if (!token) {
-          console.error('Erro: Token JWT não encontrado nos cookies.');
+        if (!response || !response.token) {
+          console.error('Erro: Token JWT não retornado pelo backend.');
           this.showMessage('Erro ao autenticar. Tente novamente.', 'Fechar', { duration: 3000 });
           return;
         }
 
         try {
-          // Decodifica o token para obter idEmpresa
-          const decodedToken: any = jwtDecode(token);
+          const decodedToken: any = jwtDecode(response.token);
           const idEmpresa = decodedToken.idEmpresa;
 
           if (!idEmpresa) {
@@ -73,14 +67,12 @@ export class LoginEmpresaComponent implements OnInit {
             return;
           }
 
-          // ✅ Salva o idEmpresa globalmente no UsuariosService
           this.usuario.setUserEmpresaData(idEmpresa);
 
           console.log('Autenticação bem-sucedida. ID da Empresa:', idEmpresa);
           this.showMessage('Autenticação realizada com sucesso!', 'Fechar', { duration: 3000 });
 
-          // Redireciona para a página principal
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/login']);
 
         } catch (error) {
           console.error('Erro ao decodificar token JWT:', error);
@@ -88,12 +80,11 @@ export class LoginEmpresaComponent implements OnInit {
         }
       },
       (error) => {
-        console.error('Erro durante a autenticação:', error);
-        this.showMessage('Credenciais inválidas!', 'Fechar', { duration: 3000 });
+        console.error('Erro na requisição:', error);
+        this.showMessage('Credenciais inválidas.', 'Fechar', { duration: 3000 });
       }
     );
   }
-
 
   toggleShowPassword(): void {
     this.hide = !this.hide;

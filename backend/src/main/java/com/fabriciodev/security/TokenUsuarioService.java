@@ -29,6 +29,7 @@ public class TokenUsuarioService implements TokenServiceInterface {
         claims.put("loginUsuario", login.getLoginUsuario());
         claims.put("idTiposLogin", login.getTiposLogin().getId());
         claims.put("idEmpresa", login.getIdEmpresa());
+        claims.put("role", "USUARIO");
 
         return JWT.create()
                 .withIssuer("sistema-otica")
@@ -40,6 +41,8 @@ public class TokenUsuarioService implements TokenServiceInterface {
 
     @Override
     public Map<String, Object> validateToken(String token) {
+        token = token.replace("Bearer ", "").trim();
+
         Algorithm algorithm = Algorithm.HMAC256(secret);
         DecodedJWT decodedJWT = JWT.require(algorithm)
                 .withIssuer("sistema-otica")
@@ -52,6 +55,11 @@ public class TokenUsuarioService implements TokenServiceInterface {
         claims.put("idEmpresa", decodedJWT.getClaim("idEmpresa").asInt());
 
         return claims;
+    }
+
+    public boolean isTokenUsuario(String token) {
+        Map<String, Object> claims = validateToken(token);
+        return claims != null && "USUARIO".equals(claims.get("role"));
     }
 
     private Instant generateExpirationDate() {

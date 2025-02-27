@@ -10,6 +10,15 @@ import java.time.LocalDateTime;
 @Table(name = "empresa")
 public class Empresa {
 
+    public Empresa() {
+
+    }
+
+    public Empresa(Integer idEmpresa, String cnpj) {
+        this.idEmpresa = idEmpresa;
+        this.cnpj = cnpj;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEmpresa")
@@ -50,7 +59,6 @@ public class Empresa {
 
     @Column(name = "senha", nullable = false)
     private String senha;
-
 
     public void setIdContato(Integer idContato) {
         this.idContato = idContato;

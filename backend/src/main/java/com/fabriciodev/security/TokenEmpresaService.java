@@ -29,6 +29,7 @@ public class TokenEmpresaService {
             Map<String, Object> claims = new HashMap<>();
             claims.put("cnpj", empresa.getCnpj());
             claims.put("idEmpresa", empresa.getIdEmpresa());
+            claims.put("role", "EMPRESA");
 
             return JWT.create()
                     .withIssuer("sistema-otica")
@@ -43,6 +44,8 @@ public class TokenEmpresaService {
 
     public Map<String, Object> validateToken(String token) {
         try {
+            token = token.replace("Bearer ", "").trim();
+
             Algorithm algorithm = Algorithm.HMAC256(secret);
             DecodedJWT decodedJWT = JWT.require(algorithm)
                     .withIssuer("sistema-otica")
@@ -52,11 +55,20 @@ public class TokenEmpresaService {
             Map<String, Object> userData = new HashMap<>();
             userData.put("cnpj", decodedJWT.getClaim("cnpj").asString());
             userData.put("idEmpresa", decodedJWT.getClaim("idEmpresa").asInt());
+            userData.put("role", decodedJWT.getClaim("role").asString());
 
+            // System.out.println("Token validado! Claims: " + userData);
             return userData;
         } catch (JWTVerificationException exception) {
+            // System.out.println("Erro ao validar token: " + exception.getMessage());
             return null;
         }
+    }
+
+    public boolean isTokenEmpresa(String token) {
+        Map<String, Object> claims = validateToken(token);
+        // System.out.println("Claims do Token: " + claims);
+        return claims != null && "EMPRESA".equals(claims.get("role"));
     }
 
     private Instant generateExpirationDate() {

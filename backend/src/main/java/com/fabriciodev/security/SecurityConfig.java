@@ -10,9 +10,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
@@ -24,16 +28,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.disable())
-            .csrf(csrf -> csrf.disable())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-            .requestMatchers(HttpMethod.POST, "/api/login/autenticar", "/api/login-empresa", "/api/login-empresa/auth").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/empresa/create").permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/cnae", "/api/empresa", "/api/tipos-login").permitAll()
-            .anyRequest().authenticated()
-        )
-            .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // 🔹 Habilita CORS no Spring
+                                                                                   // Security
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.POST, "/api/login/autenticar", "/api/login-empresa",
+                                "/api/login-empresa/auth")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/empresa/create").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/cnae", "/api/empresa", "/api/tipos-login").permitAll()
+                        .anyRequest().authenticated())
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -44,7 +50,23 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    // 🔹 Método para configuração global do CORS
+    @Bean
+    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(List.of("http://localhost:4200")); // 🔹 Modifique para "*" se precisar testar
+        config.setAllowedHeaders(List.of("Origin", "Content-Type", "Accept", "Authorization"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setExposedHeaders(List.of("Authorization")); // 🔹 Expõe o token no response header
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
     }
 }

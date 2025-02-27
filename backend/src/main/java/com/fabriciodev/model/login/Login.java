@@ -11,7 +11,7 @@ public class Login {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idlogin") 
+    @Column(name = "idlogin")
     private Long id;
 
     @Column(name = "login_usuario", nullable = false, unique = true)
@@ -24,9 +24,9 @@ public class Login {
     @JoinColumn(name = "idtipos_login", nullable = false)
     private TiposLogin tiposLogin;
 
-    @Column(name = "idUsuario", nullable = false) 
+    @Column(name = "idUsuario", nullable = false)
     private Integer idUsuario;
-   
+
     @Column(name = "Data_cadastro", nullable = false)
     private LocalDateTime dataCadastro;
 
@@ -35,7 +35,6 @@ public class Login {
 
     @Column(name = "idEmpresa", nullable = false)
     private Integer idEmpresa;
-
 
     // Getters e Setters
     public Long getId() {
