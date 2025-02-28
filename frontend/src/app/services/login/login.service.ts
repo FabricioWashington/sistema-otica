@@ -27,7 +27,7 @@ export class LoginService {
     return this.http.post(`${this.apiUrl}/autenticar`, null, { params, withCredentials: true }).pipe(
       tap((response: any) => {
         if (response?.token) {
-          this.usuariosService.saveTokenUser(response.token, response.usuario, response.acesso.tiposLogin);
+          this.usuariosService.saveTokenUser(response.tokenUser, response.usuario, response.acesso.tiposLogin);
         }
       })
     );

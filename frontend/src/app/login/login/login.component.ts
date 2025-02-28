@@ -1,3 +1,4 @@
+import { Usuario } from './../../models/usuario/usuario';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from '../../services/login/login.service';
 import { TiposLogin } from '../../models/tipos-login/tipos-login';
@@ -88,11 +89,7 @@ export class LoginComponent implements OnInit {
           const tipoSelecionado = this.tiposLogin.find(
             (tipo) => tipo.id === this.idTiposLogin
           )?.tiposLogin;
-
-          if (tipoSelecionado) {
-            this.usuarioService.setUserData(tipoSelecionado, this.loginUsuario);
-          }
-
+          this.usuarioService.saveTokenUser(response.tokenUser, response.usuario, response.acesso);
           this.router.navigate(['/home']);
         },
         (error: any) => {
@@ -142,7 +139,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  logout(){
+  logout() {
     this.usuarioService.clearUserEmpresaData;
     this.usuarioService.removeToken;
     this.router.navigate(['/login-empresa']);

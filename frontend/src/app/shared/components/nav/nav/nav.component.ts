@@ -15,8 +15,8 @@ import { ThemeService } from '../../../../services/theme/theme.service';
   styleUrl: './nav.component.scss'
 })
 export class NavComponent implements OnInit {
-  tipoLogin: string = '';
-  nomeUsuario: string = '';
+  tipoLogin: string | null = null;
+  nomeUsuario: string | null = null;
   isMenuOpen: boolean = false;
   nomeFantasia: string = '';
   razaoSocial: string = '';
@@ -70,9 +70,16 @@ export class NavComponent implements OnInit {
   }
 
   userLoading(): void {
-    const userData = this.usuarioService.getUserData();
-    this.tipoLogin = userData.acesso;
-    this.nomeUsuario = userData.usuario;
+    this.userName();
+    this.userAccess();
+  }
+
+  userName(){
+    this.nomeUsuario = this.usuarioService.getUser();
+  }
+
+  userAccess(){
+    this.tipoLogin = this.usuarioService.getUserAccess();
   }
 
   logout() {
