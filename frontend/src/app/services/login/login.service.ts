@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Login } from '../../models/login/login';
 import { environment } from '../../../../environment.prod';
 import { UsuariosService } from '../usuarios/usuarios.service';
@@ -13,7 +13,7 @@ export class LoginService {
 
   constructor(
     private http: HttpClient,
-    private usuariosService: UsuariosService,
+    private usuariosService: UsuariosService
   ) { }
 
   autenticar(
@@ -23,10 +23,14 @@ export class LoginService {
   ): Observable<any> {
     const { idEmpresa } = this.usuariosService.getUserEmpresaData();
     const params = { loginUsuario, loginSenha, idTiposLogin, idEmpresa };
-    return this.http.post(`${this.apiUrl}/autenticar`, null, {
-      params,
-      withCredentials: true
-    });
+
+    return this.http.post(`${this.apiUrl}/autenticar`, null, { params, withCredentials: true }).pipe(
+      tap((response: any) => {
+        if (response?.token) {
+          this.usuariosService.saveTokenUser(response.token, response.usuario, response.acesso.tiposLogin);
+        }
+      })
+    );
   }
 
   verificarUsuario(
@@ -40,17 +44,14 @@ export class LoginService {
 
   postLogin(login: Login): Observable<Login> {
     const { idEmpresa } = this.usuariosService.getUserEmpresaData();
-    const body = { ...login, idEmpresa }
+    const body = { ...login, idEmpresa };
     return this.http.post<Login>(this.apiUrl, body);
   }
 
-
   getTiposLogin(): Observable<{ id: number; tiposLogin: string }[]> {
     const { idEmpresa } = this.usuariosService.getUserEmpresaData();
-    const empresa = { idEmpresa }
     return this.http.get<{ id: number; tiposLogin: string }[]>(
-      `${this.apiUrl}/tipos-login?idEmpresa=${empresa}`
+      `${this.apiUrl}/tipos-login?idEmpresa=${idEmpresa}`
     );
   }
-
 }

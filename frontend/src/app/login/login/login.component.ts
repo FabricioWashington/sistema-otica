@@ -142,6 +142,12 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  logout(){
+    this.usuarioService.clearUserEmpresaData;
+    this.usuarioService.removeToken;
+    this.router.navigate(['/login-empresa']);
+  }
+
   onCancel() {
     this.location.back();
   }

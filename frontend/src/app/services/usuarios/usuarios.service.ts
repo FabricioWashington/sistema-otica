@@ -13,6 +13,10 @@ export class UsuariosService {
   private idEmpresaKey = 'idEmpresa';
   private tokenKey = 'token';
   private empresaKey = 'empresa';
+  private tokenUserKey = 'tokenUser';
+  private userKey = 'usuario';
+  private accessKey = 'acesso';
+
   private apiUrl = `${environment.apiUrl}/usuarios`;
 
   constructor(private http: HttpClient) {}
@@ -73,7 +77,7 @@ export class UsuariosService {
     localStorage.removeItem(this.idEmpresaKey);
   }
 
-  //// token
+  //// token empresa
   saveToken(token: string, empresa: string): void {
     localStorage.setItem(this.tokenKey, token);
     localStorage.setItem(this.empresaKey, empresa);
@@ -95,4 +99,49 @@ export class UsuariosService {
   isAuthenticated(): boolean {
     return this.getToken() !== null;
   }
+
+  //// token usuario
+  saveTokenUser(token: string, usuario: string, acesso: string){
+    localStorage.setItem(this.tokenUserKey, token);
+    localStorage.setItem(this.userKey, usuario);
+    localStorage.setItem(this.accessKey, acesso);
+  }
+
+  getTokenUser(): string | null {
+    return localStorage.getItem(this.tokenUserKey);
+  }
+
+  getUser(): string | null {
+    return localStorage.getItem(this.userKey);
+  }
+
+  getUserAccess(): string | null {
+    return localStorage.getItem(this.accessKey);
+  }
+
+  removeTokenUser(): void {
+    localStorage.removeItem(this.tokenUserKey);
+    localStorage.removeItem(this.userKey);
+    localStorage.removeItem(this.accessKey);
+  }
+
+  isAdmin(): boolean {
+    return this.getUserAccess() === 'ADMIN';
+  }
+
+  isFuncionario(): boolean {
+    return this.getUserAccess() === 'Funcionario';
+  }
+
+  isAuthenticatedUser(): boolean {
+    return this.getToken() !== null;
+  }
+
+  clearAllData(): void {
+    this.clearUserData();
+    this.clearUserEmpresaData();
+    this.removeToken();
+    this.removeTokenUser();
+  }
+
 }

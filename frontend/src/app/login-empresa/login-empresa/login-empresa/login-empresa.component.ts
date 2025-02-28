@@ -49,41 +49,18 @@ export class LoginEmpresaComponent implements OnInit {
 
     this.login.autenticar(this.loginEmpresa, this.loginSenha).subscribe(
       (response) => {
-        console.log('Resposta do backend:', response);
-
-        if (!response || !response.token) {
-          console.error('Erro: Token JWT não retornado pelo backend.');
-          this.showMessage('Erro ao autenticar. Tente novamente.', 'Fechar', { duration: 3000 });
-          return;
-        }
-
         try {
           const decodedToken: any = jwtDecode(response.token);
           const idEmpresa = decodedToken.idEmpresa;
-
-          if (!idEmpresa) {
-            console.error('Erro: idEmpresa não encontrado no token JWT.');
-            this.showMessage('Erro na autenticação. Contate o suporte.', 'Fechar', { duration: 3000 });
-            return;
-          }
-
           this.usuario.setUserEmpresaData(idEmpresa);
-
-          console.log('Autenticação bem-sucedida. ID da Empresa:', idEmpresa);
           this.showMessage('Autenticação realizada com sucesso!', 'Fechar', { duration: 3000 });
-
           this.router.navigate(['/login']);
 
         } catch (error) {
-          console.error('Erro ao decodificar token JWT:', error);
-          this.showMessage('Erro ao processar autenticação. Tente novamente.', 'Fechar', { duration: 3000 });
+          console.error('Erro na requisição:', error);
+          this.showMessage('Credenciais inválidas.', 'Fechar', { duration: 3000 });
         }
-      },
-      (error) => {
-        console.error('Erro na requisição:', error);
-        this.showMessage('Credenciais inválidas.', 'Fechar', { duration: 3000 });
-      }
-    );
+      });
   }
 
   toggleShowPassword(): void {
