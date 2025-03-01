@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuario/usuario';
 import { Observable } from 'rxjs';
@@ -142,6 +142,13 @@ export class UsuariosService {
     this.clearUserEmpresaData();
     this.removeToken();
     this.removeTokenUser();
+  }
+
+  getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
   }
 
 }

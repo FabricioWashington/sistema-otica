@@ -32,7 +32,6 @@ public class EmpresaService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    
     public Empresa createEmpresa(EmpresaDTO empresaDTO) {
         if (empresaRepository.existsByCnpj(empresaDTO.getCnpj())) {
             throw new IllegalArgumentException("CNPJ já cadastrado.");
@@ -109,11 +108,11 @@ public class EmpresaService {
 
         return empresaRepository.save(empresa);
     }
-    
+
     public List<Empresa> listarEmpresas() {
         return empresaRepository.findAll();
     }
-   
+
     public Optional<Empresa> consultarEmpresa(Integer id) {
         return empresaRepository.findById(id);
     }

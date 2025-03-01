@@ -16,42 +16,36 @@ export class TiposLoginService {
     private usuariosService: UsuariosService,
   ) {}
 
-  private getAuthHeaders(): HttpHeaders {
-    const token = this.usuariosService.getToken();
-    // console.log("token enviado: ", token);
-    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  }
-
   listarTiposLogin(): Observable<any[]> {
     const { idEmpresa } = this.usuariosService.getUserEmpresaData();
     const url = idEmpresa ? `${this.apiUrl}?idEmpresa=${idEmpresa}` : this.apiUrl;
 
     return this.http.get<any[]>(url, {
-      headers: this.getAuthHeaders(),
+      headers: this.usuariosService.getAuthHeaders(),
     });
   }
 
   criarTipoLogin(tiposLogin: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, tiposLogin, {
-      headers: this.getAuthHeaders(),
+      headers: this.usuariosService.getAuthHeaders(),
     });
   }
 
   buscarPorId(id: number): Observable<TiposLogin> {
     return this.http.get<TiposLogin>(`${this.apiUrl}/${id}`, {
-      headers: this.getAuthHeaders(),
+      headers: this.usuariosService.getAuthHeaders(),
     });
   }
 
   atualizarTiposLogin(id: number, tiposLogin: TiposLogin): Observable<TiposLogin> {
     return this.http.put<TiposLogin>(`${this.apiUrl}/${id}`, tiposLogin, {
-      headers: this.getAuthHeaders(),
+      headers: this.usuariosService.getAuthHeaders(),
     });
   }
 
   deletarTiposLogin(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, {
-      headers: this.getAuthHeaders(),
+      headers: this.usuariosService.getAuthHeaders(),
     });
   }
 }

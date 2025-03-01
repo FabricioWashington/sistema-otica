@@ -1,9 +1,9 @@
 package com.fabriciodev.controller.tiposlogin;
 
+import com.fabriciodev.components.BaseApiController;
 import com.fabriciodev.model.tiposlogin.TiposLogin;
-import com.fabriciodev.security.TokenEmpresaService;
 import com.fabriciodev.service.tiposlogin.TiposLoginService;
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,24 +14,16 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/tipos-login")
 @CrossOrigin(origins = "http://localhost:4200")
-public class TiposLoginController {
+public class TiposLoginController extends BaseApiController {
 
     @Autowired
     private TiposLoginService tiposLoginService;
 
-    @Autowired
-    private TokenEmpresaService tokenEmpresaService;
-
     @GetMapping
-    public ResponseEntity<?> listarTiposLogin(
-            @RequestHeader("Authorization") String token,
+    public ResponseEntity<?> listarTiposLogin(HttpServletRequest request,
             @RequestParam(required = false) Integer idEmpresa) {
 
-        System.out.println("Token recebido no backend: " + token);
-        // token = token.replace("Bearer ", "").trim();
-
-        if (!tokenEmpresaService.isTokenEmpresa(token)) {
-            System.out.println("Token inválido ou não autorizado." + token);
+        if (!isAuthorized(request)) {
             return ResponseEntity.status(403).body(Map.of("error", "Acesso negado. Apenas empresas podem acessar."));
         }
 
@@ -42,11 +34,9 @@ public class TiposLoginController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(
-            @RequestHeader("Authorization") String token,
-            @PathVariable Long id) {
+    public ResponseEntity<?> buscarPorId(HttpServletRequest request, @PathVariable Long id) {
 
-        if (!tokenEmpresaService.isTokenEmpresa(token)) {
+        if (!isAuthorized(request)) {
             return ResponseEntity.status(403).body(Map.of("error", "Acesso negado. Apenas empresas podem acessar."));
         }
 
@@ -56,11 +46,9 @@ public class TiposLoginController {
     }
 
     @PostMapping
-    public ResponseEntity<?> criarTipoLogin(
-            @RequestHeader("Authorization") String token,
-            @RequestBody TiposLogin tiposLogin) {
+    public ResponseEntity<?> criarTipoLogin(HttpServletRequest request, @RequestBody TiposLogin tiposLogin) {
 
-        if (!tokenEmpresaService.isTokenEmpresa(token)) {
+        if (!isAuthorized(request)) {
             return ResponseEntity.status(403).body(Map.of("error", "Acesso negado. Apenas empresas podem acessar."));
         }
 
@@ -68,12 +56,11 @@ public class TiposLoginController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizarTipoLogin(
-            @RequestHeader("Authorization") String token,
+    public ResponseEntity<?> atualizarTipoLogin(HttpServletRequest request,
             @PathVariable Long id,
             @RequestBody TiposLogin tiposLoginAtualizado) {
 
-        if (!tokenEmpresaService.isTokenEmpresa(token)) {
+        if (!isAuthorized(request)) {
             return ResponseEntity.status(403).body(Map.of("error", "Acesso negado. Apenas empresas podem acessar."));
         }
 
@@ -83,11 +70,9 @@ public class TiposLoginController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletarTipoLogin(
-            @RequestHeader("Authorization") String token,
-            @PathVariable Long id) {
+    public ResponseEntity<?> deletarTipoLogin(HttpServletRequest request, @PathVariable Long id) {
 
-        if (!tokenEmpresaService.isTokenEmpresa(token)) {
+        if (!isAuthorized(request)) {
             return ResponseEntity.status(403).body(Map.of("error", "Acesso negado. Apenas empresas podem acessar."));
         }
 

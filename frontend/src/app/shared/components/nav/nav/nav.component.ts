@@ -18,8 +18,8 @@ export class NavComponent implements OnInit {
   tipoLogin: string | null = null;
   nomeUsuario: string | null = null;
   isMenuOpen: boolean = false;
-  nomeFantasia: string = '';
-  razaoSocial: string = '';
+  nomeFantasia: string | null = null;
+  razaoSocial: string | null = null;
   idEmpresa: number = 0;
   isDarkMode: boolean = false;
 
@@ -35,8 +35,11 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.userLoading();
-    this.obterNomeEmpresa(this.idEmpresa);
+    // this.obterNomeEmpresa(this.idEmpresa);
+    this.razaoSocial = this.usuarioService.getEmpresa();
+    this.nomeFantasia = this.usuarioService.getEmpresa();
     this.isDarkMode = localStorage.getItem("darkMode") === "enabled";
+    console.log('nome', this.nomeFantasia);
   }
 
 
@@ -45,21 +48,21 @@ export class NavComponent implements OnInit {
     this.themeService.toggleTheme();
   }
 
-  obterNomeEmpresa(idEmpresa: number): void {
-    const userData = this.usuarioService.getUserEmpresaData();
-    this.idEmpresa = userData.idEmpresa;
-    this.empresaService.buscarEmpresa(userData.idEmpresa).subscribe(
-      (empresa) => {
-        this.razaoSocial = empresa.razaoSocial;
-        this.nomeFantasia = empresa.nomeFantasia;
-      },
-      (error) => {
-        this.onError('Erro ao carregar nome da empresa.', 'Fechar', { duration: 3000 });
-        console.error('Erro ao buscar a empresa', error);
-      }
-    )
+  // obterNomeEmpresa(idEmpresa: number): void {
+  //   const userData = this.usuarioService.getUserEmpresaData();
+  //   this.idEmpresa = userData.idEmpresa;
+  //   this.empresaService.buscarEmpresa(userData.idEmpresa).subscribe(
+  //     (empresa) => {
+  //       this.razaoSocial = empresa.razaoSocial;
+  //       this.nomeFantasia = empresa.nomeFantasia;
+  //     },
+  //     (error) => {
+  //       this.onError('Erro ao carregar nome da empresa.', 'Fechar', { duration: 3000 });
+  //       console.error('Erro ao buscar a empresa', error);
+  //     }
+  //   )
 
-  }
+  // }
 
   onMenuOpened(): void {
     this.isMenuOpen = true;
@@ -83,7 +86,7 @@ export class NavComponent implements OnInit {
   }
 
   logout() {
-    this.usuarioService.clearUserData();
+    this.usuarioService.removeTokenUser();
     this.router.navigate(['/login']);
   }
 
