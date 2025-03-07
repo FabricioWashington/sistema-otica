@@ -1,0 +1,26 @@
+<div class="modal fade show d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-between">
+        <h5 class="modal-title">{{ data.title }}</h5>
+        <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div *ngFor="let field of data.fields">
+            <div class="form-group p-2">
+              <label>{{ field.label }}</label>
+              <input class="form-control" [type]="field.type || 'text'" [(ngModel)]="formData[field.name]" [name]="field.name">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="submit()">Salvar</button>
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
