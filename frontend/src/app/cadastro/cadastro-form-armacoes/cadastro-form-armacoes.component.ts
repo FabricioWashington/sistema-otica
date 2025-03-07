@@ -84,4 +84,33 @@ export class CadastroFormArmacoesComponent {
       }
     });
   }
+
+  openEdit(item: any): void {
+    const dialogRef = this.dialog.open(ModalFormGenericComponent, {
+      width: '500px',
+      data: {
+        title: 'Editar Armação',
+        fields: [
+          { name: 'referencia', label: 'Referência', value: item.referencia },
+          { name: 'marca', label: 'Marca', value: item.marca },
+          { name: 'tipoOculos', label: 'Tipo de Óculos', value: item.tipo },
+          { name: 'quantidade', label: 'Quantidade', value: item.quantidade, type: 'number' },
+          { name: 'cor', label: 'Cor', value: item.cor },
+          { name: 'sexo', label: 'Sexo', value: item.sexo }
+        ]
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const index = this.data.findIndex(d => d.referencia === item.referencia);
+        if (index !== -1) {
+          this.data[index] = result;
+          console.log('Dados editados:', this.data);
+        }
+      }
+    });
+  }
+
+
 }

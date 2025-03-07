@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-todo-list-generic',
@@ -11,8 +11,11 @@ export class TodoListGenericComponent {
   @Input() columns: { key: string, label: string }[] = [];
   @Input() titulo = "Titulo";
   @Input() data: any[] = [];
-  newItem: any = {};
-  isLoading = true;
+
+  @Output() editEvent = new EventEmitter<any>()
+
+  public newItem: any = {};
+  public isLoading = true;
 
   constructor() {
     this.loading();
@@ -25,6 +28,7 @@ export class TodoListGenericComponent {
   editItem(index: number) {
     const itemEditado = this.data[index];
     console.log('Editando:', itemEditado);
+    this.editEvent.emit(this.data[index]);
     this.newItem = { ...itemEditado };
   }
 

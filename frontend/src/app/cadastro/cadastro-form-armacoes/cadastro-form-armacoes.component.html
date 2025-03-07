@@ -7,6 +7,6 @@
   </div>
 
   <div class="mt-3">
-    <app-todo-list-generic [columns]="columns" [titulo]="titulo" [data]="data"></app-todo-list-generic>
+    <app-todo-list-generic [columns]="columns" [titulo]="titulo" [data]="data" (editEvent)="openEdit($event)"></app-todo-list-generic>
   </div>
 </div>
