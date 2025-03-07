@@ -6,7 +6,8 @@
     </div>
   </div>
 
-  <div *ngIf="!isLoading && data.length === 0" class="empty-table">
+  <div *ngIf="!isLoading && data.length === 0" class="empty-table table-error">
+    <i class="bi bi-emoji-expressionless-fill fs-1 text-center"></i>
     <p class="text-center text-muted">Nenhum registro encontrado.</p>
   </div>
 
@@ -22,10 +23,10 @@
         <td *ngFor="let col of columns">{{ item[col.key] }}</td>
         <td>
           <button class="btn btn-warning btn-sm me-1" (click)="editItem(i)">
-            <i class="fas fa-edit"></i>
+            <i class="bi bi-pencil-square"></i>
           </button>
           <button class="btn btn-danger btn-sm" (click)="removeItem(i)">
-            <i class="fas fa-trash"></i>
+            <i class="bi bi-trash"></i>
           </button>
         </td>
       </tr>

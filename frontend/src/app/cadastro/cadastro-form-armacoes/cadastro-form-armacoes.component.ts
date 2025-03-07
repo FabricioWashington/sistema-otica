@@ -29,6 +29,12 @@ export class CadastroFormArmacoesComponent {
     { key: 'sexo', label: 'Sexo' }
   ];
 
+  data = [
+    { referencia: 'A100', marca: 'Ray-Ban', tipo: 'Óculos de Grau', quantidade: 5, cor: 'Preto', sexo: 'Unissex' },
+    { referencia: 'A200', marca: 'Oakley', tipo: 'Óculos de Sol', quantidade: 8, cor: 'Azul', sexo: 'Masculino' },
+    { referencia: 'A300', marca: 'Prada', tipo: 'Óculos de Grau', quantidade: 3, cor: 'Vermelho', sexo: 'Feminino' }
+  ];
+
   public titulo = "Armações";
 
 

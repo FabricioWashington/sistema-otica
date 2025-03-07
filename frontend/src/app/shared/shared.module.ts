@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AppMaterialModule } from './app-material/app-material.module';
 import { LoadingComponent } from './components/loading/loading.component';
@@ -15,6 +15,7 @@ import { TodoListGenericComponent } from './utils/todo-list/todo-list-generic/to
 
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     LoadingComponent,
     ErrorDialogComponent,

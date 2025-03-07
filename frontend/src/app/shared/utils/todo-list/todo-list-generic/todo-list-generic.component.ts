@@ -10,19 +10,12 @@ import { Component, Input } from '@angular/core';
 export class TodoListGenericComponent {
   @Input() columns: { key: string, label: string }[] = [];
   @Input() titulo = "Titulo";
-  data: any[] = [];
+  @Input() data: any[] = [];
   newItem: any = {};
   isLoading = true;
 
   constructor() {
     this.loading();
-  }
-
-  addItem() {
-    if (Object.keys(this.newItem).length) {
-      this.data.push({ ...this.newItem });
-      this.newItem = {};
-    }
   }
 
   removeItem(index: number) {
