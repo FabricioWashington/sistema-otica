@@ -6,7 +6,6 @@ import { ModalFormGenericComponent } from '../../shared/utils/modal/modal-form-g
 @Component({
   selector: 'app-cadastro-form-armacoes',
   standalone: false,
-
   templateUrl: './cadastro-form-armacoes.component.html',
   styleUrl: './cadastro-form-armacoes.component.scss'
 })
@@ -21,7 +20,7 @@ export class CadastroFormArmacoesComponent {
   };
 
   columns = [
-    { key: 'referencia', label: 'Refêrencia' },
+    { key: 'referencia', label: 'Referência' },
     { key: 'marca', label: 'Marca' },
     { key: 'tipoOculos', label: 'Tipo' },
     { key: 'quantidade', label: 'Qtde' },
@@ -37,8 +36,7 @@ export class CadastroFormArmacoesComponent {
 
   public titulo = "Armações";
 
-
-  constructor(private router: Router,  private dialog: MatDialog) {}
+  constructor(private router: Router, private dialog: MatDialog) {}
 
   onSubmit(): void {
     console.log('Dados enviados:', this.formData);
@@ -61,56 +59,43 @@ export class CadastroFormArmacoesComponent {
     console.log('Redirecionando para cadastro');
   }
 
-  openModal(): void {
+  openFormModal(title: string, item: any = null): void {
     const dialogRef = this.dialog.open(ModalFormGenericComponent, {
       width: '500px',
       data: {
-        title: 'Cadastro de Armações',
+        title: title,
         fields: [
-          { name: 'referencia', label: 'Referência', value: this.formData.referencia },
-          { name: 'marca', label: 'Marca', value: this.formData.marca },
-          { name: 'tipoOculos', label: 'Tipo de Óculos', value: this.formData.tipoOculos },
-          { name: 'quantidade', label: 'Quantidade', value: this.formData.quantidade, type: 'number' },
-          { name: 'cor', label: 'Cor', value: this.formData.cor },
-          { name: 'sexo', label: 'Sexo', value: this.formData.sexo }
+          { name: 'referencia', label: 'Referência', value: item?.referencia || '' },
+          { name: 'marca', label: 'Marca', value: item?.marca || '' },
+          { name: 'tipoOculos', label: 'Tipo de Óculos', value: item?.tipo || '' },
+          { name: 'quantidade', label: 'Quantidade', value: item?.quantidade || '', type: 'number' },
+          { name: 'cor', label: 'Cor', value: item?.cor || '' },
+          { name: 'sexo', label: 'Sexo', value: item?.sexo || '' }
         ]
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.formData = result;
-        console.log('Dados atualizados:', this.formData);
-      }
-    });
-  }
-
-  openEdit(item: any): void {
-    const dialogRef = this.dialog.open(ModalFormGenericComponent, {
-      width: '500px',
-      data: {
-        title: 'Editar Armação',
-        fields: [
-          { name: 'referencia', label: 'Referência', value: item.referencia },
-          { name: 'marca', label: 'Marca', value: item.marca },
-          { name: 'tipoOculos', label: 'Tipo de Óculos', value: item.tipo },
-          { name: 'quantidade', label: 'Quantidade', value: item.quantidade, type: 'number' },
-          { name: 'cor', label: 'Cor', value: item.cor },
-          { name: 'sexo', label: 'Sexo', value: item.sexo }
-        ]
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        const index = this.data.findIndex(d => d.referencia === item.referencia);
-        if (index !== -1) {
-          this.data[index] = result;
-          console.log('Dados editados:', this.data);
+        if (item) {
+          const index = this.data.findIndex(d => d.referencia === item.referencia);
+          if (index !== -1) {
+            this.data[index] = result;
+            console.log('Dados editados:', this.data);
+          }
+        } else {
+          this.data.push(result);
+          console.log('Novo item adicionado:', result);
         }
       }
     });
   }
 
+  openModal(): void {
+    this.openFormModal('Cadastro de Armações');
+  }
 
+  openEdit(item: any): void {
+    this.openFormModal('Editar Armação', item);
+  }
 }

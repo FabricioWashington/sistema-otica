@@ -1,5 +1,4 @@
-import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Inject, Output} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -10,6 +9,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrl: './modal-form-generic.component.scss'
 })
 export class ModalFormGenericComponent {
+  @Output() saveEvent = new EventEmitter<any>();
+
   formData: any = {};
 
   constructor(
@@ -22,6 +23,7 @@ export class ModalFormGenericComponent {
   }
 
   submit() {
+    this.saveEvent.emit(this.formData);
     this.dialogRef.close(this.formData);
   }
 
