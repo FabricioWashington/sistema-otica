@@ -13,6 +13,7 @@ export class TodoListGenericComponent {
   @Input() data: any[] = [];
 
   @Output() editEvent = new EventEmitter<any>()
+  @Output() deleteEvent = new EventEmitter<any>()
 
   public newItem: any = {};
   public isLoading = true;
@@ -22,6 +23,7 @@ export class TodoListGenericComponent {
   }
 
   removeItem(index: number) {
+    this.deleteEvent.emit(index);
     this.data.splice(index, 1);
   }
 
