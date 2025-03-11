@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Location } from '@angular/common';
-import { ContatoService } from '../../services/contato/contato.service';
-import { EnderecoService } from '../../services/endereco/endereco.service';
-import { MedicoService } from '../../services/medico/medico.service';
+import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from '../../shared/utils/message/message.service';
+import { Medico } from '../../models/medico/medico';
+import { ModalFormGenericComponent } from '../../shared/utils/modal/modal-form-generic/modal-form-generic.component';
+import { MedicoService } from '../../services/medico/medico.service';
 
 @Component({
   selector: 'app-cadastro-form-medico',
@@ -13,140 +13,94 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './cadastro-form-medico.component.html',
   styleUrls: ['./cadastro-form-medico.component.scss']
 })
-export class CadastroFormMedicoComponent implements OnInit{
+export class CadastroFormMedicoComponent implements OnInit {
   medicoForm!: FormGroup;
+  medicos: Medico[] = [];
+
+  columns = [
+    { key: 'nome', label: 'Nome' },
+    { key: 'registroProfissional', label: 'Inscrição Profissional' },
+    { key: 'logradouro', label: 'Logradouro' },
+    { key: 'telefone', label: 'Telefone' },
+    { key: 'email', label: 'Email' }
+  ];
 
   constructor(
     private router: Router,
-    private contatoService: ContatoService,
-    private enderecoService: EnderecoService,
-    private medicoService: MedicoService,
-    private _snackBar: MatSnackBar,
-    private location: Location,
     private fb: FormBuilder,
+    private dialog: MatDialog,
+    private messageService: MessageService,
+    private medicoService: MedicoService,
   ) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.loadMedicos();
   }
 
   private initForm(): void {
     this.medicoForm = this.fb.group({
       nomeCompleto: ['', Validators.required],
-      inscricaoProfissional: ['', Validators.required],
+      registroProfissional: ['', Validators.required],
       telefone: ['', Validators.required],
-      telefone2: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
       logradouro: ['', Validators.required],
       bairro: ['', Validators.required],
-      numero: ['', Validators.required],
-      complemento: [''],
       cep: ['', Validators.required],
       uf: ['', Validators.required],
-      localidade: ['', Validators.required],
-      municipio: ['', Validators.required]
+      telefone2: '',
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
-  isFieldInvalid(fieldName: string): boolean {
-    const field = this.medicoForm.get(fieldName);
-    return !!(field && field.invalid && (field.touched || field.dirty));
-  }
+  openModal(medico?: Medico): void {
+    const dialogRef = this.dialog.open(ModalFormGenericComponent, {
+      width: '500px',
+      data: {
+        title: medico ? 'Editar Médico' : 'Cadastro de Médico',
+        fields: [
+          { name: 'nome', label: 'Nome', value: medico?.nome || '' },
+          { name: 'registroProfissional', label: 'Inscrição Profissional', value: medico?.registroProfissional || '' },
+          { name: 'logradouro', label: 'Logradouro', value: medico?.logradouro || '' },
+          { name: 'bairro', label: 'Bairro', value: medico?.bairro || '' },
+          { name: 'numero', label: 'Número', value: medico?.numero || '' },
+          { name: 'cep', label: 'CEP', value: medico?.cep || '' },
+          { name: 'uf', label: 'UF', value: medico?.registroProfissional || '' },
+          { name: 'municipio', label: 'Municipio', value: medico?.municipio || '' },
+          { name: 'complemento', label: 'Complemento', value: medico?.complemento || '' },
+          { name: 'email', label: 'E-mail', value: medico?.email || '' },
+          { name: 'telefone', label: 'Telefone', value: medico?.telefone || '' },
+          { name: 'telefone2', label: 'Contato', value: medico?.telefone2 || '' },
+        ]
+      }
+    });
 
-
-  onSubmit(): void {
-    if (this.medicoForm.invalid) {
-      this._snackBar.open('Preencha todos os campos obrigatórios!', 'Fechar', { duration: 3000 });
-      return;
-    }
-
-    const formData = this.medicoForm.value;
-
-    const contatoData = {
-      telefone: formData.telefone,
-      email: formData.email
-    };
-
-    this.contatoService.create(contatoData).subscribe({
-      next: (contatoResponse) => {
-        const idContato = contatoResponse.idContato;
-
-        if (!idContato) {
-          this.onError('Erro ao obter ID do contato.', 'Fechar', { duration: 3000 });
-          return;
-        }
-
-        const enderecoData = {
-          logradouro: formData.logradouro,
-          bairro: formData.bairro,
-          numero: formData.numero,
-          complemento: formData.complemento,
-          cep: formData.cep,
-          uf: formData.uf,
-          localidade: formData.localidade,
-          municipio: formData.municipio
-        };
-
-        this.enderecoService.create(enderecoData).subscribe({
-          next: (enderecoResponse) => {
-            const idEndereco = enderecoResponse.idEndereco;
-
-            if (!idEndereco) {
-              this.onError('Erro ao obter ID do endereço.', 'Fechar', { duration: 3000 });
-              return;
-            }
-
-            const medicoData = {
-              nome: formData.nomeCompleto,
-              registroProfissional: formData.inscricaoProfissional,
-              idEndereco: idEndereco,
-              idContato: idContato
-            };
-
-            this.medicoService.create(medicoData).subscribe({
-              next: () => {
-                this._snackBar.open('Médico cadastrado com sucesso!', 'Fechar', { duration: 3000 });
-              },
-              error: () => {
-                this._snackBar.open('Erro ao cadastrar médico.', 'Fechar', { duration: 3000 });
-              }
-            });
-          },
-          error: () => {
-            this._snackBar.open('Erro ao cadastrar endereço.', 'Fechar', { duration: 3000 });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (medico) {
+          const index = this.medicos.findIndex(m => m.registroProfissional === medico.registroProfissional);
+          if (index !== -1) {
+            this.medicos[index] = result;
+            this.messageService.showSuccess('Médico atualizado com sucesso!', 'Fechar');
           }
-        });
-      },
-      error: () => {
-        this._snackBar.open('Erro ao cadastrar contato.', 'Fechar', { duration: 3000 });
+        } else {
+          this.medicos.push(result);
+          this.messageService.showSuccess('Médico cadastrado com sucesso!', 'Fechar');
+        }
       }
     });
   }
 
-  onClear(): void {
-    this.medicoForm.reset();
-    this._snackBar.open('Campos limpos.', 'Fechar', { duration: 3000 });
+  removeMedico(index: number): void {
+    this.medicos.splice(index, 1);
+    this.messageService.showSuccess('Médico removido com sucesso!', 'Fechar');
   }
 
-  onCancel() {
-    this.location.back();
-  }
-
-  private onError(message: string, action: string, config: { duration: number }): void {
-    this._snackBar.open(message, action, config);
-  }
-
-  private onSucess(message: string, action: string, config: { duration: number }): void {
-    this._snackBar.open(message, action, config);
-    this.onCancel();
-  }
-
-  private showMessage(message: string, action: string, config: { duration: number }): void {
-    this._snackBar.open(message, action, config);
-  }
-
-  onBack(): void {
-    this.router.navigate(['/cadastro']);
-    console.log('Redirecionando para cadastro');
-  }
+    //// loads
+    loadMedicos() {
+      this.medicoService.getAll().subscribe({
+        next: (response) => {
+          this.medicos = response;
+        }
+      });
+    }
 }
