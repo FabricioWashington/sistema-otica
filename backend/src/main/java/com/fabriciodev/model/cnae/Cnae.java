@@ -16,7 +16,6 @@ public class Cnae {
 
     private String CNAE_Principal;
 
-    // Getters e Setters
     public int getIdCNAE() {
         return idCNAE;
     }
@@ -33,4 +32,3 @@ public class Cnae {
         this.CNAE_Principal = CNAE_Principal;
     }
 }
-

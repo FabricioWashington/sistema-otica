@@ -1,0 +1,78 @@
+package com.fabriciodev.service;
+
+import com.fabriciodev.repository.login.LoginRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.fabriciodev.dto.EmpresaDTO;
+import com.fabriciodev.model.Empresa;
+import com.fabriciodev.model.login.Login;
+import com.fabriciodev.repository.EmpresaRepository;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class EmpresaService {
+
+    private final LoginRepository loginRepository;
+
+    @Autowired
+    private EmpresaRepository empresaRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    EmpresaService(LoginRepository loginRepository) {
+        this.loginRepository = loginRepository;
+    }
+
+    public Empresa createEmpresa(EmpresaDTO empresaDTO) {
+        Empresa empresa = modelMapper.map(empresaDTO, Empresa.class);
+        empresa.setSenha(passwordEncoder.encode(empresaDTO.getSenha()));
+        Empresa empresaSalva = empresaRepository.save(empresa);
+
+        // Login usuario = new Login();
+        // usuario.setLoginUsuario(empresaDTO.getEmail());
+        // usuario.setLoginSenha(passwordEncoder.encode("senha-temporaria"));
+        // usuario.setIdEmpresa(empresaSalva.getIdEmpresa());
+        // usuario.setCpf("00000000000");
+        // usuario.setIdtiposLogin(1);
+        // usuario.setDataCadastro(LocalDateTime.now());
+        // loginRepository.save(usuario);
+
+        return empresaSalva;
+    }
+
+    public Empresa updateEmpresa(Integer id, EmpresaDTO empresaDTO) {
+        Empresa empresa = empresaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Empresa não encontrada."));
+
+        modelMapper.map(empresaDTO, empresa);
+        empresa.setSenha(passwordEncoder.encode(empresaDTO.getSenha()));
+        empresa.setDataModificacao(LocalDateTime.now());
+
+        return empresaRepository.save(empresa);
+    }
+
+    public List<Empresa> listarEmpresas() {
+        return empresaRepository.findAll();
+    }
+
+    public Optional<Empresa> consultarEmpresa(Integer id) {
+        return empresaRepository.findById(id);
+    }
+
+    public void deleteEmpresa(Integer id) {
+        Empresa empresa = empresaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Empresa não encontrada."));
+
+        empresaRepository.deleteById(id);
+    }
+}

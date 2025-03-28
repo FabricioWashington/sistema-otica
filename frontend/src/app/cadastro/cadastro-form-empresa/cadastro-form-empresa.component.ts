@@ -9,6 +9,7 @@ import { FormattingService } from '../../shared/utils/formatting/formatting.serv
 import { CnaeService } from '../../services/cnae/cnae.service';
 import { Cnae } from '../../models/cnae/cnae';
 import { Empresa } from '../../models/empresa/empresa';
+import { MessageService } from '../../shared/utils/message/message.service';
 
 @Component({
   selector: 'app-cadastro-form-empresa',
@@ -58,6 +59,7 @@ export class CadastroFormEmpresaComponent implements OnInit {
     private location: Location,
     private validationService: ValidationService,
     private formattingService: FormattingService,
+    private messageService: MessageService,
     private cnaeService: CnaeService,
   ) { }
 
@@ -69,19 +71,19 @@ export class CadastroFormEmpresaComponent implements OnInit {
 
   onSubmit(): void {
     // if (!this.validationService.validateCNPJ(this.formData.cnpj)) {
-    //   this.onError('CNPJ inválido!', 'Fechar', { duration: 3000 });
+    //   this.onError('CNPJ inválido!', 'Fechar');
     //   return;
     // }
     console.log('Dados enviados:', this.formData);
     this.empresaService.cadastrarEmpresa(this.formData).subscribe(
       () => {
-        this._snackBar.open('Cadastro realizado com sucesso!', 'Fechar', { duration: 3000 });
+        this._snackBar.open('Cadastro realizado com sucesso!', 'Fechar');
         this.router.navigate(['/login-empresa']);
       },
       (error) => {
         console.error('Erro ao cadastrar a empresa:', error);
         console.log('Detalhes do erro:', error.error);
-        this._snackBar.open('Erro ao cadastrar a empresa. Tente novamente!', 'Fechar', { duration: 3000 });
+        this.messageService.showError('Erro ao cadastrar a empresa. Tente novamente!', 'Fechar');
       }
     );
   }
@@ -90,11 +92,11 @@ export class CadastroFormEmpresaComponent implements OnInit {
     this.empresaService.buscarEmpresa(id).subscribe(
       (empresa) => {
         this.empresaSelecionada = empresa;
-        this._snackBar.open('Empresa encontrada!', 'Fechar', { duration: 3000 });
+        this.messageService.showError('Empresa encontrada!', 'Fechar');
       },
       (error) => {
         console.error('Erro ao consultar empresa:', error);
-        this._snackBar.open('Empresa não encontrada.', 'Fechar', { duration: 3000 });
+        this.messageService.showError('Empresa não encontrada.', 'Fechar');
       }
     );
   }
@@ -138,7 +140,7 @@ export class CadastroFormEmpresaComponent implements OnInit {
         email: '',
       },
     };
-    this._snackBar.open('Campos do formulário limpos!', 'Fechar', { duration: 2000 });
+    this.messageService.showSuccess('Campos do formulário limpos!', 'Fechar');
   }
 
   onBack(): void {
@@ -149,18 +151,6 @@ export class CadastroFormEmpresaComponent implements OnInit {
     this.location.back();
   }
 
-  private onError(message: string, action: string, config: { duration: number }): void {
-    this._snackBar.open(message, action, config);
-  }
-
-  private onSucess(message: string, action: string, config: { duration: number }): void {
-    this._snackBar.open(message, action, config);
-    this.onCancel();
-  }
-
-  private showMessage(message: string, action: string, config: { duration: number }): void {
-    this._snackBar.open(message, action, config);
-  }
   //loads
   loadCNAEs(): void {
     this.cnaeService.listarCNAEs().subscribe(
@@ -169,7 +159,7 @@ export class CadastroFormEmpresaComponent implements OnInit {
       },
       (error) => {
         console.error('Erro ao carregar CNAEs:', error);
-        this._snackBar.open('Erro ao carregar CNAEs. Tente novamente!', 'Fechar', { duration: 3000 });
+        this.messageService.showError('Erro ao carregar CNAEs. Tente novamente!', 'Fechar');
       }
     );
   }
@@ -181,7 +171,7 @@ export class CadastroFormEmpresaComponent implements OnInit {
       },
       (error) => {
         console.error('Erro ao carregar empresas:', error);
-        this._snackBar.open('Erro ao carregar empresas.', 'Fechar', { duration: 3000 });
+        this.messageService.showError('Erro ao carregar empresas.', 'Fechar');
       }
     );
   }
