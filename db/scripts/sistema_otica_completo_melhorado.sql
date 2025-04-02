@@ -425,7 +425,7 @@ CREATE TABLE lentes_contato (
 
 -- Tabela usuarios
 CREATE TABLE usuarios (
-  id_login bigint NOT NULL AUTO_INCREMENT,
+  id_usuario bigint NOT NULL AUTO_INCREMENT,
   login_usuario varchar(255) NOT NULL,
   login_senha varchar(255) NOT NULL,
   id_tipos_login int UNSIGNED NOT NULL,
@@ -434,10 +434,9 @@ CREATE TABLE usuarios (
   id_empresa int UNSIGNED NOT NULL,
   cpf varchar(255) DEFAULT NULL,
   nome_completo varchar(255) DEFAULT NULL,
-  id_usuario int NOT NULL,
-  PRIMARY KEY (`id_login`),
+  PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `Login_Usuario_UNIQUE` (`login_usuario`),
-  UNIQUE KEY `id_login_UNIQUE` (`id_login`),
+  UNIQUE KEY `id_usuario_UNIQUE` (`id_usuario`),
   UNIQUE KEY `UKkbqarh41retb8hm7ue4yaosrh` (`cpf`),
   KEY `fk_login_tipos_login1_idx` (`id_tipos_login`),
   KEY `fk_usuarios_empresa_idx` (`id_Empresa`)
@@ -623,15 +622,15 @@ CREATE TABLE origem_estadual (
 
 -- Tabela pedido_detalhe
 CREATE TABLE pedido_detalhe (
-  id_pedid_o_registro int UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_pedido_registro int UNSIGNED NOT NULL AUTO_INCREMENT,
   id_produto int UNSIGNED NOT NULL,
   descricao varchar(45) DEFAULT NULL,
   qntde int DEFAULT NULL,
   vlrunitario decimal(10,2) DEFAULT NULL,
   vlrtotal decimal(10,2) DEFAULT NULL,
   id_empresa int UNSIGNED NOT NULL,
-  PRIMARY KEY (`id_Pedid_o_Registro`),
-  UNIQUE KEY `id_Pedid_o_UNIQUE` (`id_Pedid_o_Registro`),
+  PRIMARY KEY (`id_Pedido_Registro`),
+  UNIQUE KEY `id_Pedid_o_UNIQUE` (`id_Pedido_Registro`),
   KEY `fk_Pedid_o_detalhe_Produto1_idx` (`id_Produto`),
   KEY `fk_usuarios_empresa_idx` (`id_Empresa`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -639,14 +638,14 @@ CREATE TABLE pedido_detalhe (
 
 -- Tabela pedido_registro
 CREATE TABLE pedido_registro (
-  id_pedid_o_registro int UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_pedido_registro int UNSIGNED NOT NULL AUTO_INCREMENT,
   id_cliente_fisico int NOT NULL,
   id_funcionario int UNSIGNED NOT NULL,
   data datetime NOT NULL,
   vlr decimal(10,2) NOT NULL,
   id_empresa int UNSIGNED NOT NULL,
-  PRIMARY KEY (`id_Pedid_o_Registro`),
-  UNIQUE KEY `id_Pedid_o_Registro_UNIQUE` (`id_Pedid_o_Registro`),
+  PRIMARY KEY (`id_Pedido_Registro`),
+  UNIQUE KEY `id_Pedido_Registro_UNIQUE` (`id_Pedido_Registro`),
   KEY `fk_Pedid_o_Registro_Funcionarios1_idx` (`id_Funcionario`),
   KEY `fk_usuarios_empresa_idx` (`id_Empresa`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
