@@ -10,21 +10,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.fabriciodev.model.Login;
-import com.fabriciodev.repository.LoginRepository;
+import com.fabriciodev.model.Usuario;
+import com.fabriciodev.repository.UsuarioRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final LoginRepository loginRepository;
+    private final UsuarioRepository usuarioRepository;
 
-    public CustomUserDetailsService(LoginRepository loginRepository) {
-        this.loginRepository = loginRepository;
+    public CustomUserDetailsService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Login login = loginRepository.findByLoginUsuario(username)
+        Usuario login = usuarioRepository.findByLoginUsuario(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 
         GrantedAuthority authority = new SimpleGrantedAuthority(

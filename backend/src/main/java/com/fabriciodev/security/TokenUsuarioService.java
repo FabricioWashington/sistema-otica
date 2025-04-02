@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.fabriciodev.model.Login;
+import com.fabriciodev.model.Usuario;
 
 @Service
 public class TokenUsuarioService implements TokenServiceInterface {
@@ -22,7 +22,7 @@ public class TokenUsuarioService implements TokenServiceInterface {
 
     @Override
     public String generateToken(Object entity) {
-        Login login = (Login) entity;
+        Usuario login = (Usuario) entity;
         Algorithm algorithm = Algorithm.HMAC256(secret);
 
         Map<String, Object> claims = new HashMap<>();

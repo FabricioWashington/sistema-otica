@@ -14,7 +14,7 @@ public class TiposLogin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idtipos_login")
+    @Column(name = "id_tipos_login")
     private Integer id;
 
     @Column(name = "tipos_login", nullable = false)

@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.fabriciodev.repository.LoginRepository;
+import com.fabriciodev.repository.UsuarioRepository;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -24,7 +24,7 @@ public class SecurityFilter extends OncePerRequestFilter {
   private TokenFactoryService tokenFactoryService;
 
   @Autowired
-  private LoginRepository loginRepository;
+  private UsuarioRepository usuarioRepository;
 
   @Autowired
   private CustomUserDetailsService userDetailsService;

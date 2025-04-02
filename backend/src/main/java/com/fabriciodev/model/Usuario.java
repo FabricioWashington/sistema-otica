@@ -8,16 +8,16 @@ import lombok.AllArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "login")
+@Table(name = "usuario")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Login {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idlogin")
-    private Long id;
+    @Column(name = "id_usuario")
+    private Integer id;
 
     @Column(name = "cpf")
     private String cpf;
@@ -29,18 +29,15 @@ public class Login {
     private String loginSenha;
 
     @ManyToOne
-    @JoinColumn(name = "idtipos_login", nullable = false)
+    @JoinColumn(name = "id_tipos_login", nullable = false)
     private TiposLogin tiposLogin;
 
-    @Column(name = "idUsuario", nullable = false)
-    private Integer idUsuario;
-
-    @Column(name = "Data_cadastro", nullable = false)
+    @Column(name = "data_cadastro", nullable = false)
     private LocalDateTime dataCadastro;
 
-    @Column(name = "Data_modificacao")
+    @Column(name = "data_modificacao")
     private LocalDateTime dataModificacao;
 
-    @Column(name = "idEmpresa", nullable = false)
+    @Column(name = "id_empresa", nullable = false)
     private Integer idEmpresa;
 }

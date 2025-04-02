@@ -1,8 +1,8 @@
 package com.fabriciodev.controller;
 
-import com.fabriciodev.model.Login;
+import com.fabriciodev.model.Usuario;
 import com.fabriciodev.security.TokenUsuarioService;
-import com.fabriciodev.service.LoginService;
+import com.fabriciodev.service.UsuarioService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,10 +16,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/login")
 @CrossOrigin(origins = "http://localhost:4200")
-public class LoginController {
+public class UsuarioController {
 
     @Autowired
-    private LoginService loginService;
+    private UsuarioService usuarioService;
 
     @Autowired
     private TokenUsuarioService tokenUsuarioService;
@@ -32,11 +32,11 @@ public class LoginController {
     public ResponseEntity<?> autenticar(
             @RequestParam String loginUsuario,
             @RequestParam String loginSenha,
-            @RequestParam Long idTiposLogin,
+            @RequestParam Integer idTiposLogin,
             @RequestParam Integer idEmpresa,
             HttpServletResponse response) {
 
-        Optional<Login> loginOptional = loginService.autenticar(loginUsuario, loginSenha, idTiposLogin, idEmpresa);
+        Optional<Usuario> loginOptional = usuarioService.autenticar(loginUsuario, loginSenha, idTiposLogin, idEmpresa);
 
         return loginOptional.map(login -> {
             String token = tokenUsuarioService.generateToken(login);
@@ -72,28 +72,28 @@ public class LoginController {
     public ResponseEntity<Boolean> verificarUsuarioCadastrado(
             @RequestHeader("Authorization") String token,
             @RequestParam String loginUsuario,
-            @RequestParam Long idTiposLogin,
+            @RequestParam Integer idTiposLogin,
             @RequestParam Integer idEmpresa) {
 
         if (!isAuthorized(token)) {
             return ResponseEntity.status(403).body(false);
         }
 
-        boolean existe = loginService.verificarUsuarioCadastrado(loginUsuario, idTiposLogin, idEmpresa);
+        boolean existe = usuarioService.verificarUsuarioCadastrado(loginUsuario, idTiposLogin, idEmpresa);
         return ResponseEntity.ok(existe);
     }
 
     @PostMapping
     public ResponseEntity<?> salvar(
             @RequestHeader("Authorization") String token,
-            @RequestBody Login login) {
+            @RequestBody Usuario login) {
 
         if (!isAuthorized(token)) {
             return ResponseEntity.status(403)
                     .body(Map.of("error", "Acesso negado. Apenas usuários autenticados podem criar novos logins."));
         }
 
-        Login novoLogin = loginService.salvar(login);
+        Usuario novoLogin = usuarioService.salvar(login);
         return ResponseEntity.ok(novoLogin);
     }
 
@@ -108,7 +108,7 @@ public class LoginController {
                     .body(Map.of("error", "Acesso negado. Apenas usuários autenticados podem atualizar logins."));
         }
 
-        Login loginAtualizado = loginService.updateLogin(id, novaSenha);
+        Usuario loginAtualizado = usuarioService.updateLogin(id, novaSenha);
         return ResponseEntity.ok(loginAtualizado);
     }
 
@@ -122,7 +122,7 @@ public class LoginController {
                     .body(Map.of("error", "Acesso negado. Apenas usuários autenticados podem deletar logins."));
         }
 
-        loginService.deleteLogin(id);
+        usuarioService.deleteLogin(id);
         return ResponseEntity.ok(Map.of("message", "Usuário deletado com sucesso."));
     }
 }

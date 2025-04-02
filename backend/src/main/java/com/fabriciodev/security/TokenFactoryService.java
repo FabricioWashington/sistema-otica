@@ -18,8 +18,8 @@ public class TokenFactoryService {
     }
 
     public String generateToken(Object entity) {
-        if (entity instanceof com.fabriciodev.model.Login) {
-            return tokenUsuarioService.generateToken((com.fabriciodev.model.Login) entity);
+        if (entity instanceof com.fabriciodev.model.Usuario) {
+            return tokenUsuarioService.generateToken((com.fabriciodev.model.Usuario) entity);
         } else if (entity instanceof EmpresaDTO) {
             return tokenEmpresaService.generateToken((EmpresaDTO) entity);
         }

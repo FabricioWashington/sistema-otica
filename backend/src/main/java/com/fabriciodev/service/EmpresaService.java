@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.fabriciodev.dto.EmpresaDTO;
 import com.fabriciodev.model.Empresa;
-import com.fabriciodev.model.Login;
+import com.fabriciodev.model.Usuario;
 import com.fabriciodev.model.TiposLogin;
 import com.fabriciodev.repository.EmpresaRepository;
-import com.fabriciodev.repository.LoginRepository;
+import com.fabriciodev.repository.UsuarioRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.Optional;
 @Service
 public class EmpresaService {
 
-    private final LoginRepository loginRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Autowired
     private EmpresaRepository empresaRepository;
@@ -30,8 +30,8 @@ public class EmpresaService {
     @Autowired
     private ModelMapper modelMapper;
 
-    EmpresaService(LoginRepository loginRepository) {
-        this.loginRepository = loginRepository;
+    EmpresaService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
     }
 
     public Empresa createEmpresa(EmpresaDTO empresaDTO) {
@@ -39,7 +39,7 @@ public class EmpresaService {
         empresa.setSenha(passwordEncoder.encode(empresaDTO.getSenha()));
         Empresa empresaSalva = empresaRepository.save(empresa);
 
-        Login usuario = new Login();
+        Usuario usuario = new Usuario();
         TiposLogin tipo = new TiposLogin();
         usuario.setLoginUsuario(empresaDTO.getEmail());
         usuario.setLoginSenha(passwordEncoder.encode("senha-temporaria"));
@@ -48,7 +48,7 @@ public class EmpresaService {
         tipo.setId(1);
         usuario.setTiposLogin(tipo);
         usuario.setDataCadastro(LocalDateTime.now());
-        loginRepository.save(usuario);
+        usuarioRepository.save(usuario);
 
         return empresaSalva;
     }
