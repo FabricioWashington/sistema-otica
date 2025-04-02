@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
 
   getTiposLogin(): void {
     this.tiposLoginService.listarTiposLogin().subscribe(
-      (tiposLogin: TiposLogin[]) => {
+      (tiposLogin: any[]) => {
         this.tiposLogin = tiposLogin;
       },
       (error: any) => {

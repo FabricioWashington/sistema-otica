@@ -1,7 +1,8 @@
 package com.fabriciodev.controller;
 
-import com.fabriciodev.dto.venda.VendaDTO;
-import com.fabriciodev.service.venda.VendaService;
+import com.fabriciodev.dto.VendaDTO;
+import com.fabriciodev.service.VendaService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

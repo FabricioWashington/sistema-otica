@@ -1,7 +1,8 @@
 package com.fabriciodev.controller;
 
-import com.fabriciodev.dto.cliente.PessoaFisicaDTO;
-import com.fabriciodev.service.cliente.PessoaFisicaService;
+import com.fabriciodev.dto.PessoaFisicaDTO;
+import com.fabriciodev.service.PessoaFisicaService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

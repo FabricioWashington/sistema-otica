@@ -1,7 +1,8 @@
 package com.fabriciodev.controller;
 
-import com.fabriciodev.dto.unidade.UnidadeDTO;
-import com.fabriciodev.service.unidade.UnidadeService;
+import com.fabriciodev.dto.UnidadeDTO;
+import com.fabriciodev.service.UnidadeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

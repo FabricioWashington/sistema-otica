@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TiposLogin } from '../../models/tipos-login/tipos-login';
 import { Observable } from 'rxjs';
@@ -16,17 +16,14 @@ export class TiposLoginService {
     private usuariosService: UsuariosService,
   ) {}
 
-  listarTiposLogin(): Observable<any[]> {
-    const { idEmpresa } = this.usuariosService.getUserEmpresaData();
-    const url = idEmpresa ? `${this.apiUrl}?idEmpresa=${idEmpresa}` : this.apiUrl;
-
-    return this.http.get<any[]>(url, {
+  listarTiposLogin(): Observable<TiposLogin[]> {
+    return this.http.get<TiposLogin[]>(this.apiUrl, {
       headers: this.usuariosService.getAuthHeaders(),
     });
   }
 
-  criarTipoLogin(tiposLogin: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, tiposLogin, {
+  criarTipoLogin(tiposLogin: TiposLogin): Observable<TiposLogin> {
+    return this.http.post<TiposLogin>(this.apiUrl, tiposLogin, {
       headers: this.usuariosService.getAuthHeaders(),
     });
   }

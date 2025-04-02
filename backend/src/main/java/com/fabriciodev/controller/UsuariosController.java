@@ -1,7 +1,7 @@
 package com.fabriciodev.controller;
 
-import com.fabriciodev.dto.usuarios.UsuariosDTO;
-import com.fabriciodev.service.usuarios.UsuariosService;
+import com.fabriciodev.dto.UsuariosDTO;
+import com.fabriciodev.service.UsuariosService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

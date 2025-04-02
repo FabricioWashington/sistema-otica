@@ -1,7 +1,8 @@
 package com.fabriciodev.controller;
 
-import com.fabriciodev.dto.caixa.CaixaDTO;
-import com.fabriciodev.service.caixa.CaixaService;
+import com.fabriciodev.dto.CaixaDTO;
+import com.fabriciodev.service.CaixaService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

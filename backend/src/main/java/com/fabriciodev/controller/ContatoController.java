@@ -3,9 +3,10 @@ package com.fabriciodev.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.fabriciodev.dto.contato.ContatoDTO;
-import com.fabriciodev.model.contato.Contato;
-import com.fabriciodev.service.contato.ContatoService;
+
+import com.fabriciodev.dto.ContatoDTO;
+import com.fabriciodev.model.Contato;
+import com.fabriciodev.service.ContatoService;
 
 import java.util.List;
 

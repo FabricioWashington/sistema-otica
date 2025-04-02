@@ -1,6 +1,5 @@
 package com.fabriciodev.service;
 
-import com.fabriciodev.repository.login.LoginRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.fabriciodev.dto.EmpresaDTO;
 import com.fabriciodev.model.Empresa;
-import com.fabriciodev.model.login.Login;
+import com.fabriciodev.model.Login;
+import com.fabriciodev.model.TiposLogin;
 import com.fabriciodev.repository.EmpresaRepository;
+import com.fabriciodev.repository.LoginRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,14 +39,16 @@ public class EmpresaService {
         empresa.setSenha(passwordEncoder.encode(empresaDTO.getSenha()));
         Empresa empresaSalva = empresaRepository.save(empresa);
 
-        // Login usuario = new Login();
-        // usuario.setLoginUsuario(empresaDTO.getEmail());
-        // usuario.setLoginSenha(passwordEncoder.encode("senha-temporaria"));
-        // usuario.setIdEmpresa(empresaSalva.getIdEmpresa());
-        // usuario.setCpf("00000000000");
-        // usuario.setIdtiposLogin(1);
-        // usuario.setDataCadastro(LocalDateTime.now());
-        // loginRepository.save(usuario);
+        Login usuario = new Login();
+        TiposLogin tipo = new TiposLogin();
+        usuario.setLoginUsuario(empresaDTO.getEmail());
+        usuario.setLoginSenha(passwordEncoder.encode("senha-temporaria"));
+        usuario.setIdEmpresa(empresaSalva.getIdEmpresa());
+        usuario.setCpf("00000000000");
+        tipo.setId(1);
+        usuario.setTiposLogin(tipo);
+        usuario.setDataCadastro(LocalDateTime.now());
+        loginRepository.save(usuario);
 
         return empresaSalva;
     }

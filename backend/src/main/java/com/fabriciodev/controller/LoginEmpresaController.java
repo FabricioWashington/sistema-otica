@@ -2,7 +2,8 @@ package com.fabriciodev.controller;
 
 import com.fabriciodev.dto.EmpresaDTO;
 import com.fabriciodev.security.TokenEmpresaService;
-import com.fabriciodev.service.LoginEmpresa.LoginEmpresaService;
+import com.fabriciodev.service.LoginEmpresaService;
+
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;

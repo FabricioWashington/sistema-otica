@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.fabriciodev.dto.produto.ProdutoDTO;
-import com.fabriciodev.model.produto.Produto;
-import com.fabriciodev.service.produto.ProdutoService;
+import com.fabriciodev.dto.ProdutoDTO;
+import com.fabriciodev.model.Produto;
+import com.fabriciodev.service.ProdutoService;
 
 import java.util.List;
 

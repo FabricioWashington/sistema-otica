@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.fabriciodev.repository.login.LoginRepository;
+import com.fabriciodev.repository.LoginRepository;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

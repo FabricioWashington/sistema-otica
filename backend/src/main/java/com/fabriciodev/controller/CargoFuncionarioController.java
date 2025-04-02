@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.fabriciodev.dto.cargofuncionario.CargoFuncionarioDTO;
-import com.fabriciodev.service.cargofuncionario.CargoFuncionarioService;
+import com.fabriciodev.dto.CargoFuncionarioDTO;
+import com.fabriciodev.service.CargoFuncionarioService;
 
 import java.util.List;
 

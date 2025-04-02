@@ -1,8 +1,9 @@
 package com.fabriciodev.controller;
 
 import com.fabriciodev.components.BaseApiController;
-import com.fabriciodev.dto.medico.MedicoDTO;
-import com.fabriciodev.service.medico.MedicoService;
+import com.fabriciodev.dto.MedicoDTO;
+import com.fabriciodev.service.MedicoService;
+
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

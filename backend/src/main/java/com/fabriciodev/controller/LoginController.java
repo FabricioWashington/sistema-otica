@@ -1,8 +1,9 @@
 package com.fabriciodev.controller;
 
-import com.fabriciodev.model.login.Login;
+import com.fabriciodev.model.Login;
 import com.fabriciodev.security.TokenUsuarioService;
-import com.fabriciodev.service.login.LoginService;
+import com.fabriciodev.service.LoginService;
+
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;

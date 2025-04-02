@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fabriciodev.model.cnae.Cnae;
-import com.fabriciodev.service.cnae.CnaeService;
+import com.fabriciodev.model.Cnae;
+import com.fabriciodev.service.CnaeService;
 
 import java.util.List;
 

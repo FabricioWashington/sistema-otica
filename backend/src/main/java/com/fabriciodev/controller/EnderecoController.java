@@ -3,9 +3,10 @@ package com.fabriciodev.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.fabriciodev.dto.endereco.EnderecoDTO;
-import com.fabriciodev.model.endereco.Endereco;
-import com.fabriciodev.service.endereco.EnderecoService;
+
+import com.fabriciodev.dto.EnderecoDTO;
+import com.fabriciodev.model.Endereco;
+import com.fabriciodev.service.EnderecoService;
 
 import java.util.List;
 
